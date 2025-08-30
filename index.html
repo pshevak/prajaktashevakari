@@ -1,96 +1,144 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prajakta Shevakari — Software Engineer</title>
-  <meta name="description" content="Portfolio of Prajakta Shevakari — Software Engineer (JHU MSE CS, Dec 2025). 6+ years SWE experience in backend, cloud, ML/NLP.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prajakta Shevakari — Software Engineer & AI/ML</title>
+  <meta name="description" content="Prajakta Shevakari — JHU MSE CS (Dec 2025). 6+ years of software engineering; projects in AI/ML (transformers, LLMs). Open to FTE SWE & AI/ML roles starting Jan 2026." />
   <style>
-    body {
-      margin: 0;
-      background: #0f172a;
-      color: #e5e7eb;
-      font: 16px/1.6 system-ui, sans-serif;
+    :root{
+      --bg:#0f172a; --panel:#101826; --ink:#e5e7eb; --muted:#9ca3af; --line:#1f2937; --brand:#38bdf8;
     }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; }
-    header { margin-bottom: 32px; }
-    h1 { font-size: 34px; margin: 0; }
-    .subtitle { color: #9ca3af; font-size: 18px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
-    .chip {
-      background: #1f2937;
-      border: 1px solid #374151;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-    }
-    .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
-    .btn {
-      text-decoration: none;
-      background: #38bdf8;
-      color: #001018;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 600;
-    }
-    .btn.ghost { background: transparent; color: #e5e7eb; border: 1px solid #374151; }
-    section { margin: 28px 0; background: rgba(17,24,39,.6); padding: 16px; border-radius: 12px; }
-    h2 { font-size: 22px; margin-top: 0; }
-    footer { margin-top: 40px; font-size: 14px; color: #9ca3af; }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#0b1220,#0f172a);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    .wrap{max-width:980px;margin:0 auto;padding:32px 20px 72px}
+    header{display:grid;gap:12px;margin:8px 0 20px}
+    h1{margin:0;font-size:34px;letter-spacing:.2px}
+    .tagline{font-size:18px;color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px solid var(--line);background:#121b2a;border-radius:999px;padding:6px 10px;font-size:13px}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+    .btn{display:inline-block;text-decoration:none;background:var(--brand);color:#001018;padding:10px 14px;border-radius:10px;font-weight:600}
+    .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+    section{margin:26px 0;background:rgba(16,24,38,.65);border:1px solid var(--line);border-radius:16px;padding:16px}
+    h2{margin:0 0 10px;font-size:22px}
+    .grid{display:grid;gap:16px}
+    @media(min-width:860px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+    ul{margin:8px 0 0 18px}
+    .muted{color:var(--muted)}
+    footer{margin-top:48px;color:var(--muted);font-size:14px}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <h1>Prajakta Shevakari</h1>
-      <div class="subtitle">Software Engineer — JHU MSE CS (Dec 2025)</div>
+      <div class="tagline">Software Engineer &amp; AI/ML — JHU MSE CS (Dec 2025)</div>
       <div class="chips">
-        <span class="chip">6+ years SWE (Barclays, JPMorgan, FIS)</span>
-        <span class="chip">Backend • Distributed Systems</span>
-        <span class="chip">AWS • Java • Python • Spark</span>
-        <span class="chip">ML / NLP (Transformers)</span>
-        <span class="chip">Baltimore, MD • Open to relocation</span>
+        <span class="chip">6+ yrs industry (Barclays, JPMorgan, FIS)</span>
+        <span class="chip">SWE • AI/ML • Data</span>
+        <span class="chip">Python • Java • PyTorch • Transformers</span>
+        <span class="chip">AWS • Spark • SQL • APIs</span>
+        <span class="chip">Open to relocation • Jan 2026 start</span>
       </div>
       <div class="cta">
-        <a class="btn" href="./Prajakta_Shevakari_Resume.pdf" target="_blank">Download Resume (PDF)</a>
+        <a class="btn" href="./Prajakta_Shevakari_Resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
         <a class="btn ghost" href="mailto:prajaktashevakari@gmail.com">Email</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank">LinkedIn</a>
-        <a class="btn ghost" href="https://github.com/pshevak" target="_blank">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/pshevak" target="_blank" rel="noopener">GitHub</a>
       </div>
     </header>
 
+    <!-- About Me -->
+    <section>
+      <h2>About Me</h2>
+      <p>
+        I’m a builder who enjoys turning complex ideas into useful, reliable software — and lately, exploring how
+        modern ML (transformers, LLMs) can make products smarter and more human-centered. I’ve led and shipped
+        production software in large organizations, mentored teams, and I’m energized by problems at the intersection
+        of software, data, and AI. Outside work, I bring focus and creativity from classical dance and community
+        initiatives into how I collaborate and lead.
+      </p>
+    </section>
+
+    <!-- GHC Availability -->
     <section>
       <h2>GHC 2025 Availability</h2>
-      <p>✔ Open to FTE SWE • Jan 2026 start • Backend / Infra / ML • Relocation OK</p>
+      <div class="chips" style="margin-top:6px">
+        <span class="chip">Open to FTE SWE &amp; AI/ML roles</span>
+        <span class="chip">Jan 2026 start</span>
+        <span class="chip">US relocation OK</span>
+      </div>
+      <p class="muted" style="margin-top:8px">Let’s connect at GHC or virtually — happy to share more context, repos, or demos.</p>
     </section>
 
+    <!-- Skills (broad, not just backend/infra) -->
+    <section class="grid cols-2">
+      <div>
+        <h2>Software Engineering</h2>
+        <ul>
+          <li>Design &amp; delivery of production features and services</li>
+          <li>APIs, data processing, reliability &amp; quality</li>
+          <li>Shipping in iterative, stakeholder-facing environments</li>
+        </ul>
+      </div>
+      <div>
+        <h2>AI / ML</h2>
+        <ul>
+          <li>Transformers, prompt design, evaluation</li>
+          <li>NLP (LLMs, NER), representation learning</li>
+          <li>Data pipelines, experimentation, reproducibility</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Highlights with outcomes -->
     <section>
-      <h2>Experience Highlights</h2>
+      <h2>Selected Highlights</h2>
       <ul>
-        <li>Reduced MTTR by <strong>70%</strong> (6 days → &lt;2) at JPMorgan by redesigning legacy modules.</li>
-        <li>Automated disaster-recovery pipeline: <strong>4h → &lt;10m</strong> at Barclays.</li>
-        <li>Delivered <strong>90+ weekly releases</strong> with 95% on-time delivery at FIS Global.</li>
+        <li>Reduced MTTR by <strong>~70%</strong> by modernizing brittle modules and debugging flows.</li>
+        <li>Cut a disaster-recovery deploy from <strong>4h → &lt;10m</strong> by automating orchestration.</li>
+        <li>Delivered <strong>90+ weekly releases</strong> with ~95% on-time delivery in a fast-moving environment.</li>
       </ul>
+      <p class="muted">Experience includes Barclays, JPMorgan, and FIS; current MSE in CS at Johns Hopkins.</p>
     </section>
 
-    <section>
-      <h2>Featured Projects</h2>
+    <!-- Projects -->
+    <section class="grid cols-2">
       <div>
-        <h3>D-FuseSmileNet</h3>
-        <p>Transformer-based classifier for spontaneous smile recognition, fusing handcrafted + learned features; SOTA accuracy on 4 datasets. (Code available on request)</p>
-        <a class="btn ghost" href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/D-FuseSmileNet%20-%20Deep%20Learning%20for%20Spontaneous%20Smile%20Recognition" target="_blank">View Report</a>
+        <h2>Project — D-FuseSmileNet</h2>
+        <p>
+          Transformer-based approach that fuses handcrafted facial cues with learned representations to recognize
+          spontaneous smiles; achieved state-of-the-art results across multiple datasets.
+        </p>
+        <p class="muted">Python • PyTorch • Transformers</p>
+        <a class="btn ghost" target="_blank" rel="noopener"
+           href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/D-FuseSmileNet%20-%20Deep%20Learning%20for%20Spontaneous%20Smile%20Recognition">View Code</a>
       </div>
-      <br>
       <div>
-        <h3>Clinical NER (LLMs + CoT)</h3>
-        <p>LLM-driven annotation pipeline for Bengali medical text using few-shot + chain-of-thought prompting; boosted F1 to 46.0. (Code available on request)</p>
-        <a class="btn ghost" href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/Clinical%20NER%20with%20LLMs%20and%20Chain-of-Thought%20Prompting" target="_blank">View Report</a>
+        <h2>Project — Clinical NER (LLMs + CoT)</h2>
+        <p>
+          Prompt-engineered LLM pipeline (few-shot + chain-of-thought) to auto-label Bengali clinical text; trained
+          transformers on synthetic labels and lifted NER performance substantially.
+        </p>
+        <p class="muted">Python • NLP • Prompting • Transformers</p>
+        <a class="btn ghost" target="_blank" rel="noopener"
+           href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/Clinical%20NER%20with%20LLMs%20and%20Chain-of-Thought%20Prompting">View Code</a>
       </div>
     </section>
 
+    <!-- Contact -->
     <section>
-      <h2>What I’m Targeting</h2>
-      <p>Backend APIs • Data Platforms • Distributed Systems • Applied ML</p>
+      <h2>Let’s Connect</h2>
+      <p>
+        I’m exploring full-time opportunities across Software Engineering and AI/ML starting January 2026.
+        If my background resonates with your team, I’d love to chat.
+      </p>
+      <div class="cta">
+        <a class="btn" href="mailto:prajaktashevakari@gmail.com">Email</a>
+        <a class="btn ghost" href="./Prajakta_Shevakari_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </section>
 
     <footer>
