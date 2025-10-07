@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<Layout title="Contact — Prajakta Shevakari">
+  <section>
+    <h1 style="font-weight:900;font-size:26px;letter-spacing:.2px;margin-bottom:12px">Let’s Connect</h1>
+    <p style="color:#d1d5db">I’m exploring full-time roles across Software Engineering and AI/ML starting June 2026. If my background aligns with your team, I’d love to chat.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <a class="btn btn-ghost" href="mailto:prajaktashevakari@gmail.com">Email</a>
+      <a class="btn btn-ghost" href={`${base}assets/resume.pdf`} target="_blank" rel="noopener">Resume (PDF)</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/pshevak" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</Layout>
