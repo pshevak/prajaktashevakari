@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 17 17 17;
+  --panel: 24 24 24;
+  --ink: 245 242 234;
+  --muted: 184 178 167;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  @apply bg-[rgb(var(--bg))] text-[rgb(var(--ink))] font-sans;
+  background-image:
+    radial-gradient(1000px 600px at -10% -10%, rgba(251,191,36,.07), transparent 60%),
+    radial-gradient(1000px 600px at 110% 10%, rgba(251,113,133,.06), transparent 60%);
+}
+a { @apply underline underline-offset-4 decoration-brand-400 hover:decoration-brand-500; }
+.card { @apply bg-[rgb(var(--panel))] border border-neutral-800 rounded-2xl p-5 shadow-glass; }
+.btn { @apply inline-block px-4 py-2 rounded-xl font-bold no-underline; }
+.btn-primary { @apply bg-brand-400 text-ink; }
+.btn-ghost { @apply bg-transparent border border-neutral-700 text-[rgb(var(--ink))]; }
+.badge { @apply inline-block text-sm px-3 py-1 rounded-full border border-neutral-700; }

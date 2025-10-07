@@ -1,0 +1,38 @@
+---
+const { title = "Prajakta Shevakari — Portfolio" } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="theme-color" content="#fbbf24" />
+    <link rel="icon" href="/assets/leaf-flame.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href="/assets/leaf-flame.svg" as="image" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="min-h-dvh">
+    <div class="sticky top-0 z-50 backdrop-blur bg-black/30 border-b border-neutral-800">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 no-underline">
+          <img src="/assets/leaf-flame.svg" alt="Logo" class="w-7 h-7 rounded-full" />
+          <span class="font-extrabold tracking-tight text-xl text-white">Prajakta</span>
+        </a>
+        <nav class="flex items-center gap-2">
+          <a class="no-underline px-3 py-2 rounded-lg hover:bg-white/5" href="/projects">Projects</a>
+          <a class="no-underline px-3 py-2 rounded-lg hover:bg-white/5" href="/experience">Experience</a>
+          <a class="no-underline px-3 py-2 rounded-lg hover:bg-white/5" href="/teaching">Teaching</a>
+          <a class="no-underline px-3 py-2 rounded-lg hover:bg-white/5" href="/contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <slot />
+    </main>
+    <footer class="max-w-6xl mx-auto px-4 py-10 text-neutral-400 text-sm flex items-center justify-between">
+      <div>© 2025 Prajakta Shevakari — Built with Astro + Tailwind. Hosted on GitHub Pages.</div>
+      <div class="hidden md:block">Fast • Accessible • MD-powered</div>
+    </footer>
+  </body>
+</html>
