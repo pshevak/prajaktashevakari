@@ -1,1 +1,0 @@
-const root=document.documentElement;const s=localStorage.getItem('theme');if(s){root.setAttribute('data-theme',s)}document.getElementById('themeToggle')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='light'?'dark':'light';root.setAttribute('data-theme',n);localStorage.setItem('theme',n);});
