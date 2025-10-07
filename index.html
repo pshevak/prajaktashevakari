@@ -4,124 +4,106 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prajakta Shevakari — Software Engineer & AI/ML</title>
-  <meta name="description" content="Prajakta Shevakari — JHU MSE CS (Jun 2026). 6+ years of software engineering; projects in AI/ML (transformers, LLMs). Actively seeking SWE & AI/ML FTE opportunities starting June 2026." />
+  <meta name="description" content="Prajakta Shevakari — JHU MSE CS (Jun 2026). 6+ years of software engineering across Barclays, JPMorgan, FIS; AI/ML projects (transformers, LLMs). Seeking SWE & AI/ML FTE roles starting Jun 2026." />
   <meta name="theme-color" content="#0f172a">
-
   <style>
     :root{
       --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#9ca3af; --line:#1f2937;
-      --brand:#38bdf8; --brand-ink:#001018; --hover:#0b2831; --chip:#121b2a;
+      --brand:#38bdf8; --brand-ink:#001018; --chip:#121b2a; --accent:#a7f3d0;
       --ring: 0 0 0 3px rgba(56,189,248,.35);
-      --radius:16px; --radius-sm:10px;
-      --wrap: 980px;
+      --radius:16px; --radius-sm:10px; --wrap: 1024px;
+    }
+    [data-theme="light"]{
+      --bg:#f7fafc; --panel:#ffffff; --ink:#0b1220; --muted:#4b5563; --line:#e5e7eb;
+      --brand:#0ea5e9; --brand-ink:#ffffff; --chip:#f3f4f6;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0; color:var(--ink);
-      background:linear-gradient(180deg,#0b1220 0%, #0f172a 40%, #0f172a 100%);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(56,189,248,.06), transparent 60%),
+        linear-gradient(180deg,var(--bg) 0%, var(--panel) 40%, var(--panel) 100%);
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* --- NAV --- */
-    .nav-wrap{
-      position:sticky; top:0; z-index:9999;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(10,16,27,.6);
-      border-bottom:1px solid var(--line);
-    }
+    /* NAV */
+    .nav-wrap{ position:sticky; top:0; z-index:9999; backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(10,16,27,.55); border-bottom:1px solid var(--line) }
+    [data-theme="light"] .nav-wrap{ background:rgba(255,255,255,.75) }
     .nav{
       max-width:var(--wrap); margin:0 auto; padding:10px 16px;
       display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink);
-      font-weight:700; letter-spacing:.2px;
-    }
-    .brand .logo{
-      width:28px; height:28px; border-radius:999px;
-      display:inline-grid; place-items:center;
-      background:radial-gradient(60% 60% at 40% 35%, #53e0ff 0%, #38bdf8 45%, #147b9c 100%);
-      box-shadow:0 0 0 2px rgba(56,189,248,.25), inset 0 0 18px rgba(255,255,255,.15);
-      color:var(--brand-ink); font-size:14px; font-weight:900;
-    }
-    .nav a.link{
-      color:var(--ink); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:600;
-    }
-    .nav a.link:hover{ background:rgba(255,255,255,.04) }
-    .nav a.link.active{ background:rgba(56,189,248,.15); color:#c6f3ff }
-
-    /* mobile menu */
-    .menu{
-      display:flex; align-items:center; gap:6px;
-    }
-    .menu-btn{
-      display:none; background:transparent; border:1px solid var(--line);
-      color:var(--ink); padding:8px 10px; border-radius:10px; cursor:pointer;
-    }
-    .menu-btn:focus-visible{ outline:none; box-shadow:var(--ring) }
+    .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font-weight:800; letter-spacing:.2px }
+    .logo{ width:28px; height:28px; border-radius:999px; display:inline-grid; place-items:center;
+      background:radial-gradient(60% 60% at 40% 35%, #53e0ff 0%, var(--brand) 50%, #147b9c 100%);
+      box-shadow:0 0 0 2px rgba(56,189,248,.25), inset 0 0 18px rgba(255,255,255,.12); color:var(--brand-ink); font-size:14px; font-weight:900 }
+    .menu{ display:flex; align-items:center; gap:6px }
+    .menu-btn{ display:none; background:transparent; border:1px solid var(--line); color:var(--ink); padding:8px 10px; border-radius:10px; cursor:pointer }
     .menu-list{ display:flex; gap:6px; flex-wrap:wrap }
-    @media (max-width:860px){
+    .nav a.link{ color:var(--ink); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:600 }
+    .nav a.link:hover{ background:rgba(127,127,127,.09) }
+    .nav a.link.active{ background:rgba(56,189,248,.18); color:#c6f3ff }
+    [data-theme="light"] .nav a.link.active{ color:#083344 }
+    .theme{ border:1px solid var(--line); border-radius:10px; padding:8px 10px; background:transparent; cursor:pointer }
+
+    @media (max-width:880px){
       .menu-btn{ display:inline-flex; align-items:center; gap:8px }
       .menu-list{
         display:none; position:absolute; left:0; right:0; top:56px;
-        background:rgba(10,16,27,.98); border-bottom:1px solid var(--line);
-        padding:10px 16px; gap:6px;
+        background:rgba(10,16,27,.98); border-bottom:1px solid var(--line); padding:10px 16px; gap:6px;
       }
+      [data-theme="light"] .menu-list{ background:#ffffff }
       .menu-list.open{ display:grid; grid-template-columns:1fr 1fr; }
     }
 
-    /* --- WRAP & UTILS --- */
     .wrap{ max-width:var(--wrap); margin:0 auto; padding:24px 16px 80px }
-    header{ display:grid; gap:12px; margin:18px 0 18px }
-    h1{ margin:0; font-size:34px; letter-spacing:.2px }
-    .tagline{ font-size:18px; color:var(--muted) }
+    header{ display:grid; gap:12px; margin:22px 0 12px }
+    h1{ margin:0; font-size:36px; letter-spacing:.2px }
+    .sub{ font-size:18px; color:var(--muted) }
+
     .chips{ display:flex; flex-wrap:wrap; gap:8px }
     .chip{ border:1px solid var(--line); background:var(--chip); border-radius:999px; padding:6px 10px; font-size:13px }
     .cta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px }
-    .btn{
-      display:inline-block; text-decoration:none; background:var(--brand); color:var(--brand-ink);
-      padding:10px 14px; border-radius:var(--radius-sm); font-weight:700; transition:transform .08s ease;
-    }
+    .btn{ display:inline-block; text-decoration:none; background:var(--brand); color:var(--brand-ink); padding:10px 14px; border-radius:10px; font-weight:800; transition:transform .08s ease }
     .btn:hover{ transform:translateY(-1px) }
     .btn.ghost{ background:transparent; color:var(--ink); border:1px solid var(--line) }
 
-    section{
-      margin:26px 0; background:rgba(16,24,38,.65);
-      border:1px solid var(--line); border-radius:var(--radius); padding:18px 16px;
-      scroll-margin-top:80px;
-    }
+    section{ margin:28px 0; background:rgba(16,24,38,.60); border:1px solid var(--line); border-radius:16px; padding:18px 16px; scroll-margin-top:84px }
+    [data-theme="light"] section{ background:#ffffff }
     h2{ margin:0 0 12px; font-size:22px }
-
-    .grid{ display:grid; gap:16px }
-    @media(min-width:860px){ .grid.cols-2{ grid-template-columns:1fr 1fr } }
-
-    ul{ margin:8px 0 0 18px }
+    h3{ margin:0 0 6px; font-size:18px }
     .muted{ color:var(--muted) }
 
-    /* project cards */
-    .proj h3{ margin:0 0 6px; font-size:18px }
-    .card{
-      border:1px solid var(--line); border-radius:14px; padding:14px;
-      background:linear-gradient(180deg, rgba(18,27,42,.8), rgba(14,22,36,.65));
-      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
-    }
-    .card:hover{ transform:translateY(-2px); border-color:#2a3a52; box-shadow:0 10px 24px rgba(0,0,0,.25) }
+    .grid{ display:grid; gap:16px }
+    @media(min-width:880px){ .grid.cols-2{ grid-template-columns:1fr 1fr } .cols-3{ grid-template-columns:repeat(3,1fr) } }
 
-    /* footer & back-to-top */
+    /* Cards & timeline */
+    .card{ border:1px solid var(--line); border-radius:14px; padding:14px; background:linear-gradient(180deg, rgba(18,27,42,.8), rgba(14,22,36,.65)); transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease }
+    [data-theme="light"] .card{ background:#f9fafb }
+    .card:hover{ transform:translateY(-2px); border-color:#2a3a52; box-shadow:0 10px 24px rgba(0,0,0,.20) }
+    .timeline{ border-left:2px solid var(--line); margin-left:10px; padding-left:16px; display:grid; gap:14px }
+    .tl{ position:relative }
+    .tl::before{ content:""; position:absolute; left:-22px; top:6px; width:10px; height:10px; border-radius:999px; background:var(--brand); box-shadow:0 0 0 3px rgba(56,189,248,.25) }
+
+    /* Footer & top button */
     footer{ margin-top:48px; color:var(--muted); font-size:14px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap }
-    .top{
-      position:fixed; right:16px; bottom:16px; z-index:9998;
-      display:none; padding:10px 12px; border-radius:999px; background:rgba(56,189,248,.85); color:#00212a; border:0; cursor:pointer;
-      box-shadow:0 8px 18px rgba(0,0,0,.35);
-    }
+    .top{ position:fixed; right:16px; bottom:16px; z-index:9998; display:none; padding:10px 12px; border-radius:999px; background:rgba(56,189,248,.85); color:#00212a; border:0; cursor:pointer; box-shadow:0 8px 18px rgba(0,0,0,.35) }
     .top.show{ display:inline-block }
     .top:focus-visible{ outline:none; box-shadow:var(--ring) }
-    a:focus-visible, button:focus-visible{ outline:none; box-shadow:var(--ring) border-box }
 
-    /* ensure links are visible on focus via keyboard */
-    .link:focus-visible{ outline:none; box-shadow:var(--ring) }
+    /* Modal (Resume) */
+    .modal{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; padding:24px; z-index:10000 }
+    .modal.open{ display:flex }
+    .modal-box{ background:var(--panel); border:1px solid var(--line); border-radius:16px; width:min(100%, 900px); height:min(90vh, 1100px); display:flex; flex-direction:column }
+    [data-theme="light"] .modal-box{ background:#ffffff }
+    .modal-head{ display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding:10px 12px }
+    .modal-body{ flex:1; overflow:auto; background:#000000; }
+    .modal-body iframe{ width:100%; height:100%; border:0; background:#fff }
+
+    a:focus-visible, button:focus-visible{ outline:none; box-shadow:var(--ring) border-box }
   </style>
 </head>
 <body>
@@ -129,22 +111,18 @@
   <!-- NAV -->
   <div class="nav-wrap" role="navigation" aria-label="Main">
     <div class="nav">
-      <a class="brand" href="#home">
-        <span class="logo" aria-hidden="true">P</span>
-        <span>Prajakta</span>
-      </a>
-
+      <a class="brand" href="#home"><span class="logo" aria-hidden="true">P</span><span>Prajakta</span></a>
       <div class="menu">
+        <button class="theme" id="themeToggle" aria-label="Toggle theme">🌓</button>
         <button class="menu-btn" aria-expanded="false" aria-controls="menu-list">Menu ▾</button>
         <div id="menu-list" class="menu-list" role="menu">
           <a class="link" href="#about" role="menuitem">About</a>
-          <a class="link" href="#education" role="menuitem">Education</a>
-          <a class="link" href="#ghc" role="menuitem">GHC</a>
+          <a class="link" href="#experience" role="menuitem">Experience</a>
           <a class="link" href="#skills" role="menuitem">Skills</a>
-          <a class="link" href="#highlights" role="menuitem">Highlights</a>
           <a class="link" href="#projects" role="menuitem">Projects</a>
+          <a class="link" href="#leadership" role="menuitem">Teaching & Leadership</a>
           <a class="link" href="#contact" role="menuitem">Contact</a>
-          <a class="link" href="./Prajakta Shevakari SDE Resume.pdf" target="_blank" rel="noopener" role="menuitem">Resume</a>
+          <a class="link" href="./Prajakta Shevakari SDE Resume.pdf" target="_blank" rel="noopener" role="menuitem">Resume (PDF)</a>
         </div>
       </div>
     </div>
@@ -153,131 +131,149 @@
   <div class="wrap" id="home">
     <header>
       <h1>Prajakta Shevakari</h1>
-      <div class="tagline">
-        JHU MSE CS (Jun 2026) • Actively seeking Full-Time SWE &amp; AI/ML opportunities (Jun 2026 start)
-      </div>
+      <div class="sub">JHU MSE CS (Jun 2026) • Software Engineering & AI/ML • Open to U.S. relocation</div>
       <div class="chips">
         <span class="chip">6+ yrs industry (Barclays, JPMorgan, FIS)</span>
         <span class="chip">SWE • AI/ML • Data</span>
         <span class="chip">Python • Java • PyTorch • Transformers</span>
         <span class="chip">AWS • Spark • SQL • APIs</span>
-        <span class="chip">Open to relocation • Jun 2026 start</span>
+        <span class="chip">Jun 2026 start</span>
       </div>
       <div class="cta">
-        <a class="btn" href="./Prajakta Shevakari SDE Resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
+        <a class="btn" href="#" id="openResume">Quick View Resume</a>
         <a class="btn ghost" href="mailto:prajaktashevakari@gmail.com">Email</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/pshevak" target="_blank" rel="noopener">GitHub</a>
       </div>
     </header>
 
-    <!-- About Me -->
+    <!-- About -->
     <section id="about" aria-labelledby="about-title">
-      <h2 id="about-title">About Me</h2>
+      <h2 id="about-title">About</h2>
       <p>
-        I’m a Master’s student in <strong>Computer Science at Johns Hopkins University</strong>, graduating in <strong>June 2026</strong>, with over
-        <strong>six years of prior industry experience</strong> spanning Barclays, JPMorgan, and FIS Global. My work bridges
-        <strong>software engineering</strong> and <strong>applied AI/ML</strong>, focusing on building intelligent, scalable systems that drive measurable impact.
+        I’m a Master’s student in <strong>Computer Science at Johns Hopkins University</strong> (graduating <strong>June 2026</strong>) with
+        <strong>six years of prior industry experience</strong> across Barclays, JPMorgan, and FIS Global. My work bridges
+        <strong>software engineering</strong> and <strong>applied AI/ML</strong>—designing intelligent, scalable systems that deliver measurable impact. :contentReference[oaicite:2]{index=2}
       </p>
       <p>
-        At Hopkins, I’ve deepened my expertise through advanced coursework in <strong>Artificial Intelligence</strong>, <strong>Machine Learning</strong>,
-        <strong>Natural Language Processing</strong>, and <strong>Software System Design</strong>, while serving as a <strong>Course Assistant and Fellow</strong>
-        supporting graduate-level system-design and operating-systems courses.
-      </p>
-      <p>
-        I’m especially interested in <strong>ML infrastructure</strong>, <strong>LLM-based applications</strong>, and <strong>high-performance systems</strong>.
-        Beyond engineering, I’m a trained <strong>Bharatanatyam dancer</strong> and an outdoor enthusiast—practices that keep my mind creative and grounded.
+        At Hopkins, I’ve focused on <strong>AI</strong>, <strong>Machine Learning</strong>, <strong>NLP</strong>, and <strong>Software System Design</strong>, while supporting graduate courses
+        as a <strong>Course Assistant and Head CA</strong>. I’m especially interested in <strong>ML infrastructure</strong>, <strong>LLM applications</strong>, and
+        <strong>high-performance systems</strong>. Beyond engineering, I’m a trained <strong>Bharatanatyam dancer</strong>, which keeps me grounded and creative. 
       </p>
     </section>
 
-    <!-- Education -->
-    <section id="education" aria-labelledby="education-title">
-      <h2 id="education-title">Education</h2>
-      <ul>
-        <li>
-          <strong>Johns Hopkins University</strong> — M.S.E. Computer Science (Aug 2024 – Jun 2026)<br />
-          Coursework: Artificial Intelligence, Machine Learning, NLP, ML: AI System Design & Development, Human Language Technology,
-          Product Management, Software System Design, Parallel Computing for Data Science
-        </li>
-        <li>
-          <strong>Savitribai Phule Pune University</strong> — B.S. Computer Science (Aug 2013 – May 2017) | GPA: 3.8 <br />
-          Coursework: Data Structures & Algorithms, Cloud Computing, Business Analytics, High-Performance Computing, Computer Networks
-        </li>
-      </ul>
-    </section>
+    <!-- Experience -->
+    <section id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <div class="timeline">
+        <div class="tl card">
+          <h3>Software Developer Intern — Johns Hopkins University (Office of Digital Transformation)</h3>
+          <div class="muted">Baltimore, MD • Jun 2025 – Aug 2025</div>
+          <ul>
+            <li>Built internal automation tools and GUI apps in Python to streamline student hiring & operations workflows.</li>
+            <li>Partnered with senior staff to design and maintain validation systems for HR data quality. :contentReference[oaicite:4]{index=4}</li>
+          </ul>
+        </div>
 
-    <!-- GHC Availability -->
-    <section id="ghc" aria-labelledby="ghc-title">
-      <h2 id="ghc-title">GHC 2025 Availability</h2>
-      <div class="chips" style="margin-top:6px">
-        <span class="chip">Open to FTE SWE &amp; AI/ML roles</span>
-        <span class="chip">Jun 2026 start</span>
-        <span class="chip">US relocation OK</span>
+        <div class="tl card">
+          <h3>Lead Development Engineer — Barclays</h3>
+          <div class="muted">Pune, India • Apr 2023 – May 2024</div>
+          <ul>
+            <li>Led a real-time executive dashboard transforming transactional data into actionable insights.</li>
+            <li>Automated the disaster-recovery deployment pipeline: <strong>4+ hours → &lt;10 minutes</strong>. :contentReference[oaicite:5]{index=5}</li>
+          </ul>
+        </div>
+
+        <div class="tl card">
+          <h3>Software Engineer III — JPMorgan Chase</h3>
+          <div class="muted">Mumbai, India • Oct 2021 – Apr 2023</div>
+          <ul>
+            <li>Co-led a cloud migration moving terabytes of data from on-prem to <strong>AWS</strong>; delivered <strong>15</strong> prod releases and <strong>7</strong> POCs in a month.</li>
+            <li>Cut MTTR by <strong>~70%</strong> by redesigning legacy modules for resilience and debuggability. :contentReference[oaicite:6]{index=6}</li>
+          </ul>
+        </div>
+
+        <div class="tl card">
+          <h3>Software Engineer — FIS Global</h3>
+          <div class="muted">Pune, India • Jul 2017 – Oct 2021</div>
+          <ul>
+            <li>Release Manager delivering <strong>90+ weekly releases</strong> with <strong>~95%</strong> on-time delivery; led middle-office feature development.</li>
+            <li>Built a static bulk-upload feature saving ops teams <strong>10+ hours/week</strong>; received <em>Above and Beyond</em> award. :contentReference[oaicite:7]{index=7}</li>
+          </ul>
+        </div>
+
+        <div class="tl card">
+          <h3>Software Development Intern — BMC Software</h3>
+          <div class="muted">Aug 2016 – Apr 2017</div>
+          <ul>
+            <li>Developed a modular analytics platform for BNA with Yellowfin BI for live reporting. :contentReference[oaicite:8]{index=8}</li>
+          </ul>
+        </div>
       </div>
-      <p class="muted" style="margin-top:8px">Let’s connect at GHC or virtually — happy to share more context, repos, or demos.</p>
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="grid cols-2" aria-labelledby="skills-title">
-      <div>
-        <h2 id="skills-title">Skills</h2>
-        <h3 class="muted" style="margin:0 0 6px; font-size:14px; letter-spacing:.4px; text-transform:uppercase">Software Engineering</h3>
-        <ul>
-          <li>Design &amp; delivery of production features and services</li>
-          <li>APIs, data processing, reliability &amp; quality</li>
-          <li>Shipping in iterative, stakeholder-facing environments</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="muted" style="margin:28px 0 6px; font-size:14px; letter-spacing:.4px; text-transform:uppercase">AI / ML</h3>
-        <ul>
-          <li>Transformers, prompt design, evaluation</li>
-          <li>NLP (LLMs, NER), representation learning</li>
-          <li>Data pipelines, experimentation, reproducibility</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Highlights -->
-    <section id="highlights" aria-labelledby="highlights-title">
-      <h2 id="highlights-title">Selected Highlights</h2>
-      <div class="grid">
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <div class="grid cols-3">
         <div class="card">
-          <p style="margin:0">Reduced MTTR by <strong>~70%</strong> by modernizing brittle modules and debugging flows.</p>
+          <h3>Languages</h3>
+          <p class="muted">Python, Java, Bash, JavaScript/TypeScript, SQL</p>
         </div>
         <div class="card">
-          <p style="margin:0">Cut a disaster-recovery deploy from <strong>4h → &lt;10m</strong> by automating orchestration.</p>
+          <h3>ML & Data</h3>
+          <p class="muted">Transformers/LLMs, PyTorch, NLP, Spark, Experimentation</p>
         </div>
         <div class="card">
-          <p style="margin:0">Delivered <strong>90+ weekly releases</strong> with ~95% on-time delivery in a fast-moving environment.</p>
+          <h3>Platforms & Tools</h3>
+          <p class="muted">AWS, REST APIs, Kafka, Jenkins, Maven, Git, PowerBI</p>
         </div>
       </div>
-      <p class="muted" style="margin-top:10px">Experience includes Barclays, JPMorgan, and FIS; current MSE in CS at Johns Hopkins.</p>
+      <p class="muted" style="margin-top:8px">Also: Spring, Hibernate, Tomcat, Autosys, TeamCity, Pentaho, Oracle/PL-SQL, ServiceNow, Splunk. :contentReference[oaicite:9]{index=9}</p>
     </section>
 
     <!-- Projects -->
     <section id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Projects</h2>
-      <div class="grid cols-2 proj">
+      <div class="grid cols-2">
         <div class="card">
           <h3>D-FuseSmileNet — Multimodal Transformer for Spontaneous Smile Recognition</h3>
-          <p style="margin:6px 0 6px">
-            Designed a <strong>transformer-based multimodal network</strong> that fuses handcrafted facial-action features with learned embeddings
-            to recognize <strong>spontaneous vs. posed smiles</strong>, achieving <strong>state-of-the-art accuracy</strong> across benchmark datasets.
+          <p>
+            Designed a <strong>transformer-based multimodal network</strong> fusing handcrafted facial-action features with learned embeddings
+            to distinguish <strong>spontaneous vs. posed smiles</strong>, achieving <strong>state-of-the-art accuracy</strong> across benchmark datasets.
           </p>
-          <p class="muted" style="margin:0 0 10px">Stack: Python • PyTorch • Transformers</p>
-          <a class="btn ghost" target="_blank" rel="noopener"
-             href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/D-FuseSmileNet%20-%20Deep%20Learning%20for%20Spontaneous%20Smile%20Recognition">View Report</a>
+          <p class="muted">Stack: Python • PyTorch • Transformers</p>
+          <div class="cta">
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/D-FuseSmileNet%20-%20Deep%20Learning%20for%20Spontaneous%20Smile%20Recognition">Report</a>
+          </div>
         </div>
 
         <div class="card">
-          <h3>Clinical NER (LLMs + Chain of Thought)</h3>
-          <p style="margin:6px 0 6px">
+          <h3>Clinical NER (LLMs + Chain-of-Thought)</h3>
+          <p>
             Built a <strong>prompt-engineered LLM pipeline</strong> combining <strong>few-shot</strong> and <strong>chain-of-thought</strong> reasoning to auto-label
             <strong>Bengali clinical text</strong>, generating synthetic annotations that <strong>boosted downstream NER performance by over 30%</strong>.
           </p>
-          <p class="muted" style="margin:0 0 10px">Stack: Python • Transformers • NLP • Prompting</p>
-          <a class="btn ghost" target="_blank" rel="noopener"
-             href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/Clinical%20NER%20with%20LLMs%20and%20Chain-of-Thought%20Prompting">View Report</a>
+          <p class="muted">Stack: Python • Transformers • NLP • Prompting</p>
+          <div class="cta">
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://github.com/pshevak/prajaktashevakari/tree/e72b80fb99601047c2ddd1371f9cbee195e6255c/Clinical%20NER%20with%20LLMs%20and%20Chain-of-Thought%20Prompting">Report</a>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:8px">Project summaries adapted from your resume and reports. :contentReference[oaicite:10]{index=10}</p>
+    </section>
+
+    <!-- Teaching & Leadership -->
+    <section id="leadership" aria-labelledby="leadership-title">
+      <h2 id="leadership-title">Teaching & Leadership</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Head Course Assistant — Software System Design (Fall 2025)</h3>
+          <p class="muted">Led CA team operations, rubric enforcement, and student support for large graduate course; collaborated with faculty on assignment specs and grading quality. :contentReference[oaicite:11]{index=11}</p>
+        </div>
+        <div class="card">
+          <h3>Course Assistant — Operating Systems (Spring 2025)</h3>
+          <p class="muted">Held office hours, graded systems assignments, and coached students on OS fundamentals (VM, processes, concurrency). :contentReference[oaicite:12]{index=12}</p>
         </div>
       </div>
     </section>
@@ -285,40 +281,63 @@
     <!-- Contact -->
     <section id="contact" aria-labelledby="contact-title">
       <h2 id="contact-title">Let’s Connect</h2>
-      <p>
-        I’m exploring full-time opportunities across Software Engineering and AI/ML starting June 2026.
-        If my background resonates with your team, I’d love to chat.
-      </p>
+      <p>I’m exploring full-time roles across Software Engineering and AI/ML starting June 2026. If my background aligns with your team, I’d love to chat.</p>
       <div class="cta">
         <a class="btn ghost" href="mailto:prajaktashevakari@gmail.com">Email</a>
-        <a class="btn ghost" href="./Prajakta Shevakari SDE Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn ghost" href="./Prajakta Shevakari SDE Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/pshevak" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
 
     <footer>
-      <div>© 2025 Prajakta Shevakari • Built for GHC 2025</div>
-      <div class="muted">Made with clean HTML/CSS + a sprinkle of JS</div>
+      <div>© 2025 Prajakta Shevakari — Crafted with vanilla HTML/CSS + a dash of JS. Hosted on GitHub Pages.</div>
+      <div class="muted">Fast • Accessible • Maintainer-friendly</div>
     </footer>
   </div>
 
+  <!-- Back to top -->
   <button class="top" aria-label="Back to top">↑</button>
 
+  <!-- Resume modal -->
+  <div class="modal" id="resumeModal" aria-hidden="true" aria-modal="true" role="dialog">
+    <div class="modal-box">
+      <div class="modal-head">
+        <strong>Resume — PDF Viewer</strong>
+        <div>
+          <a class="btn ghost" href="./Prajakta Shevakari SDE Resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
+          <button class="btn" id="closeResume">Close</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe src="./Prajakta Shevakari SDE Resume.pdf#view=FitH" title="Resume PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // mobile menu toggle
+    // Theme toggle (persist to localStorage)
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved){ root.setAttribute('data-theme', saved); }
+    document.getElementById('themeToggle')?.addEventListener('click', () => {
+      const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', now);
+      localStorage.setItem('theme', now);
+    });
+
+    // Mobile menu toggle
     const btn = document.querySelector('.menu-btn');
     const list = document.getElementById('menu-list');
     btn?.addEventListener('click', () => {
       const open = list.classList.toggle('open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-
-    // close mobile menu on link click
     list?.querySelectorAll('a.link').forEach(a => a.addEventListener('click', () => {
       list.classList.remove('open'); btn?.setAttribute('aria-expanded','false');
     }));
 
-    // scrollspy
+    // Scrollspy
     const links = [...document.querySelectorAll('.link')].filter(a => a.getAttribute('href')?.startsWith('#'));
     const linkMap = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
     const observer = new IntersectionObserver(entries => {
@@ -326,26 +345,28 @@
         if (e.isIntersecting){
           links.forEach(l => l.classList.remove('active'));
           linkMap[e.target.id]?.classList.add('active');
-          // update hash without jumping
           history.replaceState(null, '', '#' + e.target.id);
         }
       });
     }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
     document.querySelectorAll('section[id]').forEach(sec => observer.observe(sec));
 
-    // back-to-top button
+    // Back-to-top button
     const topBtn = document.querySelector('.top');
-    const showTop = () => {
-      if (window.scrollY > 500) topBtn.classList.add('show');
-      else topBtn.classList.remove('show');
-    };
+    const showTop = () => { if (window.scrollY > 500) topBtn.classList.add('show'); else topBtn.classList.remove('show'); };
     showTop(); window.addEventListener('scroll', showTop);
     topBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // accessibility: if user tabs into page, ensure focus style is visible on menu items
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') document.body.classList.add('tabbing');
-    }, { once:true });
+    // Resume modal
+    const modal = document.getElementById('resumeModal');
+    const openResume = document.getElementById('openResume');
+    const closeResume = document.getElementById('closeResume');
+    openResume?.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); });
+    closeResume?.addEventListener('click', () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+    modal?.addEventListener('click', (e) => { if(e.target === modal){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }});
+
+    // Accessibility: keyboard focus outline after first Tab
+    window.addEventListener('keydown', (e) => { if (e.key === 'Tab') document.body.classList.add('tabbing'); }, { once:true });
   </script>
 </body>
 </html>
