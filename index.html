@@ -9,77 +9,140 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         
-        /* New Clean Light Theme Setup */
+        /* --- Base Theme Variables (Light Mode Default) --- */
+        :root {
+            --color-bg-primary: #f8f8f8;
+            --color-bg-secondary: #ffffff;
+            --color-text-primary: #1f2937; /* Dark black/gray */
+            --color-text-secondary: #4b5563; /* Muted gray for body text */
+            --color-bg-subtle-card: #f0f9ff; /* Very light sky blue for hobby cards */
+            --color-accent-jhu: #003B6F;
+            --color-accent-sky: #0ea5e9; 
+            --color-accent-amber: #f59e0b; 
+            --shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- Dark Mode Overrides --- */
+        .dark {
+            --color-bg-primary: #121212; /* Near black */
+            --color-bg-secondary: #1f2937; /* Dark gray for cards/sections */
+            --color-text-primary: #ffffff; /* FORCED WHITE for headings and primary text */
+            --color-text-secondary: #c9d6e4; /* Bright white/gray for body text */
+            --color-bg-subtle-card: #28303a; /* Darker background for hobby cards to ensure text contrast */
+            --color-accent-jhu: #6366f1; /* Adjusted Indigo/Violet for visibility */
+            --color-accent-sky: #38bdf8;
+            --color-accent-amber: #fcd34d;
+            --shadow-light: none;
+        }
+
+        /* Applying Variables */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f8f8; /* Very light gray background */
-            color: #1f2937; /* Dark text for high contrast */
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .accent-primary { color: var(--color-accent-jhu); }
+        .bg-accent-primary { background-color: var(--color-accent-jhu); }
+        .bg-section { background-color: var(--color-bg-secondary); }
+        .border-sky-500 { border-color: var(--color-accent-sky); }
+        .text-sky-500 { color: var(--color-accent-sky); }
+        .text-amber-600 { color: var(--color-accent-amber); }
+        .border-amber-500 { border-color: var(--color-accent-amber); }
+        
+        /* High Contrast Text Rules (Ensures all gray text switches to bright color in dark mode) */
+        .text-gray-800, .text-gray-700 { color: var(--color-text-primary); }
+        .text-gray-600 { color: var(--color-text-secondary); } 
+        .text-gray-500 { color: var(--color-text-secondary); opacity: 0.8; } 
+        
+        /* Subtle Backgrounds with High Contrast Hover */
+        .bg-gray-200, .bg-gray-100 { background-color: var(--color-bg-primary); }
+        
+        /* Hobby Card Specific Styling (Finalized for contrast) */
+        .hobby-container {
+            background-color: var(--color-bg-subtle-card);
+            border: 1px solid var(--color-accent-sky);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         
-        /* Primary JHU Blue for accent and text */
-        .accent-primary {
-            color: #003B6F; /* Deep Academic Blue */
+        /* Hover effect */
+        .hobby-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--color-accent-jhu);
         }
-        .bg-accent-primary {
-            background-color: #003B6F;
+        
+        /* --- FINAL FIX: Force ALL specific gray text classes within the hobby container to use the bright dark mode text color --- */
+        .dark .hobby-container .text-gray-600,
+        .dark .hobby-container .text-gray-700,
+        .dark .hobby-container .text-gray-800 {
+            color: var(--color-text-secondary) !important; 
         }
-        .bg-section {
-            background-color: #ffffff; /* White background for sections */
+        
+        /* Experience/Project Card Specific Dark Mode Text Fix (Ensures internal text is readable on dark backgrounds) */
+        .bg-section .text-gray-600, .bg-section .text-gray-500 {
+            transition: color 0.3s;
+        }
+        .dark .bg-section .text-gray-600 { color: var(--color-text-secondary); }
+        .dark .bg-section .text-gray-500 { color: var(--color-text-secondary); opacity: 0.8; }
+        
+        /* Fix for Intro Paragraph Text (Ensures main intro text is white in dark mode) */
+        .dark #home .text-xl.text-gray-600 {
+            color: var(--color-text-secondary) !important;
         }
 
+
+        /* --- Theme Toggle Animation --- */
+        @keyframes rotate-in { 0% { opacity: 0; transform: rotate(-90deg) scale(0.8); } 100% { opacity: 1; transform: rotate(0deg) scale(1); } }
+        @keyframes rotate-out { 0% { opacity: 1; transform: rotate(0deg) scale(1); } 100% { opacity: 0; transform: rotate(90deg) scale(0.8); } }
+
+        .theme-icon { transition: opacity 0.3s, transform 0.3s; }
+        .theme-icon.switching-in { animation: rotate-in 0.4s forwards; }
+        .theme-icon.switching-out { animation: rotate-out 0.4s forwards; }
+        
         /* Smooth scrolling for hash links */
-        html {
-            scroll-behavior: smooth;
+        html { scroll-behavior: smooth; }
+        .page-section { padding-top: 4rem; padding-bottom: 4rem; }
+        
+        /* --- Pulsing Gradient Headline --- */
+        @keyframes gradient-pulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        /* Style for the main container to manage page transitions */
-        .page-section {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
+        .gradient-headline {
+            color: var(--color-accent-jhu);
+            background: linear-gradient(90deg, var(--color-accent-jhu), var(--color-accent-sky), var(--color-accent-jhu));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-pulse 8s ease infinite;
+            text-shadow: 0 0 5px rgba(0, 59, 111, 0.3);
         }
         
-        /* Typewriter Animation Styles */
-        .typewriter-cursor {
-            border-right: 0.15em solid #003B6F; /* Deep Blue Cursor */
-            animation: 
-                blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #003B6F; }
-        }
+        /* --- Floating Image Animation --- */
+        @keyframes subtle-float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
+        .floating-image { animation: subtle-float 20s ease-in-out infinite; transition: transform 0.3s ease; }
+        .floating-image:hover { transform: translateY(-8px) scale(1.02); animation-play-state: paused; }
 
         /* Scroll-based Fade-in Animation */
-        .fade-in-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* New: Dynamic Hover Effect for Hobby Boxes */
-        .hobby-box {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hobby-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
+        .fade-in-scroll { opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 0.8s ease-out; }
+        .fade-in-scroll.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- Sticky Navigation Bar (Now with JavaScript-Driven Page Switching) -->
-    <nav class="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-200">
+    <!-- Sticky Navigation Bar (Now with Theme Toggle) -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700 transition duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Logo/Name (Final Version: Name | Masters) -->
-            <button onclick="navigate('home')" class="text-2xl font-black accent-primary hover:text-sky-500 transition duration-300">
-                Prajakta Shevakari<span class="text-sky-500 font-bold"> | Masters</span>
-            </button>
+            
+            <!-- NEW: Prominent Name and Title -->
+            <div class="flex items-center space-x-4">
+                <h1 class="text-2xl sm:text-3xl font-extrabold accent-primary tracking-tight">Prajakta Shevakari</h1>
+                <span class="hidden sm:block text-base font-semibold text-sky-500 border-l pl-4 border-gray-300 dark:border-gray-700">Masters Candidate</span>
+            </div>
+
             <!-- Navigation Links -->
             <div class="space-x-8 hidden md:flex">
                 <button onclick="navigate('home')" id="nav-home" class="nav-link text-sky-500 font-bold hover:text-sky-600 transition duration-300">Home</button>
@@ -87,9 +150,19 @@
                 <button onclick="navigate('projects')" id="nav-projects" class="nav-link text-gray-600 hover:text-sky-500 transition duration-300">Research & Projects</button>
                 <button onclick="navigate('skills')" id="nav-skills" class="nav-link text-gray-600 hover:text-sky-500 transition duration-300">Skills</button>
             </div>
-            <button onclick="navigate('contact')" class="hidden sm:block px-4 py-2 bg-accent-primary text-white font-semibold rounded-full hover:bg-sky-600 transition duration-300 shadow-md">
-                Contact
-            </button>
+            
+            <div class="flex items-center space-x-4">
+                <!-- NEW: Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
+                    <!-- Sun/Moon SVG icons (for light/dark) - Added 'theme-icon' class -->
+                    <svg id="sun-icon" class="h-6 w-6 theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg id="moon-icon" class="h-6 w-6 theme-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button>
+
+                <button onclick="navigate('contact')" class="hidden sm:block px-4 py-2 bg-accent-primary text-white font-semibold rounded-full hover:bg-sky-600 transition duration-300 shadow-md">
+                    Contact
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -105,53 +178,51 @@
                     <h4 class="text-xl font-medium text-sky-500 mb-4 tracking-wider uppercase">
                         JHU Computer Science | AI/NLP Focus
                     </h4>
-                    <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight accent-primary">
-                        <span id="typewriter-text" class="typewriter-cursor"></span>
+                    <!-- Static Headline with Pulsing Gradient -->
+                    <h1 class="5xl sm:text-7xl font-extrabold leading-tight gradient-headline">
+                        Scaling Innovation: Distributed Systems for Applied AI
                     </h1>
                     <p class="mt-8 text-xl max-w-3xl text-gray-600 leading-relaxed">
-                        I am an <span class="font-bold">MS in Computer Science</span> student at <span class="font-bold">Johns Hopkins University</span>, driven by the goal of engineering scalable, mission-critical systems. My career foundation as a lead developer at FinTech institutions like J.P. Morgan and Barclays taught me the necessity of simple, sustainable solutions. I now merge that high-impact industry experience in <span class="font-bold">distributed systems and cloud architecture</span> with advanced academic research in <span class="font-bold">Artificial Intelligence and Natural Language Processing (NLP)</span> to contribute to advanced, automated, and intuitive technologies.
+                        I am a <span class="font-bold">Masters student in Computer Science</span> at <span class="font-bold">Johns Hopkins University</span>, driven by the goal of engineering scalable, mission-critical systems. My career foundation as a lead developer at FinTech institutions like J.P. Morgan and Barclays taught me the necessity of simple, sustainable solutions. I now merge that high-impact industry experience in <span class="font-bold">distributed systems and cloud architecture</span> with advanced academic research in <span class="font-bold">Artificial Intelligence and Natural Language Processing (NLP)</span> to contribute to advanced, automated, and intuitive technologies.
                     </p>
 
-                    <!-- NEW: Hobbies/Personality Section - FINAL REDESIGN (UPDATED BLUE THEME) -->
-                    <div class="mt-8 pt-4 border-t border-gray-200">
+                    <!-- Hobbies/Personality Section - FINAL VISUAL DIVIDER LAYOUT -->
+                    <div class="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
                         <h5 class="text-lg font-semibold text-gray-700 mb-4">Beyond the Code: Finding Balance</h5>
-                        <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4 text-center">
                             
-                            <!-- Box 1: Bharatnatyam (Updated Style) -->
-                            <div class="hobby-box bg-gray-50 p-4 rounded-xl shadow-lg flex items-center space-x-4 border-l-4 border-sky-500">
-                                <span class="text-4xl">💎</span>
+                            <!-- Tile 1: Discipline & Focus -->
+                            <div class="hobby-container p-4 sm:flex-1 rounded-lg transition duration-300">
+                                <span class="text-3xl sm:text-4xl block mb-2">🧘</span>
+                                <p class="font-bold text-sm text-sky-500">Discipline & Focus</p>
+                                <p class="text-xs text-gray-600 mt-1">Classical dance (Bharatnatyam) fosters the discipline needed for technical rigor.</p>
+                            </div>
+
+                            <!-- Tile 2: Physical Activity -->
+                            <div class="hobby-container p-4 sm:flex-1 rounded-lg transition duration-300">
+                                <span class="text-3xl sm:text-4xl block mb-2">🏃</span>
                                 <div>
-                                    <p class="font-bold text-lg text-sky-600">Bharatnatyam & Discipline</p>
-                                    <p class="text-sm text-gray-600">Trained for several years in this classical Indian dance form, which helps me stay focused and grounded amidst technical challenges.</p>
+                                    <p class="font-bold text-sm text-sky-500">Physical Activity</p>
+                                    <p class="text-xs text-gray-600 mt-1">Roller skating, hiking, and Pickleball balance mental effort with competitive sport.</p>
                                 </div>
                             </div>
 
-                            <!-- Box 2: Sports & Outdoors (Updated Style) -->
-                            <div class="hobby-box bg-gray-50 p-4 rounded-xl shadow-lg flex items-center space-x-4 border-l-4 border-sky-500">
-                                <span class="text-4xl">🎾</span>
+                            <!-- Tile 3: Mentorship & Service -->
+                            <div class="hobby-container p-4 sm:flex-1 rounded-lg transition duration-300">
+                                <span class="text-3xl sm:text-4xl block mb-2">🤝</span>
                                 <div>
-                                    <p class="font-bold text-lg text-sky-600">Sports & Outdoors</p>
-                                    <p class="text-sm text-gray-600">Active in competitive roller skating, hiking, and recently got into Pickleball, balancing technical rigor with physical activity.</p>
-                                </div>
-                            </div>
-
-                            <!-- Box 3: Community Service (Updated Style) -->
-                            <div class="hobby-box bg-gray-50 p-4 rounded-xl shadow-lg flex items-center space-x-4 border-l-4 border-sky-500">
-                                <span class="text-4xl">📚</span>
-                                <div>
-                                    <p class="font-bold text-lg text-sky-600">Community & Mentorship</p>
-                                    <p class="text-sm text-gray-600">Volunteered with the 'Teaching for Good' campaign, sharing knowledge in Math and elementary computer skills with underprivileged students.</p>
+                                    <p class="font-bold text-sm text-sky-500">Mentorship & Service</p>
+                                    <p class="text-xs text-gray-600 mt-1">Volunteering with 'Teaching for Good' to share fundamental technical skills.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- END FINAL REDESIGN -->
 
                     <div class="mt-10 flex space-x-4">
                         <button onclick="navigate('projects')" class="px-8 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-xl hover:bg-sky-600 transition duration-300 transform hover:scale-105">
                             View Research
                         </button>
-                        <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="px-8 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg shadow-lg hover:bg-gray-300 transition duration-300 transform hover:scale-105">
+                        <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="px-8 py-3 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 font-bold rounded-lg shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-305 transform hover:scale-105">
                             Download CV
                         </a>
                     </div>
@@ -159,8 +230,9 @@
 
                 <!-- Right Column: Image -->
                 <div class="md:w-2/5 order-1 md:order-2 flex justify-center items-center">
-                    <div class="w-64 h-64 sm:w-80 sm:h-80 bg-gray-300 rounded-full overflow-hidden shadow-2xl ring-4 ring-sky-100">
-                        <img src="photo.jpg" alt="Prajakta Shevakari Professional Photo" class="object-cover w-full h-full">
+                    <!-- Added floating-image class for animation -->
+                    <div class="w-64 h-64 sm:w-80 sm:h-80 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden shadow-2xl ring-4 ring-sky-100 floating-image">
+                        <img src="IMG_8258 (1).jpg" alt="Prajakta Shevakari Professional Photo" class="object-cover w-full h-full">
                     </div>
                 </div>
             </div>
@@ -175,8 +247,8 @@
                 <!-- NEW ACADEMIC EXPERIENCE: Head Course Assistant (JHU) -->
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-amber-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">Head Course Assistant</h3>
-                        <p class="text-sm font-medium text-gray-500">Fall 2025</p>
+                        <h3 class="2xl font-semibold accent-primary">Head Course Assistant</h3>
+                        <p class="text-sm font-medium text-gray-600">Fall 2025</p>
                     </div>
                     <p class="text-lg text-amber-600 mb-3">Johns Hopkins University | Software System Design</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
@@ -189,7 +261,7 @@
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-amber-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                         <h3 class="text-2xl font-semibold accent-primary">Course Assistant</h3>
-                        <p class="text-sm font-medium text-gray-500">Spring 2025</p>
+                        <p class="text-sm font-medium text-gray-600">Spring 2025</p>
                     </div>
                     <p class="text-lg text-amber-600 mb-3">Johns Hopkins University | Operating Systems</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
@@ -202,7 +274,7 @@
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-amber-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                         <h3 class="text-2xl font-semibold accent-primary">ILLD Fellow - Python Developer</h3>
-                        <p class="text-sm font-medium text-gray-500">Academic Year 2024 - Present</p>
+                        <p class="text-sm font-medium text-gray-600">Academic Year 2024 - Present</p>
                     </div>
                     <p class="text-lg text-amber-600 mb-3">Johns Hopkins University | Office of Digital Transformation</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
@@ -215,9 +287,9 @@
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                         <h3 class="text-2xl font-semibold accent-primary">Lead Development Engineer</h3>
-                        <p class="text-sm font-medium text-gray-500">April 2023 - May 2024</p>
+                        <p class="text-sm font-medium text-gray-600">April 2023 - May 2024</p>
                     </div>
-                    <p class="text-lg text-sky-600 mb-3">Barclays | Pune, India</p>
+                    <p class="text-lg text-sky-500 mb-3">Barclays | Pune, India</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
                         <li>Led design and development of a state-of-the-art <span class="font-semibold">web dashboard</span> for real-time transactional data, empowering executives with key insights.</li>
                         <li>Reimagined and automated the disaster recovery <span class="font-semibold">deployment pipeline</span>, reducing release time from 4+ hours to <span class="font-semibold">under 10 minutes</span>.</li>
@@ -229,9 +301,9 @@
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                         <h3 class="text-2xl font-semibold accent-primary">Software Engineer III</h3>
-                        <p class="text-sm font-medium text-gray-500">October 2021 - April 2023</p>
+                        <p class="text-sm font-medium text-gray-600">October 2021 - April 2023</p>
                     </div>
-                    <p class="text-lg text-sky-600 mb-3">JP Morgan Chase | Mumbai, India</p>
+                    <p class="text-lg text-sky-500 mb-3">JP Morgan Chase | Mumbai, India</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
                         <li>Spearheaded the <span class="font-semibold">cloud migration</span> project, moving terabytes of data from on-prem sources to <span class="font-semibold">AWS</span>.</li>
                         <li>Developed a robust <span class="font-semibold">Java and Spark tool</span> to connect to AWS, enrich raw data, generate reports, and store output back to the cloud.</li>
@@ -243,9 +315,9 @@
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                         <h3 class="text-2xl font-semibold accent-primary">Software Engineer / Release Manager</h3>
-                        <p class="text-sm font-medium text-gray-500">July 2017 - October 2021</p>
+                        <p class="text-sm font-medium text-gray-600">July 2017 - October 2021</p>
                     </div>
-                    <p class="text-lg text-sky-600 mb-3">FIS Global | Pune, India</p>
+                    <p class="text-lg text-sky-500 mb-3">FIS Global | Pune, India</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
                         <li>Delivered over <span class="font-semibold">90 weekly production releases</span> with a 95% on-time delivery rate as Release Manager.</li>
                         <li>Received the <span class="font-semibold">"Above and Beyond" award</span> for delivering a bulk upload feature that automated manual tasks, saving the operations team <span class="font-semibold">10+ hours weekly</span>.</li>
@@ -257,9 +329,9 @@
                 <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
                         <h3 class="text-2xl font-semibold accent-primary">Software Development Intern</h3>
-                        <p class="text-sm font-medium text-gray-500">August 2016 - April 2017</p>
+                        <p class="text-sm font-medium text-gray-600">August 2016 - April 2017</p>
                     </div>
-                    <p class="text-lg text-sky-600 mb-3">BMC Software | Pune, India</p>
+                    <p class="text-lg text-sky-500 mb-3">BMC Software | Pune, India</p>
                     <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
                         <li>Built a <span class="font-semibold">live data analytics and reporting platform</span> for BMC Network Automation (BNA).</li>
                         <li>Used <span class="font-semibold">machine learning</span> to extract real-time insights from large datasets.</li>
@@ -282,7 +354,7 @@
                     <p class="text-gray-600 text-base mb-4 line-clamp-4">
                         A novel framework for spontaneous smile detection via <span class="font-semibold">Hadamard fusion</span> of transformer-based features and handcrafted <span class="font-semibold">D-Marker features</span>. Achieved <span class="font-semibold">state-of-the-art accuracy</span> on 4 benchmark datasets (e.g., BBC: 100%, SPOS: 98.5%), demonstrating superior performance over multi-task learning methods.
                     </p>
-                    <div class="text-sm font-bold text-sky-600 hover:underline">
+                    <div class="text-sm font-bold text-sky-500 hover:text-sky-600 hover:underline">
                         View Details &rarr;
                     </div>
                 </article>
@@ -294,7 +366,7 @@
                     <p class="text-gray-600 text-base mb-4 line-clamp-4">
                         Developed an efficient, automated annotation pipeline for low-resource Bengali clinical text using GPT-4.1. Employed <span class="font-semibold">Chain-of-Thought (CoT) prompting</span>, which <span class="font-semibold">tripled the token-level F1</span> and boosted the downstream BanglishBERT model F1 to 46.0, closing two-thirds of the gap to manual labeling.
                     </p>
-                    <div class="text-sm font-bold text-sky-600 hover:underline">
+                    <div class="text-sm font-bold text-sky-500 hover:text-sky-600 hover:underline">
                         View Details &rarr;
                     </div>
                 </article>
@@ -302,11 +374,11 @@
                 <!-- Project Card 3: BMC Software BNA Project - NOW REDIRECTS TO DETAIL PAGE -->
                 <article onclick="navigate('project-bna')" class="bg-section p-6 rounded-xl shadow-lg transition duration-300 hover:shadow-xl border-t-4 border-sky-500 cursor-pointer">
                     <span class="text-sky-500 text-sm font-semibold mb-2 block">DATA MINING / BI (Undergrad Project)</span>
-                    <h3 class="text-xl font-bold mb-3 accent-primary">Next Gen Analytics for BMC Network Automation (BNA)</h3>
+                    <h3 class="xl font-bold mb-3 accent-primary">Next Gen Analytics for BMC Network Automation (BNA)</h3>
                     <p class="text-gray-600 text-base mb-4 line-clamp-4">
                         Designed and built a modular, concurrent, and scalable platform for data mining BNA datasets. Introduced <span class="font-semibold">live reporting dashboards</span> using Yellowfin BI to replace static reports and enable sophisticated, data-driven decision making.
                     </p>
-                    <div class="text-sm font-bold text-sky-600 hover:underline">
+                    <div class="text-sm font-bold text-sky-500 hover:text-sky-600 hover:underline">
                         View Details &rarr;
                     </div>
                 </article>
@@ -320,7 +392,7 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- Academic Profile -->
                 <div class="bg-section p-8 rounded-xl shadow-lg">
-                    <h3 class="text-3xl font-semibold text-sky-600 mb-6">JHU Academic Focus</h3>
+                    <h3 class="text-3xl font-semibold text-sky-500">JHU Academic Focus</h3>
                     <ul class="list-disc space-y-2 text-gray-600 text-lg pl-5">
                         <li class="pl-2"><span class="font-semibold">EN.601.664</span> - Artificial Intelligence</li>
                         <li class="pl-2"><span class="font-semibold">EN.601.675</span> - Machine Learning</li>
@@ -333,7 +405,7 @@
                         <li class="pl-2"><span class="font-semibold">EN.605.704</span> - Object-Oriented Analysis and Design</li>
                         <li class="pl-2"><span class="font-semibold">EN.520.657</span> - Design of Advanced Instruments and System</li>
                     </ul>
-                    <h3 class="text-xl font-semibold text-sky-600 mt-8 mb-4">Research & Teaching</h3>
+                    <h3 class="text-xl font-semibold text-sky-500 mt-8 mb-4">Research & Teaching</h3>
                     <ul class="space-y-4 text-gray-600 text-lg">
                         <li class="border-l-4 border-sky-500 pl-4">
                             <span class="font-semibold">Research Interests:</span> Scalable ML Architectures, Distributed Systems, Computational Finance, Human-Computer Interaction.
@@ -346,18 +418,18 @@
 
                 <!-- Technical Skills -->
                 <div class="bg-section p-8 rounded-xl shadow-lg">
-                    <h3 class="text-3xl font-semibold text-sky-600 mb-6">Key Technologies</h3>
+                    <h3 class="text-3xl font-semibold text-sky-500 mb-6">Key Technologies</h3>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">Python</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">Java (Core)</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">AWS & Cloud Services</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">Apache Spark & Kafka</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">LLMs & NLP</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">PyTorch & TensorFlow</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">REST APIs & Microservices</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">AngularJS & JavaScript</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">SQL & Oracle</span>
-                        <span class="px-3 py-1 bg-gray-200 text-gray-800 text-sm font-medium rounded-full hover:bg-sky-100 hover:text-sky-700">Jenkins & CI/CD</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Python</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Java (Core)</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">AWS & Cloud Services</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Apache Spark & Kafka</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">LLMs & NLP</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">PyTorch & TensorFlow</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">REST APIs & Microservices</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">AngularJS & JavaScript</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">SQL & Oracle</span>
+                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Jenkins & CI/CD</span>
                     </div>
                 </div>
             </div>
@@ -371,13 +443,13 @@
                     With a background in delivering high-impact fintech solutions and a strong foundation in modern ML/AI research at JHU, I'm seeking opportunities to build and scale innovative technical products.
                 </p>
                 <div class="flex flex-col space-y-4">
-                    <a href="mailto:prajaktashevakari@gmail.com" class="text-lg font-medium text-sky-600 hover:text-sky-800 transition duration-300">
+                    <a href="mailto:prajaktashevakari@gmail.com" class="text-lg font-medium text-sky-500 hover:text-sky-600 transition duration-300">
                         <span role="img" aria-label="Email">&#x2709;</span> prajaktashevakari@gmail.com
                     </a>
-                    <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="text-lg font-medium text-sky-600 hover:text-sky-800 transition duration-300">
+                    <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="text-lg font-medium text-sky-500 hover:text-sky-600 transition duration-300">
                         <span role="img" aria-label="LinkedIn">&#x1F4F0;</span> LinkedIn Profile
                     </a>
-                    <a href="https://github.com/your-username" target="_blank" class="text-lg font-medium text-sky-600 hover:text-sky-800 transition duration-300">
+                    <a href="https://github.com/your-username" target="_blank" class="text-lg font-medium text-sky-500 hover:text-sky-600 transition duration-300">
                         <span role="img" aria-label="GitHub">&#x25C7;</span> GitHub Repositories
                     </a>
                 </div>
@@ -387,89 +459,52 @@
         <!-- 6. Project Detail: D-FuseSmileNet (JHU ML) -->
         <section id="project-smile" class="page-section hidden">
             <button onclick="navigate('projects')" class="text-sky-500 font-semibold mb-6 flex items-center hover:text-sky-600 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
                 Back to Projects
             </button>
             <h1 class="text-5xl font-extrabold accent-primary mb-6">D-FuseSmileNet: Enhancing Spontaneous Smile Recognition</h1>
             
             <div class="bg-section p-8 rounded-xl shadow-lg space-y-6">
-                <p class="text-xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
+                <p class="xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
                     A novel deep learning framework that integrates hand-crafted physiological markers with transformer-based features to distinguish genuine (spontaneous) from fake (posed) smiles, achieving new state-of-the-art results.
                 </p>
 
-                <h3 class="text-3xl font-semibold text-sky-600 pt-4">Technical Challenge & Innovation</h3>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 ml-5">
+                <h3 class="text-3xl font-semibold text-sky-500 pt-4">Technical Challenge & Innovation</h3>
+                <ul class="list-disc list-inside text-gray-600 space-y-3 ml-5">
                     <li><span class="font-semibold">Problem:</span> Spontaneous smiles have subtle spatiotemporal differences in muscle activations (e.g., eye crinkling) often missed by generic deep learning models. Traditional multi-task learning (MTL) approaches are complex due to intricate loss-weighting schemes.</li>
                     <li><span class="font-semibold">Innovation (Hadamard Fusion):</span> Proposed a direct <span class="font-bold">Hadamard multiplicative fusion</span> to blend powerful transformer-based visual representations (learned features) with expert-defined <span class="font-bold">D-Marker features</span> (hand-crafted physiological cues).</li>
-                    <li><span class="font-semibold">Architecture:</span> Systematically evaluated 15 fusion strategies, confirming that Hadamard fusion achieves optimal feature interaction while avoiding the complexity of auxiliary task supervision inherent in MTL models.</li>
+                    <li><span class="font-semibold">Architecture:</span> Systematically evaluated 15 fusion strategies, confirming that Hadamard fusion achieves optimal performance by enabling meaningful feature interaction while <span class="font-semibold">eliminating the need for auxiliary task supervision</span>, which complicates MTL models.</li>
+                    <li><span class="font-semibold">Methodology:</span> The approach is fully automated and end-to-end trainable, unlike many high-performing baselines that rely on manual landmark initialization and extensive preprocessing.</li>
                 </ul>
 
-                <h3 class="text-3xl font-semibold text-sky-600 pt-4">Visual and Quantitative Impact</h3>
-                <div class="bg-gray-100 p-4 rounded-lg text-center mb-6">
-                    <p class="font-semibold text-gray-700">Architecture Diagram (D-FuseSmileNet Pipeline)</p>
-                    <p class="text-sm text-gray-500">
-                        <svg viewBox="0 0 800 250" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Simplified D-FuseSmileNet Architecture for Illustration -->
-                            <rect x="0" y="0" width="800" height="250" fill="#f0f9ff" rx="10"/>
-
-                            <!-- Stream 1: D-Marker (Top) -->
-                            <text x="100" y="30" fill="#003B6F" font-size="16" font-weight="bold">HANDCRAFTED STREAM (D-Marker)</text>
-                            <rect x="10" y="50" width="180" height="40" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="100" y="75" fill="#003B6F" font-size="14" text-anchor="middle">Facial Dynamics Extraction</text>
-                            <line x1="190" y1="70" x2="300" y2="70" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <rect x="300" y="50" width="150" height="40" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="375" y="75" fill="#fff" font-size="14" text-anchor="middle">D-Marker Features (Z)</text>
-
-                            <!-- Stream 2: Deep Learning (Bottom) -->
-                            <text x="100" y="130" fill="#003B6F" font-size="16" font-weight="bold">DEEP LEARNING STREAM (Transformer)</text>
-                            <rect x="10" y="150" width="180" height="40" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="100" y="175" fill="#003B6F" font-size="14" text-anchor="middle">Transformer Encoder</text>
-                            <line x1="190" y1="170" x2="300" y2="170" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <rect x="300" y="150" width="150" height="40" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="375" y="175" fill="#fff" font-size="14" text-anchor="middle">Visual Features (H)</text>
-
-                            <!-- Fusion -->
-                            <line x1="450" y1="70" x2="525" y2="120" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <line x1="450" y1="170" x2="525" y2="120" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <circle cx="550" cy="120" r="30" fill="#003B6F" stroke="#003B6F" stroke-width="2"/>
-                            <text x="550" y="125" fill="#fff" font-size="18" font-weight="bold" text-anchor="middle">⊗</text>
-                            <text x="550" y="160" fill="#003B6F" font-size="14" text-anchor="middle">Hadamard Fusion</text>
-                            
-                            <!-- Output -->
-                            <line x1="580" y1="120" x2="650" y2="120" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <rect x="650" y="100" width="140" height="40" fill="#003B6F" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="720" y="125" fill="#fff" font-size="14" text-anchor="middle">Smile Classifier Output</text>
-
-                            <!-- Marker definition for arrows -->
-                            <defs>
-                                <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#003B6F" />
-                                </marker>
-                            </defs>
-                        </svg>
-                    </p>
+                <h3 class="3xl font-semibold text-sky-500 pt-4">Visual and Quantitative Impact</h3>
+                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-center mb-6">
+                    <p class="font-semibold text-gray-700 dark:text-gray-300">Architecture Diagram (D-FuseSmileNet Pipeline)</p>
+                    <!-- IMAGE PLACEHOLDER START -->
+                    <img src="ML_Archi.png" alt="D-FuseSmileNet Architecture Diagram" class="w-full h-auto rounded-lg shadow-lg my-4">
+                    <!-- IMAGE PLACEHOLDER END -->
+                    
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4">
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
                         <p class="text-2xl font-bold accent-primary">100% Accuracy</p>
-                        <p class="text-gray-600">Achieved perfect classification on the challenging <span class="font-semibold">BBC</span> dataset.</p>
+                        <p class="text-gray-600 dark:text-gray-200">Achieved perfect classification on the challenging <span class="font-semibold">BBC</span> dataset, and 99.7% on MMI, establishing consistent SOTA performance.</p>
                     </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
-                        <p class="text-2xl font-bold accent-primary">State-of-the-Art (SOTA)</p>
-                        <p class="text-gray-600">Established new SOTA performance across 4 benchmark datasets, surpassing previous deep learning methods by significant margins.</p>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                        <p class="2xl font-bold accent-primary">+5.0% Gain (BBC)</p>
+                        <p class="text-gray-600 dark:text-gray-200">Outperformed previous multi-task learning methods by significant margins: <span class="font-semibold">+5.0% on BBC</span> and +0.8% on UvA-NEMO, validating the superiority of direct feature interaction.</p>
                     </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
-                        <p class="text-2xl font-bold accent-primary">Feature Separation</p>
-                        <p class="text-gray-600">t-SNE visualization confirmed that Hadamard fusion creates the clearest class separation compared to baseline and MTL methods.</p>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                        <p class="text-2xl font-bold accent-primary">Reduced Complexity</p>
+                        <p class="text-gray-600 dark:text-gray-200">Eliminated the need for auxiliary loss-weighting and hyperparameter tuning required by Multi-Task Learning (MTL) approaches, improving computational efficiency.</p>
                     </div>
                 </div>
 
                 <div class="pt-6">
+                    <p class="text-sm font-medium text-gray-600 italic mb-3">Code and supplementary data available upon request.</p>
                     <a href="JHU_ML_Report.pdf" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
-                        Download Full Research Paper (PDF) &rarr;
+                        Download Full Research Paper &rarr;
                     </a>
                 </div>
             </div>
@@ -478,116 +513,57 @@
         <!-- 7. Project Detail: Clinical NER (JHU NLP) -->
         <section id="project-nlp" class="page-section hidden">
             <button onclick="navigate('projects')" class="text-sky-500 font-semibold mb-6 flex items-center hover:text-sky-600 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
                 Back to Projects
             </button>
             <h1 class="text-5xl font-extrabold accent-primary mb-6">LLM-Driven Clinical NER Annotation Pipeline</h1>
             
             <div class="bg-section p-8 rounded-xl shadow-lg space-y-6">
-                <p class="text-xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
+                <p class="xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
                     Designed a scalable, cost-effective annotation pipeline using advanced Large Language Models (LLMs) to automatically label medical entities in low-resource Bengali clinical text, drastically reducing reliance on manual expert effort.
                 </p>
 
-                <h3 class="text-3xl font-semibold text-sky-600 pt-4">Core Methodology & Innovation</h3>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 ml-5">
+                <h3 class="3xl font-semibold text-sky-500 pt-4">Core Methodology & Innovation</h3>
+                <ul class="list-disc list-inside text-gray-600 space-y-3 ml-5">
                     <li><span class="font-semibold">Problem:</span> Training clinical Named Entity Recognition (NER) models for low-resource languages (like Bengali) is severely limited by the scarcity and expense of human-labeled data.</li>
                     <li><span class="font-semibold">Innovation (CoT Prompting):</span> Developed a pipeline utilizing <span class="font-bold">Chain-of-Thought (CoT) reasoning</span> and carefully balanced few-shot demonstrations with models like GPT-4.1 to generate high-fidelity synthetic labels.</li>
                     <li><span class="font-semibold">Efficiency:</span> Demonstrated that annotation quality depends more on the structured reasoning provided by <span class="font-bold">CoT prompt design</span> than on raw LLM capacity (GPT-4.1-mini + CoT outperformed GPT-4.1 ICL).</li>
+                    <li><span class="font-semibold">Domain Focus:</span> Conducted detailed corpus analysis of the Bangla-HealthNER dataset to extract domain-specific linguistic features and entity distributions, guiding the prompt design for noisy, code-switched text.</li>
                 </ul>
 
-                <h3 class="text-3xl font-semibold text-sky-600 pt-4">Visual and Quantitative Impact</h3>
-                <div class="bg-gray-100 p-4 rounded-lg text-center mb-6">
-                    <p class="font-semibold text-gray-700">System Architecture (Annotation Pipeline)</p>
-                    <p class="text-sm text-gray-500">
-                        <svg viewBox="0 0 800 300" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Simplified NER Annotation Pipeline Architecture -->
-                            <rect x="0" y="0" width="800" height="300" fill="#f0f9ff" rx="10"/>
-                            
-                            <!-- Input -->
-                            <rect x="10" y="50" width="100" height="40" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="60" y="75" fill="#003B6F" font-size="14" text-anchor="middle">Unlabeled Data</text>
-                            <line x1="110" y1="70" x2="200" y2="70" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- LLM Prompting -->
-                            <rect x="200" y="30" width="100" height="30" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="250" y="48" fill="#fff" font-size="12" text-anchor="middle">ICL (No CoT)</text>
-                            
-                            <rect x="200" y="100" width="100" height="30" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="250" y="118" fill="#fff" font-size="12" text-anchor="middle">ICL + CoT</text>
-                            
-                            <line x1="110" y1="70" x2="200" y2="45" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <line x1="110" y1="70" x2="200" y2="115" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- LLM Model -->
-                            <rect x="330" y="55" width="80" height="50" fill="#003B6F" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="370" y="72" fill="#fff" font-size="12" text-anchor="middle">GPT-4.1 /</text>
-                            <text x="370" y="87" fill="#fff" font-size="12" text-anchor="middle">mini</text>
-                            
-                            <line x1="300" y1="45" x2="330" y2="70" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <line x1="300" y1="115" x2="330" y2="90" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Synthetic Labels -->
-                            <rect x="440" y="30" width="120" height="30" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="500" y="48" fill="#003B6F" font-size="12" text-anchor="middle">Synth. Labels (ICL)</text>
-                            
-                            <rect x="440" y="100" width="120" height="30" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="500" y="118" fill="#003B6F" font-size="12" text-anchor="middle">Synth. Labels (CoT)</text>
-
-                            <line x1="410" y1="70" x2="440" y2="45" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <line x1="410" y1="70" x2="440" y2="115" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Downstream NER Encoder -->
-                            <rect x="580" y="60" width="100" height="50" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="630" y="77" fill="#fff" font-size="12" text-anchor="middle">Transformer</text>
-                            <text x="630" y="92" fill="#fff" font-size="12" text-anchor="middle">Encoder (e.g. mBERT)</text>
-                            
-                            <line x1="560" y1="45" x2="580" y2="70" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <line x1="560" y1="115" x2="580" y2="90" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Evaluation -->
-                            <rect x="700" y="60" width="90" height="50" fill="#003B6F" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="745" y="77" fill="#fff" font-size="12" text-anchor="middle">NER Results</text>
-                            <text x="745" y="92" fill="#fff" font-size="12" text-anchor="middle">(F1 Score)</text>
-
-                            <line x1="680" y1="85" x2="700" y2="85" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Marker definition for arrows (re-defined for safety) -->
-                            <defs>
-                                <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#003B6F" />
-                                </marker>
-                            </defs>
-                        </svg>
-                    </p>
+                <h3 class="text-3xl font-semibold text-sky-500 pt-4">Visual and Quantitative Impact</h3>
+                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-center mb-6">
+                    <p class="font-semibold text-gray-700 dark:text-gray-300">System Architecture (Annotation Pipeline)</p>
+                    <!-- IMAGE PLACEHOLDER START -->
+                    <img src="NLP_Archi.png" alt="D-FuseSmileNet Architecture Diagram" class="w-full h-auto rounded-lg shadow-lg my-4">
+                    <!-- IMAGE PLACEHOLDER END -->
+                    
                 </div>
-                
+
                 <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
                         <p class="text-2xl font-bold accent-primary">3x F1 Improvement</p>
-                        <p class="text-gray-600">CoT reasoning almost <span class="font-semibold">tripled token-level F1</span> agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
+                        <p class="text-gray-600 dark:text-gray-200">CoT reasoning almost <span class="font-semibold">tripled token-level F1</span> agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
                     </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
                         <p class="text-2xl font-bold accent-primary">46.0 Macro F1</p>
-                        <p class="text-gray-600">The resulting synthetic data trained BanglishBERT to achieve 46.0 F1, <span class="font-semibold">closing two-thirds of the gap</span> to fully supervised training, eliminating manual effort.</p>
+                        <p class="text-gray-600 dark:text-gray-200">The resulting synthetic data trained BanglishBERT to achieve 46.0 F1, <span class="font-semibold">closing two-thirds of the gap</span> to fully supervised training (56.13 F1), eliminating manual effort.</p>
                     </div>
                 </div>
 
                 <div class="pt-6">
+                    <p class="text-sm font-medium text-gray-600 italic mb-3">Code and supplementary data available upon request.</p>
                     <a href="NLP_Final_Report.pdf" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
-                        Download Full Research Paper (PDF) &rarr;
+                        Download Full Research Paper &rarr;
                     </a>
                 </div>
-            </div>
-        </section>
+                </div>
+            </section>
 
         <!-- 8. Project Detail: Next Gen Analytics for BNA (Undergrad Project/Internship) -->
         <section id="project-bna" class="page-section hidden">
             <button onclick="navigate('projects')" class="text-sky-500 font-semibold mb-6 flex items-center hover:text-sky-600 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
                 Back to Projects
             </button>
             <h1 class="text-5xl font-extrabold accent-primary mb-6">Next Gen Analytics for BMC Network Automation (BNA)</h1>
@@ -597,102 +573,38 @@
                     Built a modular, concurrent, and scalable data analytics platform for large enterprise networks, integrating advanced machine learning and business intelligence tools to replace static reporting.
                 </p>
 
-                <h3 class="text-3xl font-semibold text-sky-600 pt-4">System Architecture & Technology</h3>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 ml-5">
+                <h3 class="text-3xl font-semibold text-sky-500 pt-4">System Architecture & Technology</h3>
+                <ul class="list-disc list-inside text-gray-600 space-y-3 ml-5">
                     <li><span class="font-semibold">Objective:</span> Transform raw BNA data (configuration changes, compliance, network outages) into real-time, sophisticated reporting to aid SecOps and decision-making.</li>
-                    <li><span class="font-semibold">Architecture:</span> Designed a <span class="font-bold">modular and concurrent</span> system using <span class="font-bold">Java</span> and JVM-based toolkits like <span class="font-bold">Akka</span> for scalability and efficiency.</li>
-                    <li><span class="font-semibold">Deployment:</span> Offered as a <span class="font-bold">RESTful web service</span>, supporting various data mining techniques (clustering, regression, classification) and predictive analytics.</li>
-                    <li><span class="font-semibold">Reporting Layer:</span> Integrated <span class="font-bold">Yellowfin BI Platform</span> to introduce dynamic dashboards and live reporting, substituting earlier static reports that lacked applied analytics.</li>
+                    <li><span class="font-semibold">Architecture:</span> Designed a <span class="font-bold">modular and concurrent</span> system using <span class="font-bold">Java</span> and JVM-based toolkits such as <span class="font-bold">Akka</span> for scalability. Offered as a <span class="font-bold">RESTful web service</span> to enable predictive analytics and statistical modeling.</li>
+                    <li><span class="font-semibold">Data Pipeline:</span> Utilized <span class="font-semibold">WEKA</span> and <span class="font-semibold">R scripts</span> customized for BNA requirements to implement data mining techniques including clustering, regression, classification, and association.</li>
+                    <li><span class="font-semibold">Reporting Layer:</span> Integrated the <span class="font-bold">Yellowfin BI Platform</span> to introduce dynamic dashboards and live reporting, substituting earlier static reports that lacked applied analytics.</li>
                 </ul>
                 
-                <h3 class="text-3xl font-semibold text-sky-600 pt-4">Core Components</h3>
-                <div class="bg-gray-100 p-4 rounded-lg text-center mb-6">
-                    <p class="font-semibold text-gray-700">Architecture Diagram (Web Service Host Machine)</p>
-                    <p class="text-sm text-gray-500">
-                        <svg viewBox="0 0 800 350" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Simplified BNA Architecture (Based on Figure 7.1) -->
-                            <rect x="0" y="0" width="800" height="350" fill="#f0f9ff" rx="10"/>
-
-                            <!-- Client Machine (Left) -->
-                            <rect x="10" y="50" width="160" height="200" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="90" y="40" fill="#003B6F" font-size="16" font-weight="bold" text-anchor="middle">Web Service Client Machine</text>
-                            <rect x="25" y="70" width="130" height="30" fill="#fff" rx="3" stroke="#003B6F" stroke-width="1"/>
-                            <text x="90" y="90" fill="#003B6F" font-size="12" text-anchor="middle">IDE (KM Generation)</text>
-                            <rect x="25" y="120" width="130" height="50" fill="#fff" rx="3" stroke="#003B6F" stroke-width="1"/>
-                            <text x="90" y="140" fill="#003B6F" font-size="12" text-anchor="middle">Reports</text>
-                            <text x="90" y="155" fill="#003B6F" font-size="10" text-anchor="middle">(Yellowfin Reports)</text>
-                            <text x="90" y="200" fill="#003B6F" font-size="10" text-anchor="middle">Client</text>
-
-                            <!-- Arrows to Host -->
-                            <line x1="170" y1="85" x2="250" y2="85" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <text x="210" y="80" fill="#003B6F" font-size="10" text-anchor="middle">KM.zip / .xml</text>
-                            <line x1="170" y1="145" x2="250" y2="145" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            <text x="210" y="140" fill="#003B6F" font-size="10" text-anchor="middle">Yellowfin Reports</text>
-
-                            <!-- Web Service Host Machine (Center/Right) -->
-                            <rect x="260" y="50" width="530" height="250" fill="#fff" rx="5" stroke="#003B6F" stroke-width="2"/>
-                            <text x="525" y="40" fill="#003B6F" font-size="16" font-weight="bold" text-anchor="middle">Web Service Host Machine</text>
-
-                            <!-- Tomcat/Axis2 Service -->
-                            <rect x="280" y="70" width="100" height="180" fill="#003B6F" rx="5" stroke="#fff" stroke-width="1"/>
-                            <text x="330" y="120" fill="#fff" font-size="14" text-anchor="middle">Tomcat</text>
-                            <text x="330" y="180" fill="#fff" font-size="14" text-anchor="middle">Axis2</text>
-                            <text x="330" y="220" fill="#fff" font-size="14" text-anchor="middle">Service</text>
-
-                            <!-- XML Parser -->
-                            <rect x="420" y="70" width="100" height="40" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="470" y="95" fill="#fff" font-size="12" text-anchor="middle">XML Parser</text>
-                            <line x1="380" y1="85" x2="420" y2="85" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-                            
-                            <!-- Logic/Data Mining -->
-                            <rect x="420" y="170" width="100" height="70" fill="#60a5fa" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="470" y="195" fill="#fff" font-size="12" text-anchor="middle">Data Mining</text>
-                            <text x="470" y="210" fill="#fff" font-size="10" text-anchor="middle">Techniques (Java)</text>
-                            <text x="470" y="225" fill="#fff" font-size="10" text-anchor="middle">Logic/Algorithm</text>
-                            <line x1="380" y1="195" x2="420" y2="195" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Yellowfin -->
-                            <rect x="550" y="170" width="100" height="40" fill="#bae6fd" rx="5" stroke="#003B6F" stroke-width="1"/>
-                            <text x="600" y="195" fill="#003B6F" font-size="12" text-anchor="middle">Yellowfin</text>
-                            <line x1="520" y1="195" x2="550" y2="195" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Database (Postgre SQL) -->
-                            <ellipse cx="730" cy="195" rx="50" ry="20" fill="#bae6fd" stroke="#003B6F" stroke-width="1"/>
-                            <text x="730" y="195" fill="#003B6F" font-size="14" text-anchor="middle">Postgre SQL</text>
-                            <line x1="520" y1="195" x2="680" y2="195" stroke="#003B6F" stroke-width="2"/>
-                            <line x1="650" y1="195" x2="680" y2="195" stroke="#003B6F" stroke-width="2" marker-end="url(#arrow)"/>
-
-                            <!-- Data Source / Input Data Flows -->
-                            <line x1="520" y1="90" x2="730" y2="175" stroke="#003B6F" stroke-width="1" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
-                            <text x="625" y="105" fill="#003B6F" font-size="10" text-anchor="middle">Data Source</text>
-                            
-                            <line x1="730" y1="175" x2="520" y2="215" stroke="#003B6F" stroke-width="1" stroke-dasharray="5,5" marker-end="url(#arrow)"/>
-                            <text x="625" y="240" fill="#003B6F" font-size="10" text-anchor="middle">Input Data</text>
-
-                            <!-- Marker definition for arrows -->
-                            <defs>
-                                <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
-                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#003B6F" />
-                                </marker>
-                            </defs>
-                        </svg>
-                    </p>
+                <h3 class="text-3xl font-semibold text-sky-500 pt-4">Core Components</h3>
+                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-center mb-6">
+                    <p class="font-semibold text-gray-700 dark:text-gray-300">Architecture Diagram (Web Service Host Machine)</p>
+                    <!-- IMAGE PLACEHOLDER START -->
+                    <img src="BMC_Archi.png" alt="D-FuseSmileNet Architecture Diagram" class="w-full h-auto rounded-lg shadow-lg my-4">
+                    <!-- IMAGE PLACEHOLDER END -->
+                    
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
                         <p class="text-xl font-bold accent-primary">Technology Stack</p>
-                        <p class="text-gray-600">Java, Akka, PostgreSQL, XML, Apache Tomcat, Axis2, <span class="font-semibold">Yellowfin BI</span>, <span class="font-semibold">Machine Learning</span> (WEKA/R integration).</p>
+                        <p class="text-gray-600 dark:text-gray-200">Java, Akka, PostgreSQL, XML, Apache Tomcat, Axis2, <span class="font-semibold">Yellowfin BI</span>, <span class="font-semibold">Machine Learning</span> (WEKA/R integration).</p>
                     </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
                         <p class="text-xl font-bold accent-primary">Key Outcomes</p>
-                        <p class="text-gray-600">Enabled ad-hoc and sophisticated reporting, provided dynamic dashboards, and delivered intelligent insights for security and operational plans.</p>
+                        <p class="text-gray-600 dark:text-gray-200">Enabled ad-hoc and sophisticated reporting, provided dynamic dashboards, and delivered intelligent insights for security and operational plans.</p>
                     </div>
                 </div>
 
                 <div class="pt-6">
-                    <a href="BMC_Report.pdf" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
-                        Download Full Project Report (DOCX) &rarr;
+                    <p class="text-sm font-medium text-gray-600 italic mb-3">Code and supplementary data available upon request.</p>
+                    <a href="report2 (1).docx" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
+                        Download Full Project Report &rarr;
                     </a>
                 </div>
             </div>
@@ -701,52 +613,79 @@
     </main>
 
     <!-- Simple Persistent Footer -->
-    <footer class="bg-gray-100 mt-12 py-6 border-t border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+    <footer class="bg-gray-100 dark:bg-gray-900 mt-12 py-6 border-t border-gray-200 dark:border-gray-700 transition duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
             <p class="text-sm">
                 &copy; 2025 Prajakta Shevakari | Built for GitHub Pages.
             </p>
         </div>
     </footer>
 
-    <!-- JavaScript for Multi-Page Simulation and Typewriter Effect -->
+    <!-- JavaScript for Multi-Page Simulation, Theme Toggle, and Animation Management -->
     <script>
-        // Store the timer ID globally to manage the animation lifecycle
-        let typewriterTimerId;
+        // --- THEME TOGGLE LOGIC ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Function to apply/remove animation class
+        const animateSwitch = (icon, entering) => {
+            icon.classList.remove(entering ? 'switching-out' : 'switching-in');
+            icon.classList.add(entering ? 'switching-in' : 'switching-out');
+            
+            // Clean up the animation class after it finishes
+            setTimeout(() => {
+                icon.classList.remove('switching-in', 'switching-out');
+            }, 400); 
+        };
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            
+            if (isDark) {
+                localStorage.setItem('theme', 'dark');
+                animateSwitch(sunIcon, false);
+                animateSwitch(moonIcon, true);
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                localStorage.setItem('light', 'light');
+                animateSwitch(moonIcon, false);
+                animateSwitch(sunIcon, true);
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        });
 
         // --- Multi-Page Navigation Logic ---
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('.page-section');
 
-        const stopTypewriter = () => {
-            if (typewriterTimerId) {
-                clearTimeout(typewriterTimerId);
-                typewriterTimerId = null;
-            }
-        };
-
-        const startTypewriter = () => {
-            if (!typewriterTimerId) {
-                typeWriter();
-            }
-        };
-
         const navigate = (pageId) => {
-            // Stop animation immediately when leaving home page
+            // Logic to manage the fade-in-scroll effect
             if (pageId !== 'home') {
-                stopTypewriter();
-                // Ensure the fade-in class is removed when leaving
+                // When leaving home, ensure fade-in is removed
                 document.querySelector('#home .md\\:w-3\\/5').classList.remove('visible');
                 document.querySelector('#home .md\\:w-2\\/5').classList.remove('visible');
             } else {
-                startTypewriter();
-                // Add a slight delay to ensure the content is visible before fading in
+                // Re-apply fade-in classes when returning to home page
                 setTimeout(() => {
                     document.querySelector('#home .md\\:w-3\\/5').classList.add('visible');
                     document.querySelector('#home .md\\:w-2\\/5').classList.add('visible');
                 }, 10); 
             }
 
+            // Hide all sections, then show the target section
             sections.forEach(section => {
                 section.classList.add('hidden');
             });
@@ -786,79 +725,14 @@
             navigate(pageId);
         };
 
-        // --- Typewriter Animation Logic ---
-        const typewriterElement = document.getElementById('typewriter-text');
-        // UPDATED PHRASES: More specific to FinTech, AI, and Distributed Systems
-        const phrases = [
-            "Building Scalable FinTech Systems",
-            "Driving Innovation with Applied AI",
-            "Expert in Distributed Architectures",
-            "Architecting Mission-Critical Solutions",
-            "JHU Masters Researcher: AI/NLP"
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function typeWriter() {
-            // If the element is hidden (i.e., not on the home page), exit the loop
-            if (document.getElementById('home').classList.contains('hidden')) {
-                stopTypewriter();
-                return;
-            }
-
-            const currentPhrase = phrases[phraseIndex];
-            let displayString = '';
-
-            if (isDeleting) {
-                // Deleting text
-                displayString = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                // Typing text
-                displayString = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            typewriterElement.textContent = displayString;
-
-            let typingSpeed = 100; // Default typing speed
-
-            if (isDeleting) {
-                typingSpeed /= 2; // Faster deleting
-            }
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                // Pause at end of phrase
-                typingSpeed = 1500;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                // Finished deleting, move to next phrase
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typingSpeed = 500; // Pause before starting next phrase
-            }
-
-            // Set the timeout and store the ID to be able to stop it later
-            typewriterTimerId = setTimeout(typeWriter, typingSpeed);
-        }
-        
         // --- Initialization ---
         window.onload = () => {
             let initialPage = window.location.hash.substring(1) || 'home';
             
-            // Apply initial nav link style and handle typewriter animation
+            // Apply initial nav link style and handle navigation
             navigate(initialPage);
-
-            // Apply fade-in classes on load if on the home page
-            if (initialPage === 'home') {
-                 setTimeout(() => {
-                    document.querySelector('#home .md\\:w-3\\/5').classList.add('visible');
-                    document.querySelector('#home .md\\:w-2\\/5').classList.add('visible');
-                }, 10); 
-            }
         };
-
+        
         // Initialize fade-in class application for Home page content elements
         document.addEventListener("DOMContentLoaded", function() {
             const leftContent = document.querySelector('#home .md\\:w-3\\/5');
