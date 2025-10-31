@@ -163,126 +163,17 @@
             background: rgba(17, 12, 30, 0.75);
         }
 
-        .mobile-menu-toggle {
-            display: none;
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 999px;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-soft);
-            background: rgba(255, 255, 255, 0.58);
-            box-shadow: 0 18px 38px -24px rgba(124, 58, 237, 0.45);
-            transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
-        }
-
-        .mobile-menu-toggle:hover {
-            transform: translateY(-2px);
-            border-color: rgba(124, 58, 237, 0.4);
-        }
-
-        html.dark .mobile-menu-toggle {
-            background: rgba(17, 12, 30, 0.75);
-        }
-
-        .mobile-menu {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 1.75rem 1.75rem 3rem;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(22px);
-            z-index: 60;
-            overflow-y: auto;
-            min-height: 100vh;
-        }
-
-        html.dark .mobile-menu {
-            background: rgba(9, 6, 20, 0.92);
-        }
-
-        .mobile-menu-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .mobile-close {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-soft);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: transform 0.3s ease, border 0.3s ease;
-        }
-
-        .mobile-close:hover {
-            transform: translateY(-2px);
-            border-color: rgba(236, 72, 153, 0.4);
-        }
-
-        .mobile-menu-links {
-            margin-top: clamp(2rem, 6vw, 3rem);
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .mobile-nav-link {
-            text-align: left;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            padding: 0 0 0.4rem 0;
-            border: none;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.18);
-            transition: color 0.3s ease, border 0.3s ease;
-            background: transparent;
-            width: 100%;
-        }
-
-        .mobile-nav-link:hover {
-            color: var(--accent-secondary);
-            border-color: rgba(236, 72, 153, 0.35);
-        }
-
-        .mobile-menu-footer {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .mobile-menu-footer .btn-secondary,
-        .mobile-menu-footer .btn-primary {
-            width: 100%;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
         .hero-shell {
             position: relative;
             display: grid;
-            gap: clamp(1.5rem, 4vw, 3rem);
-            grid-template-columns: minmax(0, 1fr);
+            gap: clamp(2rem, 3vw, 3rem);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             padding: clamp(2.5rem, 6vw, 3.5rem);
             border-radius: 2.25rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border-soft);
             box-shadow: var(--shadow-hero);
             overflow: hidden;
-            align-items: center;
         }
 
         .hero-shell::after {
@@ -296,7 +187,6 @@
         .hero-copy {
             position: relative;
             z-index: 1;
-            max-width: 40rem;
         }
 
         .hero-eyebrow {
@@ -399,26 +289,6 @@
             animation: floaty 18s ease-in-out infinite;
         }
 
-        @media (min-width: 900px) {
-            .hero-shell {
-                grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.9fr);
-            }
-
-            .hero-photo {
-                justify-content: flex-end;
-            }
-
-            .portrait-frame {
-                width: min(360px, 100%);
-            }
-        }
-
-        @media (max-width: 899px) {
-            .hero-subtitle {
-                max-width: none;
-            }
-        }
-
         .portrait-frame img {
             width: 100%;
             height: 100%;
@@ -485,13 +355,6 @@
             gap: 1.2rem;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             margin-top: 2.5rem;
-        }
-
-        .hero-highlights {
-            position: relative;
-            z-index: 1;
-            grid-column: 1 / -1;
-            margin-top: clamp(1rem, 3vw, 2rem);
         }
 
         .highlight-card {
@@ -740,16 +603,8 @@
             display: none;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .navbar .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: inline-flex;
-            }
-
-            .navbar .btn-primary.text-sm {
                 display: none;
             }
         }
@@ -766,51 +621,20 @@
                 </div>
             </div>
             <div class="nav-links flex items-center space-x-8">
-                <button type="button" id="nav-home" onclick="navigate('home')" class="nav-link active">Home</button>
-                <button type="button" id="nav-experience" onclick="navigate('experience')" class="nav-link">Experience</button>
-                <button type="button" id="nav-projects" onclick="navigate('projects')" class="nav-link">Research &amp; Projects</button>
-                <button type="button" id="nav-skills" onclick="navigate('skills')" class="nav-link">Skills</button>
+                <button id="nav-home" onclick="navigate('home')" class="nav-link active">Home</button>
+                <button id="nav-experience" onclick="navigate('experience')" class="nav-link">Experience</button>
+                <button id="nav-projects" onclick="navigate('projects')" class="nav-link">Research &amp; Projects</button>
+                <button id="nav-skills" onclick="navigate('skills')" class="nav-link">Skills</button>
             </div>
             <div class="flex items-center space-x-4">
-                <button type="button" id="menu-toggle" class="mobile-menu-toggle" aria-label="Open menu" aria-controls="mobile-menu">
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                     <svg id="sun-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                     <svg id="moon-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                 </button>
-                <button type="button" onclick="navigate('contact')" class="hidden sm:inline-flex btn-primary text-sm">Let’s Connect</button>
+                <button onclick="navigate('contact')" class="hidden sm:inline-flex btn-primary text-sm">Let’s Connect</button>
             </div>
         </div>
     </nav>
-
-    <div id="mobile-menu" class="mobile-menu hidden" aria-hidden="true">
-        <div>
-            <div class="mobile-menu-top">
-                <div class="flex items-center space-x-3">
-                    <div class="h-11 w-11 rounded-full bg-gradient-to-br from-purple-500/80 to-pink-500/80 flex items-center justify-center text-white font-semibold">PS</div>
-                    <div>
-                        <h2 class="text-lg font-semibold tracking-tight">Prajakta Shevakari</h2>
-                        <p class="text-xs uppercase tracking-[0.35em] text-purple-500">AI &amp; Systems Builder</p>
-                    </div>
-                </div>
-                <button type="button" id="mobile-close" class="mobile-close" aria-label="Close menu">×</button>
-            </div>
-            <div class="mobile-menu-links">
-                <button type="button" class="mobile-nav-link" data-mobile-nav="home">Home</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="experience">Experience</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="projects">Research &amp; Projects</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="skills">Skills</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="contact">Contact</button>
-            </div>
-        </div>
-        <div class="mobile-menu-footer">
-            <button type="button" onclick="navigate('projects')" class="btn-primary">Explore Research</button>
-            <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
-        </div>
-    </div>
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <section id="home" class="section-shell">
@@ -821,39 +645,37 @@
                     <p class="hero-subtitle">
                         I am a master’s student at Johns Hopkins University blending a fintech engineering background with cutting-edge ML research. From automating mission-critical banking workflows to architecting LLM-driven annotation pipelines, I build dependable platforms for intelligent decisioning.
                     </p>
-                <div class="focus-chips">
-                    <span class="chip">⚙️ Distributed AI Platforms</span>
-                    <span class="chip">☁️ Cloud &amp; Data Pipelines</span>
-                    <span class="chip">🧠 LLM Automation</span>
-                    <span class="chip">🤝 Leadership &amp; Mentorship</span>
-                </div>
-                <div class="cta-group">
-                    <button type="button" onclick="navigate('projects')" class="btn-primary">Explore Research</button>
-                    <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
-                </div>
-            </div>
-            <div class="hero-photo">
-                <div class="portrait-frame">
-                    <img src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" alt="Prajakta Shevakari" onerror="this.src='https://placehold.co/400x400/7c3aed/ffffff?text=Prajakta';" />
-                </div>
-            </div>
-            <div class="hero-highlights">
-                <div class="highlight-strip">
-                    <div class="highlight-card">
-                        <div class="highlight-title">70% ↓</div>
-                        <p class="highlight-text">Cut MTTR across JP Morgan systems by re-architecting observability and recovery flows.</p>
+                    <div class="focus-chips">
+                        <span class="chip">⚙️ Distributed AI Platforms</span>
+                        <span class="chip">☁️ Cloud &amp; Data Pipelines</span>
+                        <span class="chip">🧠 LLM Automation</span>
+                        <span class="chip">🤝 Leadership &amp; Mentorship</span>
                     </div>
-                    <div class="highlight-card">
-                        <div class="highlight-title">90+</div>
-                        <p class="highlight-text">Weekly production releases coordinated as Release Manager with 95% on-time delivery.</p>
+                    <div class="cta-group">
+                        <button onclick="navigate('projects')" class="btn-primary">Explore Research</button>
+                        <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
                     </div>
-                    <div class="highlight-card">
-                        <div class="highlight-title">SOTA</div>
-                        <p class="highlight-text">Achieved state-of-the-art accuracy for spontaneous smile recognition across four datasets.</p>
+                    <div class="highlight-strip">
+                        <div class="highlight-card">
+                            <div class="highlight-title">70% ↓</div>
+                            <p class="highlight-text">Cut MTTR across JP Morgan systems by re-architecting observability and recovery flows.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-title">90+</div>
+                            <p class="highlight-text">Weekly production releases coordinated as Release Manager with 95% on-time delivery.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-title">SOTA</div>
+                            <p class="highlight-text">Achieved state-of-the-art accuracy for spontaneous smile recognition across four datasets.</p>
+                        </div>
                     </div>
                 </div>
+                <div class="hero-photo">
+                    <div class="portrait-frame">
+                        <img src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" alt="Prajakta Shevakari" onerror="this.src='https://placehold.co/400x400/7c3aed/ffffff?text=Prajakta';" />
+                    </div>
+                </div>
             </div>
-        </div>
 
             <div class="glass-card mt-12 fade-in">
                 <h3 class="text-xl font-semibold text-purple-500">Beyond the code</h3>
@@ -999,7 +821,7 @@
                     <p class="text-sm text-purple-700/80 mt-3">
                         Transformer features fused with physiological D-markers via Hadamard interaction to classify spontaneous vs posed smiles with benchmark-leading accuracy across BBC, SPOS, UvA-NEMO, and MMI datasets.
                     </p>
-                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
+                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
                 <article onclick="navigate('project-nlp')" class="project-card">
                     <span class="tag">NLP · LLMs</span>
@@ -1007,7 +829,7 @@
                     <p class="text-sm text-purple-700/80 mt-3">
                         Chain-of-Thought prompting with GPT-4.1 to auto-label Bengali clinical text, tripling F1 agreement and lifting BanglishBERT macro F1 to 46.0 without manual annotation cycles.
                     </p>
-                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
+                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
                 <article onclick="navigate('project-bna')" class="project-card">
                     <span class="tag">Data Systems · BI</span>
@@ -1015,7 +837,7 @@
                     <p class="text-sm text-purple-700/80 mt-3">
                         Modular Java/Akka service layering ML models with Yellowfin BI dashboards to transform static reports into real-time predictive insights for enterprise network automation.
                     </p>
-                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
+                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
             </div>
         </section>
@@ -1081,7 +903,7 @@
         </section>
 
         <section id="project-smile" class="section-shell hidden">
-            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
             <div class="section-header fade-in">
                 <p class="tag">Computer Vision · ML</p>
                 <h2 class="section-title">D-FuseSmileNet · Enhancing Spontaneous Smile Recognition</h2>
@@ -1122,7 +944,7 @@
         </section>
 
         <section id="project-nlp" class="section-shell hidden">
-            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
             <div class="section-header fade-in">
                 <p class="tag">NLP · LLMs</p>
                 <h2 class="section-title">LLM-Driven Clinical NER Annotation Pipeline</h2>
@@ -1158,7 +980,7 @@
         </section>
 
         <section id="project-bna" class="section-shell hidden">
-            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
             <div class="section-header fade-in">
                 <p class="tag">Data Systems · BI</p>
                 <h2 class="section-title">Next Gen Analytics for BMC Network Automation</h2>
@@ -1230,64 +1052,8 @@
             }
         });
 
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileClose = document.getElementById('mobile-close');
-        const mobileNavButtons = document.querySelectorAll('[data-mobile-nav]');
         const sections = document.querySelectorAll('.section-shell');
         const navLinks = document.querySelectorAll('.nav-link');
-
-        const openMobileMenu = () => {
-            if (!mobileMenu) return;
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('menu-open');
-            if (menuToggle) {
-                menuToggle.setAttribute('aria-expanded', 'true');
-            }
-        };
-
-        const closeMobileMenu = () => {
-            if (!mobileMenu) return;
-            mobileMenu.classList.add('hidden');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('menu-open');
-            if (menuToggle) {
-                menuToggle.setAttribute('aria-expanded', 'false');
-            }
-        };
-
-        if (menuToggle) {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.addEventListener('click', () => {
-                if (mobileMenu && mobileMenu.classList.contains('hidden')) {
-                    openMobileMenu();
-                } else {
-                    closeMobileMenu();
-                }
-            });
-        }
-
-        if (mobileClose) {
-            mobileClose.addEventListener('click', closeMobileMenu);
-        }
-
-        if (mobileMenu) {
-            mobileMenu.addEventListener('click', event => {
-                if (event.target === mobileMenu) {
-                    closeMobileMenu();
-                }
-            });
-        }
-
-        mobileNavButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.getAttribute('data-mobile-nav');
-                if (targetId) {
-                    navigate(targetId);
-                }
-            });
-        });
 
         function navigate(pageId) {
             sections.forEach(section => section.classList.add('hidden'));
@@ -1301,7 +1067,6 @@
             if (activeLink) {
                 activeLink.classList.add('active');
             }
-            closeMobileMenu();
         }
 
         window.onpopstate = () => {
@@ -1313,18 +1078,6 @@
             const initialPage = window.location.hash.substring(1) || 'home';
             navigate(initialPage);
         };
-
-        document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                closeMobileMenu();
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 1024) {
-                closeMobileMenu();
-            }
-        });
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
