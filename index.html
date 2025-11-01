@@ -163,205 +163,17 @@
             background: rgba(17, 12, 30, 0.75);
         }
 
-        .mobile-menu-toggle {
-            display: none;
-            width: auto;
-            height: 2.75rem;
-            border-radius: 999px;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0 1.15rem;
-            border: 1px solid var(--border-soft);
-            background: rgba(255, 255, 255, 0.58);
-            box-shadow: 0 18px 38px -24px rgba(124, 58, 237, 0.45);
-            transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
-            color: var(--text-primary);
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-        .mobile-menu-toggle:hover {
-            transform: translateY(-2px);
-            border-color: rgba(124, 58, 237, 0.4);
-        }
-
-        html.dark .mobile-menu-toggle {
-            background: rgba(17, 12, 30, 0.75);
-        }
-
-        .mobile-menu-toggle svg {
-            flex-shrink: 0;
-        }
-
-        .mobile-menu-toggle span {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .mobile-menu {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 1.75rem 1.75rem 3rem;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(22px);
-            z-index: 60;
-            overflow-y: auto;
-            min-height: 100vh;
-        }
-
-        html.dark .mobile-menu {
-            background: rgba(9, 6, 20, 0.92);
-        }
-
-        .mobile-menu-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .mobile-close {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-soft);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: transform 0.3s ease, border 0.3s ease;
-        }
-
-        .mobile-close:hover {
-            transform: translateY(-2px);
-            border-color: rgba(236, 72, 153, 0.4);
-        }
-
-        .mobile-menu-links {
-            margin-top: clamp(2rem, 6vw, 3rem);
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .mobile-nav-link {
-            text-align: left;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            padding: 0 0 0.4rem 0;
-            border: none;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.18);
-            transition: color 0.3s ease, border 0.3s ease;
-            background: transparent;
-            width: 100%;
-        }
-
-        .mobile-nav-link:hover {
-            color: var(--accent-secondary);
-            border-color: rgba(236, 72, 153, 0.35);
-        }
-
-        .mobile-menu-footer {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .mobile-menu-footer .btn-secondary,
-        .mobile-menu-footer .btn-primary {
-            width: 100%;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        .mobile-nav-rail {
-            display: none;
-            position: sticky;
-            top: calc(72px + 0.75rem);
-            z-index: 40;
-            padding: 0.5rem 1.25rem 0.75rem;
-            background: transparent;
-            backdrop-filter: blur(0px);
-        }
-
-        .mobile-nav-rail-inner {
-            display: flex;
-            gap: 0.75rem;
-            overflow-x: auto;
-            padding-bottom: 0.25rem;
-        }
-
-        .mobile-nav-rail-inner::-webkit-scrollbar {
-            display: none;
-        }
-
-        .mobile-rail-link {
-            flex: 0 0 auto;
-            padding: 0.55rem 1.1rem;
-            border-radius: 999px;
-            border: 1px solid rgba(124, 58, 237, 0.25);
-            background: rgba(255, 255, 255, 0.75);
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-primary);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
-        }
-
-        .mobile-rail-link:focus-visible {
-            outline: 2px solid var(--accent-secondary);
-            outline-offset: 2px;
-        }
-
-        .mobile-rail-link.active {
-            border-color: rgba(236, 72, 153, 0.55);
-            box-shadow: 0 12px 24px -16px rgba(236, 72, 153, 0.45);
-            transform: translateY(-2px);
-            background: linear-gradient(120deg, rgba(124, 58, 237, 0.22), rgba(236, 72, 153, 0.22));
-        }
-
-        html.dark .mobile-nav-rail {
-            background: transparent;
-        }
-
-        html.dark .mobile-rail-link {
-            background: rgba(17, 12, 30, 0.78);
-            border-color: rgba(185, 159, 255, 0.25);
-            color: var(--text-secondary);
-        }
-
-        html.dark .mobile-rail-link.active {
-            border-color: rgba(244, 114, 182, 0.55);
-            box-shadow: 0 12px 24px -16px rgba(124, 58, 237, 0.45);
-            background: linear-gradient(120deg, rgba(167, 139, 250, 0.28), rgba(244, 114, 182, 0.28));
-        }
-
         .hero-shell {
             position: relative;
             display: grid;
-            gap: clamp(1.5rem, 4vw, 3rem);
-            grid-template-columns: minmax(0, 1fr);
+            gap: clamp(2rem, 3vw, 3rem);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             padding: clamp(2.5rem, 6vw, 3.5rem);
             border-radius: 2.25rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border-soft);
             box-shadow: var(--shadow-hero);
             overflow: hidden;
-            align-items: center;
         }
 
         .hero-shell::after {
@@ -375,7 +187,6 @@
         .hero-copy {
             position: relative;
             z-index: 1;
-            max-width: 40rem;
         }
 
         .hero-eyebrow {
@@ -478,26 +289,6 @@
             animation: floaty 18s ease-in-out infinite;
         }
 
-        @media (min-width: 900px) {
-            .hero-shell {
-                grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.9fr);
-            }
-
-            .hero-photo {
-                justify-content: flex-end;
-            }
-
-            .portrait-frame {
-                width: min(360px, 100%);
-            }
-        }
-
-        @media (max-width: 899px) {
-            .hero-subtitle {
-                max-width: none;
-            }
-        }
-
         .portrait-frame img {
             width: 100%;
             height: 100%;
@@ -564,13 +355,6 @@
             gap: 1.2rem;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             margin-top: 2.5rem;
-        }
-
-        .hero-highlights {
-            position: relative;
-            z-index: 1;
-            grid-column: 1 / -1;
-            margin-top: clamp(1rem, 3vw, 2rem);
         }
 
         .highlight-card {
@@ -792,126 +576,6 @@
             width: 100%;
         }
 
-        .home-contact-links {
-            margin-top: 3.5rem;
-            padding: 2.25rem;
-            border-radius: 2rem;
-            border: 1px solid var(--border-soft);
-            background: var(--bg-secondary);
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .home-contact-links::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: var(--bg-overlay);
-            pointer-events: none;
-        }
-
-        .home-contact-links h3 {
-            position: relative;
-            z-index: 1;
-            font-size: clamp(1.35rem, 3vw, 1.75rem);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .home-contact-links p {
-            position: relative;
-            z-index: 1;
-            color: var(--text-secondary);
-            margin-bottom: 1.75rem;
-        }
-
-        .home-contact-actions {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.25rem;
-        }
-
-        .contact-orb {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.9rem;
-            padding: 0.65rem 1.5rem 0.65rem 0.75rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(124, 58, 237, 0.22);
-            color: var(--text-primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-size: 0.78rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-            box-shadow: 0 24px 40px -28px rgba(124, 58, 237, 0.45);
-            position: relative;
-        }
-
-        .contact-orb:hover {
-            transform: translateY(-3px);
-            border-color: rgba(236, 72, 153, 0.4);
-            box-shadow: 0 30px 48px -28px rgba(236, 72, 153, 0.45);
-        }
-
-        .contact-orb:focus-visible {
-            outline: 2px solid var(--accent-secondary);
-            outline-offset: 3px;
-        }
-
-        .contact-orb-icon {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(236, 72, 153, 0.25));
-            border: 1px solid rgba(124, 58, 237, 0.25);
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-            animation: orbPulse 3.2s ease-in-out infinite;
-        }
-
-        .contact-orb-icon svg {
-            width: 1.3rem;
-            height: 1.3rem;
-        }
-
-        @keyframes orbPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.35);
-            }
-            50% {
-                transform: scale(1.06);
-                box-shadow: 0 0 0 12px rgba(124, 58, 237, 0);
-            }
-        }
-
-        html.dark .home-contact-links {
-            background: rgba(17, 12, 30, 0.78);
-        }
-
-        html.dark .contact-orb {
-            background: rgba(16, 11, 31, 0.92);
-            border-color: rgba(185, 159, 255, 0.25);
-            color: var(--text-secondary);
-        }
-
-        html.dark .contact-orb:hover {
-            border-color: rgba(244, 114, 182, 0.5);
-        }
-
-        html.dark .contact-orb-icon {
-            background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(244, 114, 182, 0.35));
-            border-color: rgba(185, 159, 255, 0.3);
-        }
-
         footer {
             padding: 2.8rem 0;
             background: rgba(255, 255, 255, 0.68);
@@ -939,54 +603,9 @@
             display: none;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .navbar .nav-links {
                 display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: inline-flex;
-            }
-
-            .navbar .btn-primary.text-sm {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-nav-rail {
-                display: block;
-            }
-
-            .hero-shell {
-                padding: 2.25rem 1.75rem;
-            }
-
-            .home-contact-links {
-                padding: 1.75rem;
-                border-radius: 1.75rem;
-            }
-
-            .contact-orb {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .mobile-nav-rail {
-                top: calc(64px + 0.5rem);
-                padding: 0.5rem 1rem 0.75rem;
-            }
-
-            .mobile-menu-toggle {
-                padding: 0 0.95rem;
-                letter-spacing: 0.14em;
-            }
-
-            .contact-orb {
-                font-size: 0.72rem;
-                letter-spacing: 0.12em;
             }
         }
     </style>
@@ -998,66 +617,24 @@
                 <div class="h-11 w-11 rounded-full bg-gradient-to-br from-purple-500/80 to-pink-500/80 flex items-center justify-center text-white font-semibold">PS</div>
                 <div>
                     <h1 class="text-xl font-semibold tracking-tight">Prajakta Shevakari</h1>
-                    <p class="text-xs uppercase tracking-[0.35em] text-purple-500">AI & Systems Builder</p>
+                    <p class="text-xs uppercase tracking-[0.35em] text-purple-500">Master's in CS</p>
                 </div>
             </div>
             <div class="nav-links flex items-center space-x-8">
-                <button type="button" id="nav-home" onclick="navigate('home')" class="nav-link active">Home</button>
-                <button type="button" id="nav-experience" onclick="navigate('experience')" class="nav-link">Experience</button>
-                <button type="button" id="nav-projects" onclick="navigate('projects')" class="nav-link">Research &amp; Projects</button>
-                <button type="button" id="nav-skills" onclick="navigate('skills')" class="nav-link">Skills</button>
+                <button id="nav-home" onclick="navigate('home')" class="nav-link active">Home</button>
+                <button id="nav-experience" onclick="navigate('experience')" class="nav-link">Experience</button>
+                <button id="nav-projects" onclick="navigate('projects')" class="nav-link">Research &amp; Projects</button>
+                <button id="nav-skills" onclick="navigate('skills')" class="nav-link">Skills</button>
             </div>
             <div class="flex items-center space-x-4">
-                <button type="button" id="menu-toggle" class="mobile-menu-toggle" aria-label="Open menu" aria-controls="mobile-menu">
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <span>Menu</span>
-                </button>
-                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                     <svg id="sun-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                     <svg id="moon-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                 </button>
-                <button type="button" onclick="navigate('contact')" class="hidden sm:inline-flex btn-primary text-sm">Let’s Connect</button>
+                <button onclick="navigate('contact')" class="hidden sm:inline-flex btn-primary text-sm">Let’s Connect</button>
             </div>
         </div>
     </nav>
-
-    <div class="mobile-nav-rail" role="navigation" aria-label="Section shortcuts">
-        <div class="mobile-nav-rail-inner">
-            <button type="button" class="mobile-rail-link active" data-quick-nav="home">Home</button>
-            <button type="button" class="mobile-rail-link" data-quick-nav="experience">Experience</button>
-            <button type="button" class="mobile-rail-link" data-quick-nav="projects">Research &amp; Projects</button>
-            <button type="button" class="mobile-rail-link" data-quick-nav="skills">Skills</button>
-            <button type="button" class="mobile-rail-link" data-quick-nav="contact">Contact</button>
-        </div>
-    </div>
-
-    <div id="mobile-menu" class="mobile-menu hidden" aria-hidden="true">
-        <div>
-            <div class="mobile-menu-top">
-                <div class="flex items-center space-x-3">
-                    <div class="h-11 w-11 rounded-full bg-gradient-to-br from-purple-500/80 to-pink-500/80 flex items-center justify-center text-white font-semibold">PS</div>
-                    <div>
-                        <h2 class="text-lg font-semibold tracking-tight">Prajakta Shevakari</h2>
-                        <p class="text-xs uppercase tracking-[0.35em] text-purple-500">AI &amp; Systems Builder</p>
-                    </div>
-                </div>
-                <button type="button" id="mobile-close" class="mobile-close" aria-label="Close menu">×</button>
-            </div>
-            <div class="mobile-menu-links">
-                <button type="button" class="mobile-nav-link" data-mobile-nav="home">Home</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="experience">Experience</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="projects">Research &amp; Projects</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="skills">Skills</button>
-                <button type="button" class="mobile-nav-link" data-mobile-nav="contact">Contact</button>
-            </div>
-        </div>
-        <div class="mobile-menu-footer">
-            <button type="button" onclick="navigate('projects')" class="btn-primary">Explore Research</button>
-            <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
-        </div>
-    </div>
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <section id="home" class="section-shell">
@@ -1066,41 +643,41 @@
                     <span class="hero-eyebrow">Johns Hopkins University · CS (AI/ML)</span>
                     <h2 class="hero-title">Designing resilient systems that let intelligent products scale.</h2>
                     <p class="hero-subtitle">
-                        I am a master’s student at Johns Hopkins University blending a fintech engineering background with cutting-edge ML research. From automating mission-critical banking workflows to architecting LLM-driven annotation pipelines, I build dependable platforms for intelligent decisioning.
+                        I am a Masters student in Computer Science at Johns Hopkins University, specializing in Artificial Intelligence and Machine Learning (AI/ML). Leveraging my foundation as a lead developer at FinTech firms like J.P. Morgan and Barclays, I focus on engineering highly scalable, mission-critical systems. My current work integrates deep industry expertise in distributed architecture and cloud services with advanced research in AI/ML and NLP, driving the development of reliable, automated, and intelligent technical solutions.
                     </p>
-                <div class="focus-chips">
-                    <span class="chip">⚙️ Distributed AI Platforms</span>
-                    <span class="chip">☁️ Cloud &amp; Data Pipelines</span>
-                    <span class="chip">🧠 LLM Automation</span>
-                    <span class="chip">🤝 Leadership &amp; Mentorship</span>
+                    <!-- <div class="focus-chips">
+                        <span class="chip">⚙️ Distributed AI Platforms</span>
+                        <span class="chip">☁️ Cloud &amp; Data Pipelines</span>
+                        <span class="chip">🧠 LLM Automation</span>
+                        <span class="chip">🤝 Leadership &amp; Mentorship</span>
+                    </div>
+                    -->
+                    <div class="cta-group">
+                        <button onclick="navigate('projects')" class="btn-primary">Explore Research</button>
+                        <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
+                    </div>
+                   <!-- <div class="highlight-strip">
+                        <div class="highlight-card">
+                            <div class="highlight-title">70% ↓</div>
+                            <p class="highlight-text">Cut MTTR across JP Morgan systems by re-architecting observability and recovery flows.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-title">90+</div>
+                            <p class="highlight-text">Weekly production releases coordinated as Release Manager with 95% on-time delivery.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-title">SOTA</div>
+                            <p class="highlight-text">Achieved state-of-the-art accuracy for spontaneous smile recognition across four datasets.</p>
+                        </div>
+                    </div>
+                    -->
                 </div>
-                <div class="cta-group">
-                    <button type="button" onclick="navigate('projects')" class="btn-primary">Explore Research</button>
-                    <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
+                <div class="hero-photo">
+                    <div class="portrait-frame">
+                        <img src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" alt="Prajakta Shevakari" onerror="this.src='https://placehold.co/400x400/7c3aed/ffffff?text=Prajakta';" />
+                    </div>
                 </div>
             </div>
-            <div class="hero-photo">
-                <div class="portrait-frame">
-                    <img src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" alt="Prajakta Shevakari" onerror="this.src='https://placehold.co/400x400/7c3aed/ffffff?text=Prajakta';" />
-                </div>
-            </div>
-            <div class="hero-highlights">
-                <div class="highlight-strip">
-                    <div class="highlight-card">
-                        <div class="highlight-title">70% ↓</div>
-                        <p class="highlight-text">Cut MTTR across JP Morgan systems by re-architecting observability and recovery flows.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <div class="highlight-title">90+</div>
-                        <p class="highlight-text">Weekly production releases coordinated as Release Manager with 95% on-time delivery.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <div class="highlight-title">SOTA</div>
-                        <p class="highlight-text">Achieved state-of-the-art accuracy for spontaneous smile recognition across four datasets.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
             <div class="glass-card mt-12 fade-in">
                 <h3 class="text-xl font-semibold text-purple-500">Beyond the code</h3>
@@ -1109,41 +686,18 @@
                     <div class="hobby-card">
                         <div class="text-4xl mb-2">🧘</div>
                         <h4 class="font-semibold text-lg text-purple-500">Iyengar Yoga Discipline</h4>
-                        <p class="text-sm text-purple-700/80">Meditation and Iyengar practice keep my focus sharp for high-stakes engineering.</p>
+                        <p class="text-sm text-purple-700/80">Practicing Iyengar Yoga and meditation is key to my mental and physical well-being, it’s where my technical focus begins!</p>
                     </div>
                     <div class="hobby-card">
                         <div class="text-4xl mb-2">🏃</div>
                         <h4 class="font-semibold text-lg text-purple-500">Movement &amp; Expression</h4>
-                        <p class="text-sm text-purple-700/80">Bharatnatyam, hiking, roller skating, and pickleball fuel creativity and resilience.</p>
+                        <p class="text-sm text-purple-700/80">From the discipline of Bharatnatyam to the joy of hiking, roller skating, and new hobbies like Pickleball, I love staying active.</p>
                     </div>
                     <div class="hobby-card">
                         <div class="text-4xl mb-2">🤝</div>
                         <h4 class="font-semibold text-lg text-purple-500">Teaching for Good</h4>
                         <p class="text-sm text-purple-700/80">I mentor and volunteer, helping learners build confidence in technical foundations.</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="home-contact-links fade-in">
-                <h3>Let’s build something lasting together.</h3>
-                <p>Tap a channel below to start a conversation—whether it’s about AI systems, fintech, or new collaborations.</p>
-                <div class="home-contact-actions">
-                    <a class="contact-orb" href="mailto:prajaktashevakari@gmail.com" aria-label="Email Prajakta">
-                        <span class="contact-orb-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 7l8.44 5.63a2 2 0 002.12 0L22 7M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </span>
-                        Email
-                    </a>
-                    <a class="contact-orb" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener noreferrer" aria-label="Open Prajakta's LinkedIn profile">
-                        <span class="contact-orb-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.452 20.452H16.9v-4.996c0-1.19-.024-2.72-1.657-2.72-1.66 0-1.914 1.297-1.914 2.636v5.08H9.777V9h3.4v1.561h.047c.474-.9 1.637-1.85 3.368-1.85 3.6 0 4.266 2.37 4.266 5.455v6.286zM5.337 7.433a1.965 1.965 0 110-3.93 1.965 1.965 0 010 3.93zM7.119 20.452H3.554V9h3.565v11.452z" />
-                            </svg>
-                        </span>
-                        LinkedIn
-                    </a>
                 </div>
             </div>
         </section>
@@ -1167,6 +721,20 @@
                         <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
                             <li>Lead mentoring, office hours, and complex assessment design for graduate-level system design.</li>
                             <li>Build supplementary material that anchors distributed architecture concepts for mixed cohorts.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Software Developer Intern</p>
+                                <p class="timeline-org">JHU Office of Digital Transformation</p>
+                            </div>
+                            <span class="timeline-meta">Jun 2025 – Aug 2025</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Built Python automation, GUI apps, and validation tools that streamlined student hiring and operational workflows.</li>
+                            <li>Partnered with senior HR and operations staff across university systems to design, deploy, and maintain internal tooling, improving administrative efficiency.</li>
                         </ul>
                     </div>
                     <div class="timeline-item">
@@ -1264,28 +832,28 @@
             </div>
             <div class="project-grid fade-in">
                 <article onclick="navigate('project-smile')" class="project-card">
-                    <span class="tag">Computer Vision · ML</span>
+                    <span class="tag">Machine Learning · Computer Vision</span>
                     <h3 class="text-xl font-semibold mt-3">D-FuseSmileNet: Spontaneous Smile Recognition</h3>
                     <p class="text-sm text-purple-700/80 mt-3">
                         Transformer features fused with physiological D-markers via Hadamard interaction to classify spontaneous vs posed smiles with benchmark-leading accuracy across BBC, SPOS, UvA-NEMO, and MMI datasets.
                     </p>
-                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
+                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
                 <article onclick="navigate('project-nlp')" class="project-card">
-                    <span class="tag">NLP · LLMs</span>
+                    <span class="tag">Natural Language Processing · LLMs</span>
                     <h3 class="text-xl font-semibold mt-3">LLM-Driven Clinical NER Annotation Pipeline</h3>
                     <p class="text-sm text-purple-700/80 mt-3">
                         Chain-of-Thought prompting with GPT-4.1 to auto-label Bengali clinical text, tripling F1 agreement and lifting BanglishBERT macro F1 to 46.0 without manual annotation cycles.
                     </p>
-                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
+                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
                 <article onclick="navigate('project-bna')" class="project-card">
-                    <span class="tag">Data Systems · BI</span>
+                    <span class="tag">Data Mining · BI</span>
                     <h3 class="text-xl font-semibold mt-3">Next Gen Analytics for BMC Network Automation</h3>
                     <p class="text-sm text-purple-700/80 mt-3">
                         Modular Java/Akka service layering ML models with Yellowfin BI dashboards to transform static reports into real-time predictive insights for enterprise network automation.
                     </p>
-                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
+                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
             </div>
         </section>
@@ -1325,10 +893,17 @@
                         <span class="pill">Apache Spark &amp; Kafka</span>
                         <span class="pill">LLMs &amp; NLP</span>
                         <span class="pill">PyTorch &amp; TensorFlow</span>
+                        <span class="pill">Transformers</span>
+                        <span class="pill">Scikit-learn</span>
+                        <span class="pill">Docker</span>
+                        <span class="pill">Kubernetes</span>
                         <span class="pill">REST APIs &amp; Microservices</span>
                         <span class="pill">AngularJS &amp; JavaScript</span>
                         <span class="pill">SQL &amp; Oracle</span>
                         <span class="pill">Jenkins &amp; CI/CD</span>
+                        <span class="pill">Git</span>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -1351,9 +926,9 @@
         </section>
 
         <section id="project-smile" class="section-shell hidden">
-            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
             <div class="section-header fade-in">
-                <p class="tag">Computer Vision · ML</p>
+                <p class="tag">Machine Learning · Computer Vision</p>
                 <h2 class="section-title">D-FuseSmileNet · Enhancing Spontaneous Smile Recognition</h2>
             </div>
             <div class="glass-card fade-in space-y-6">
@@ -1374,27 +949,28 @@
                 <div class="grid md:grid-cols-3 gap-4">
                     <div class="glass-card">
                         <p class="text-2xl font-bold text-purple-500">100% Accuracy</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Perfect classification on the BBC dataset; 99.7% on MMI.</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Achieved perfect classification on the challenging BBC dataset, and 99.7% on MMI, establishing consistent SOTA performance.</p>
                     </div>
                     <div class="glass-card">
                         <p class="text-2xl font-bold text-purple-500">+5.0% Lift</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Beat multi-task learning baselines on BBC by 5.0%.</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Outperformed previous multi-task learning methods by significant margins: +5.0% on BBC and +0.8% on UvA-NEMO, validating the superiority of direct feature interaction.</p>
                     </div>
                     <div class="glass-card">
                         <p class="text-2xl font-bold text-purple-500">Simplified Training</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Eliminated auxiliary loss tuning—faster, more robust convergence.</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Eliminated the need for auxiliary loss-weighting and hyperparameter tuning required by Multi-Task Learning (MTL) approaches, improving computational efficiency.</p>
                     </div>
                 </div>
                 <div class="pt-4">
+                    <p class="text-sm text-purple-700/80 mt-2">Code and supplementary data available upon request.</p>
                     <a href="JHU_ML_Report.pdf" target="_blank" class="btn-primary">Download Research Paper →</a>
                 </div>
             </div>
         </section>
 
         <section id="project-nlp" class="section-shell hidden">
-            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
             <div class="section-header fade-in">
-                <p class="tag">NLP · LLMs</p>
+                <p class="tag">Natural Language Processing · LLMs</p>
                 <h2 class="section-title">LLM-Driven Clinical NER Annotation Pipeline</h2>
             </div>
             <div class="glass-card fade-in space-y-6">
@@ -1414,23 +990,24 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="glass-card">
                         <p class="text-2xl font-bold text-purple-500">3× F1 Lift</p>
-                        <p class="text-sm text-purple-700/80 mt-2">CoT prompting tripled token-level agreement vs. plain prompting.</p>
+                        <p class="text-sm text-purple-700/80 mt-2">CoT reasoning almost tripled token-level F1 agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
                     </div>
                     <div class="glass-card">
                         <p class="text-2xl font-bold text-purple-500">46.0 Macro F1</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Closed two-thirds of the gap to full supervision without human labels.</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Closed two-thirds of the gap to full supervision without human labels. CoT reasoning almost tripled token-level F1 agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
                     </div>
                 </div>
                 <div class="pt-4">
+                    <p class="text-sm text-purple-700/80 mt-2">Code and supplementary data available upon request.</p>
                     <a href="NLP_Final_Report.pdf" target="_blank" class="btn-primary">Download Research Paper →</a>
                 </div>
             </div>
         </section>
 
         <section id="project-bna" class="section-shell hidden">
-            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
             <div class="section-header fade-in">
-                <p class="tag">Data Systems · BI</p>
+                <p class="tag">Data Mining · BI</p>
                 <h2 class="section-title">Next Gen Analytics for BMC Network Automation</h2>
             </div>
             <div class="glass-card fade-in space-y-6">
@@ -1500,74 +1077,8 @@
             }
         });
 
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileClose = document.getElementById('mobile-close');
-        const mobileNavButtons = document.querySelectorAll('[data-mobile-nav]');
-        const quickNavButtons = document.querySelectorAll('[data-quick-nav]');
         const sections = document.querySelectorAll('.section-shell');
         const navLinks = document.querySelectorAll('.nav-link');
-
-        const openMobileMenu = () => {
-            if (!mobileMenu) return;
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('menu-open');
-            if (menuToggle) {
-                menuToggle.setAttribute('aria-expanded', 'true');
-            }
-        };
-
-        const closeMobileMenu = () => {
-            if (!mobileMenu) return;
-            mobileMenu.classList.add('hidden');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('menu-open');
-            if (menuToggle) {
-                menuToggle.setAttribute('aria-expanded', 'false');
-            }
-        };
-
-        if (menuToggle) {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.addEventListener('click', () => {
-                if (mobileMenu && mobileMenu.classList.contains('hidden')) {
-                    openMobileMenu();
-                } else {
-                    closeMobileMenu();
-                }
-            });
-        }
-
-        if (mobileClose) {
-            mobileClose.addEventListener('click', closeMobileMenu);
-        }
-
-        if (mobileMenu) {
-            mobileMenu.addEventListener('click', event => {
-                if (event.target === mobileMenu) {
-                    closeMobileMenu();
-                }
-            });
-        }
-
-        mobileNavButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.getAttribute('data-mobile-nav');
-                if (targetId) {
-                    navigate(targetId);
-                }
-            });
-        });
-
-        quickNavButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.getAttribute('data-quick-nav');
-                if (targetId) {
-                    navigate(targetId);
-                }
-            });
-        });
 
         function navigate(pageId) {
             sections.forEach(section => section.classList.add('hidden'));
@@ -1581,12 +1092,6 @@
             if (activeLink) {
                 activeLink.classList.add('active');
             }
-            quickNavButtons.forEach(link => link.classList.remove('active'));
-            const quickActive = document.querySelector(`[data-quick-nav="${activeId}"]`);
-            if (quickActive) {
-                quickActive.classList.add('active');
-            }
-            closeMobileMenu();
         }
 
         window.onpopstate = () => {
@@ -1598,18 +1103,6 @@
             const initialPage = window.location.hash.substring(1) || 'home';
             navigate(initialPage);
         };
-
-        document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                closeMobileMenu();
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 1024) {
-                closeMobileMenu();
-            }
-        });
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
