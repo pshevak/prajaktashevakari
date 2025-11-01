@@ -4,647 +4,1477 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prajakta Shevakari | JHU Masters Portfolio</title>
-    <!-- Load Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        
-        /* --- Base Theme Variables (Light Mode Default) --- */
+        @import url('https://fonts.googleapis.com/css2?family=General+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
         :root {
-            --color-bg-primary: #f8f8f8;
-            --color-bg-secondary: #ffffff;
-            --color-text-primary: #1f2937; /* Dark black/gray */
-            --color-text-secondary: #4b5563; /* Muted gray for body text */
-            --color-bg-subtle-card: #f0f9ff; /* Very light sky blue for hobby cards */
-            --color-bg-deep-card: #f3f4f6; /* Light gray for project result cards */
-            --color-accent-jhu: #003B6F;
-            --color-accent-sky: #0ea5e9; 
-            --color-accent-amber: #f59e0b; 
-            --shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --bg-primary: #f6f3ff;
+            --bg-secondary: rgba(255, 255, 255, 0.78);
+            --bg-tertiary: rgba(246, 243, 255, 0.65);
+            --bg-overlay: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(236, 72, 153, 0.12));
+            --text-primary: #1b1036;
+            --text-secondary: #4c3f78;
+            --border-soft: rgba(124, 58, 237, 0.15);
+            --accent-primary: #7c3aed;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #fbbf24;
+            --shadow-card: 0 25px 55px -25px rgba(124, 58, 237, 0.28);
+            --shadow-hero: 0 40px 70px -32px rgba(36, 11, 77, 0.35);
+            --gradient-title: linear-gradient(120deg, #7c3aed 0%, #ec4899 55%, #f59e0b 100%);
+            --gradient-chip: linear-gradient(120deg, rgba(124, 58, 237, 0.18), rgba(236, 72, 153, 0.18));
         }
 
-        /* --- Dark Mode Overrides --- */
         .dark {
-            --color-bg-primary: #121212; /* Near black */
-            --color-bg-secondary: #1f2937; /* Dark gray for cards/sections */
-            --color-text-primary: #ffffff; /* FORCED WHITE for headings and primary text */
-            --color-text-secondary: #c9d6e4; /* Bright white/gray for body text */
-            --color-bg-subtle-card: #28303a; /* Darker background for hobby cards to ensure text contrast */
-            --color-bg-deep-card: #0a0a0a; /* FORCED NEAR-BLACK for maximum contrast on project results */
-            --color-accent-jhu: #6366f1; /* Adjusted Indigo/Violet for visibility */
-            --color-accent-sky: #38bdf8;
-            --color-accent-amber: #fcd34d;
-            --shadow-light: none;
+            --bg-primary: #080513;
+            --bg-secondary: rgba(20, 15, 35, 0.78);
+            --bg-tertiary: rgba(15, 9, 28, 0.7);
+            --bg-overlay: linear-gradient(130deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.18));
+            --text-primary: #f8f5ff;
+            --text-secondary: #cec1ff;
+            --border-soft: rgba(185, 159, 255, 0.18);
+            --accent-primary: #a78bfa;
+            --accent-secondary: #f472b6;
+            --accent-tertiary: #facc15;
+            --shadow-card: 0 35px 65px -35px rgba(168, 85, 247, 0.5);
+            --shadow-hero: 0 45px 90px -40px rgba(124, 58, 237, 0.55);
+            --gradient-title: linear-gradient(120deg, #a78bfa 0%, #f472b6 55%, #facc15 100%);
+            --gradient-chip: linear-gradient(120deg, rgba(167, 139, 250, 0.24), rgba(244, 114, 182, 0.24));
         }
 
-        /* Applying Variables */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-bg-primary);
-            color: var(--color-text-primary);
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'General Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
-        .accent-primary { color: var(--color-accent-jhu); }
-        .bg-accent-primary { background-color: var(--color-accent-jhu); }
-        .bg-section { background-color: var(--color-bg-secondary); }
-        .border-sky-500 { border-color: var(--color-accent-sky); }
-        .text-sky-500 { color: var(--color-accent-sky); }
-        .text-amber-600 { color: var(--color-accent-amber); }
-        .border-amber-500 { border-color: var(--color-accent-amber); }
-        
-        /* High Contrast Text Rules (Ensures all gray text switches to bright color in dark mode) */
-        .text-gray-800, .text-gray-700 { color: var(--color-text-primary); }
-        .text-gray-600 { color: var(--color-text-secondary); } 
-        .text-gray-500 { color: var(--color-text-secondary); opacity: 0.8; } 
-        
-        /* Subtle Backgrounds with High Contrast Hover */
-        .bg-gray-200, .bg-gray-100 { background-color: var(--color-bg-primary); }
-        
-        /* Hobby Card Specific Styling (Finalized for contrast) */
-        .hobby-container {
-            background-color: var(--color-bg-subtle-card);
-            border: 1px solid var(--color-accent-sky);
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 9999px;
+            filter: blur(110px);
+            opacity: 0.75;
+            z-index: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
-        
-        /* Hover effect */
-        .hobby-container:hover {
+
+        body::before {
+            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.35), transparent 70%);
+            top: -20vh;
+            left: -20vw;
+        }
+
+        body::after {
+            background: radial-gradient(circle at center, rgba(236, 72, 153, 0.28), transparent 70%);
+            bottom: -25vh;
+            right: -18vw;
+        }
+
+        html.dark body::before {
+            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.45), transparent 75%);
+        }
+
+        html.dark body::after {
+            background: radial-gradient(circle at center, rgba(236, 72, 153, 0.4), transparent 75%);
+        }
+
+        main,
+        nav,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar {
+            backdrop-filter: blur(24px);
+            background: rgba(255, 255, 255, 0.72);
+            border-bottom: 1px solid var(--border-soft);
+            box-shadow: 0 18px 45px -28px rgba(124, 58, 237, 0.25);
+        }
+
+        html.dark .navbar {
+            background: rgba(14, 9, 28, 0.82);
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            padding: 0.25rem 0;
+            transition: color 0.35s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.45rem;
+            width: 100%;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--gradient-title);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-secondary);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .theme-toggle {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-soft);
+            background: rgba(255, 255, 255, 0.58);
+            box-shadow: 0 18px 38px -24px rgba(124, 58, 237, 0.45);
+            transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
+        }
+
+        .theme-toggle:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: var(--color-accent-jhu);
-        }
-        
-        /* --- FINAL FIX: Force ALL specific gray text classes within the hobby container to use the bright dark mode text color --- */
-        .dark .hobby-container .text-gray-600,
-        .dark .hobby-container .text-gray-700,
-        .dark .hobby-container .text-gray-800 {
-            color: var(--color-text-secondary) !important; 
-        }
-        
-        /* Experience/Project Card Specific Dark Mode Text Fix (Ensures internal text is readable on dark backgrounds) */
-        .bg-section .text-gray-600, .bg-section .text-gray-500 {
-            transition: color 0.3s;
-        }
-        .dark .bg-section .text-gray-600 { color: var(--color-text-secondary); }
-        .dark .bg-section .text-gray-500 { color: var(--color-text-secondary); opacity: 0.8; }
-        
-        /* Fix for Intro Paragraph Text (Ensures main intro text is white in dark mode) */
-        .dark #home .text-xl.text-gray-600 {
-            color: var(--color-text-secondary) !important;
+            border-color: rgba(124, 58, 237, 0.4);
         }
 
-
-        /* --- Theme Toggle Animation --- */
-        @keyframes rotate-in { 0% { opacity: 0; transform: rotate(-90deg) scale(0.8); } 100% { opacity: 1; transform: rotate(0deg) scale(1); } }
-        @keyframes rotate-out { 0% { opacity: 1; transform: rotate(0deg) scale(1); } 100% { opacity: 0; transform: rotate(90deg) scale(0.8); } }
-
-        .theme-icon { transition: opacity 0.3s, transform 0.3s; }
-        .theme-icon.switching-in { animation: rotate-in 0.4s forwards; }
-        .theme-icon.switching-out { animation: rotate-out 0.4s forwards; }
-        
-        /* Smooth scrolling for hash links */
-        html { scroll-behavior: smooth; }
-        .page-section { padding-top: 4rem; padding-bottom: 4rem; }
-        
-        /* --- Pulsing Gradient Headline --- */
-        @keyframes gradient-pulse {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        html.dark .theme-toggle {
+            background: rgba(17, 12, 30, 0.75);
         }
-        .gradient-headline {
-            color: var(--color-accent-jhu);
-            background: linear-gradient(90deg, var(--color-accent-jhu), var(--color-accent-sky), var(--color-accent-jhu));
-            background-size: 300% 300%;
+
+        .mobile-menu-toggle {
+            display: none;
+            width: auto;
+            height: 2.75rem;
+            border-radius: 999px;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0 1.15rem;
+            border: 1px solid var(--border-soft);
+            background: rgba(255, 255, 255, 0.58);
+            box-shadow: 0 18px 38px -24px rgba(124, 58, 237, 0.45);
+            transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
+            color: var(--text-primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .mobile-menu-toggle:hover {
+            transform: translateY(-2px);
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+
+        html.dark .mobile-menu-toggle {
+            background: rgba(17, 12, 30, 0.75);
+        }
+
+        .mobile-menu-toggle svg {
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-toggle span {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.75rem 1.75rem 3rem;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(22px);
+            z-index: 60;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        html.dark .mobile-menu {
+            background: rgba(9, 6, 20, 0.92);
+        }
+
+        .mobile-menu-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .mobile-close {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+
+        .mobile-close:hover {
+            transform: translateY(-2px);
+            border-color: rgba(236, 72, 153, 0.4);
+        }
+
+        .mobile-menu-links {
+            margin-top: clamp(2rem, 6vw, 3rem);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .mobile-nav-link {
+            text-align: left;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 0 0 0.4rem 0;
+            border: none;
+            border-bottom: 1px solid rgba(124, 58, 237, 0.18);
+            transition: color 0.3s ease, border 0.3s ease;
+            background: transparent;
+            width: 100%;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--accent-secondary);
+            border-color: rgba(236, 72, 153, 0.35);
+        }
+
+        .mobile-menu-footer {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-menu-footer .btn-secondary,
+        .mobile-menu-footer .btn-primary {
+            width: 100%;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .mobile-nav-rail {
+            display: none;
+            position: sticky;
+            top: calc(72px + 0.75rem);
+            z-index: 40;
+            padding: 0.5rem 1.25rem 0.75rem;
+            background: transparent;
+            backdrop-filter: blur(0px);
+        }
+
+        .mobile-nav-rail-inner {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 0.25rem;
+        }
+
+        .mobile-nav-rail-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-rail-link {
+            flex: 0 0 auto;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            background: rgba(255, 255, 255, 0.75);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
+        }
+
+        .mobile-rail-link:focus-visible {
+            outline: 2px solid var(--accent-secondary);
+            outline-offset: 2px;
+        }
+
+        .mobile-rail-link.active {
+            border-color: rgba(236, 72, 153, 0.55);
+            box-shadow: 0 12px 24px -16px rgba(236, 72, 153, 0.45);
+            transform: translateY(-2px);
+            background: linear-gradient(120deg, rgba(124, 58, 237, 0.22), rgba(236, 72, 153, 0.22));
+        }
+
+        html.dark .mobile-nav-rail {
+            background: transparent;
+        }
+
+        html.dark .mobile-rail-link {
+            background: rgba(17, 12, 30, 0.78);
+            border-color: rgba(185, 159, 255, 0.25);
+            color: var(--text-secondary);
+        }
+
+        html.dark .mobile-rail-link.active {
+            border-color: rgba(244, 114, 182, 0.55);
+            box-shadow: 0 12px 24px -16px rgba(124, 58, 237, 0.45);
+            background: linear-gradient(120deg, rgba(167, 139, 250, 0.28), rgba(244, 114, 182, 0.28));
+        }
+
+        .hero-shell {
+            position: relative;
+            display: grid;
+            gap: clamp(1.5rem, 4vw, 3rem);
+            grid-template-columns: minmax(0, 1fr);
+            padding: clamp(2.5rem, 6vw, 3.5rem);
+            border-radius: 2.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-hero);
+            overflow: hidden;
+            align-items: center;
+        }
+
+        .hero-shell::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--bg-overlay);
+            pointer-events: none;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+            max-width: 40rem;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            background: rgba(124, 58, 237, 0.12);
+            color: var(--accent-primary);
+            border: 1px solid rgba(124, 58, 237, 0.18);
+        }
+
+        html.dark .hero-eyebrow {
+            background: rgba(167, 139, 250, 0.18);
+            color: var(--accent-primary);
+        }
+
+        .dark .text-purple-700\/80 {
+            color: var(--text-secondary) !important;
+            opacity: 0.88 !important;
+        }
+
+        .dark .text-purple-500 {
+            color: var(--accent-primary) !important;
+        }
+
+        .dark .text-purple-400 {
+            color: var(--accent-secondary) !important;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 4.6rem);
+            line-height: 1.05;
+            margin-top: 1.1rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-title);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient-pulse 8s ease infinite;
-            text-shadow: 0 0 5px rgba(0, 59, 111, 0.3);
+            background-clip: text;
         }
-        
-        /* --- Floating Image Animation --- */
-        @keyframes subtle-float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
-        .floating-image { animation: subtle-float 20s ease-in-out infinite; transition: transform 0.3s ease; }
-        .floating-image:hover { transform: translateY(-8px) scale(1.02); animation-play-state: paused; }
 
-        /* Scroll-based Fade-in Animation */
-        .fade-in-scroll { opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 0.8s ease-out; }
-        .fade-in-scroll.visible { opacity: 1; transform: translateY(0); }
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 34rem;
+            line-height: 1.7;
+        }
+
+        .focus-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.75rem;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.1rem;
+            border-radius: 999px;
+            background: var(--gradient-chip);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.92rem;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+
+        .chip:hover {
+            transform: translateY(-3px);
+            border-color: rgba(236, 72, 153, 0.45);
+        }
+
+        .hero-photo {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .portrait-frame {
+            width: min(320px, 80%);
+            aspect-ratio: 1;
+            border-radius: 42%;
+            padding: 0.6rem;
+            background: linear-gradient(140deg, rgba(124, 58, 237, 0.4), rgba(236, 72, 153, 0.35));
+            box-shadow: 0 45px 75px -35px rgba(124, 58, 237, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floaty 18s ease-in-out infinite;
+        }
+
+        @media (min-width: 900px) {
+            .hero-shell {
+                grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.9fr);
+            }
+
+            .hero-photo {
+                justify-content: flex-end;
+            }
+
+            .portrait-frame {
+                width: min(360px, 100%);
+            }
+        }
+
+        @media (max-width: 899px) {
+            .hero-subtitle {
+                max-width: none;
+            }
+        }
+
+        .portrait-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 38%;
+            object-fit: cover;
+            border: 6px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 25px 55px -30px rgba(36, 11, 77, 0.4);
+        }
+
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            45% { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        .cta-group {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.95rem 1.9rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, rgba(124, 58, 237, 0.95), rgba(236, 72, 153, 0.95));
+            color: #fdfcff;
+            box-shadow: 0 28px 55px -25px rgba(124, 58, 237, 0.45);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 35px 70px -25px rgba(124, 58, 237, 0.55);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-soft);
+            color: var(--text-primary);
+            box-shadow: 0 20px 45px -28px rgba(124, 58, 237, 0.25);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: rgba(124, 58, 237, 0.35);
+            color: var(--accent-primary);
+        }
+
+        html.dark .btn-secondary {
+            background: rgba(18, 12, 34, 0.85);
+            color: var(--text-secondary);
+        }
+
+        .highlight-strip {
+            display: grid;
+            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            margin-top: 2.5rem;
+        }
+
+        .hero-highlights {
+            position: relative;
+            z-index: 1;
+            grid-column: 1 / -1;
+            margin-top: clamp(1rem, 3vw, 2rem);
+        }
+
+        .highlight-card {
+            padding: 1.45rem 1.8rem;
+            border-radius: 1.4rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(14px);
+        }
+
+        .highlight-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .highlight-text {
+            margin-top: 0.35rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .section-shell {
+            padding: clamp(3rem, 8vw, 5rem) 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            margin-bottom: 2.5rem;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-card {
+            background: var(--bg-secondary);
+            border-radius: 1.75rem;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-card);
+            padding: 2.2rem;
+            backdrop-filter: blur(18px);
+        }
+
+        .timeline {
+            position: relative;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(124, 58, 237, 0.6), rgba(236, 72, 153, 0.6));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3.2rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 9px;
+            top: 0.4rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+        }
+
+        .timeline-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-role {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .timeline-org {
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .timeline-meta {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 600;
+            color: var(--accent-secondary);
+        }
+
+        .hobby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.8rem;
+        }
+
+        .hobby-card {
+            padding: 1.4rem 1.6rem;
+            border-radius: 1.3rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 55px -30px rgba(124, 58, 237, 0.35);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-card {
+            position: relative;
+            padding: 2rem;
+            border-radius: 1.6rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-card);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            background: linear-gradient(140deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.18));
+            transition: opacity 0.35s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 38px 70px -35px rgba(124, 58, 237, 0.45);
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        .project-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .pill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.2rem;
+        }
+
+        .pill {
+            padding: 0.55rem 1.05rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--border-soft);
+            color: var(--text-primary);
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+
+        .pill:hover {
+            transform: translateY(-3px);
+            border-color: rgba(236, 72, 153, 0.45);
+        }
+
+        html.dark .pill {
+            background: rgba(16, 11, 31, 0.78);
+            color: var(--text-secondary);
+        }
+
+        .contact-card {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-card .btn-primary {
+            width: 100%;
+        }
+
+        .home-contact-links {
+            margin-top: 3.5rem;
+            padding: 2.25rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border-soft);
+            background: var(--bg-secondary);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-contact-links::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--bg-overlay);
+            pointer-events: none;
+        }
+
+        .home-contact-links h3 {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(1.35rem, 3vw, 1.75rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .home-contact-links p {
+            position: relative;
+            z-index: 1;
+            color: var(--text-secondary);
+            margin-bottom: 1.75rem;
+        }
+
+        .home-contact-actions {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .contact-orb {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.65rem 1.5rem 0.65rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(124, 58, 237, 0.22);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+            box-shadow: 0 24px 40px -28px rgba(124, 58, 237, 0.45);
+            position: relative;
+        }
+
+        .contact-orb:hover {
+            transform: translateY(-3px);
+            border-color: rgba(236, 72, 153, 0.4);
+            box-shadow: 0 30px 48px -28px rgba(236, 72, 153, 0.45);
+        }
+
+        .contact-orb:focus-visible {
+            outline: 2px solid var(--accent-secondary);
+            outline-offset: 3px;
+        }
+
+        .contact-orb-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(236, 72, 153, 0.25));
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+            animation: orbPulse 3.2s ease-in-out infinite;
+        }
+
+        .contact-orb-icon svg {
+            width: 1.3rem;
+            height: 1.3rem;
+        }
+
+        @keyframes orbPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.35);
+            }
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 0 12px rgba(124, 58, 237, 0);
+            }
+        }
+
+        html.dark .home-contact-links {
+            background: rgba(17, 12, 30, 0.78);
+        }
+
+        html.dark .contact-orb {
+            background: rgba(16, 11, 31, 0.92);
+            border-color: rgba(185, 159, 255, 0.25);
+            color: var(--text-secondary);
+        }
+
+        html.dark .contact-orb:hover {
+            border-color: rgba(244, 114, 182, 0.5);
+        }
+
+        html.dark .contact-orb-icon {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(244, 114, 182, 0.35));
+            border-color: rgba(185, 159, 255, 0.3);
+        }
+
+        footer {
+            padding: 2.8rem 0;
+            background: rgba(255, 255, 255, 0.68);
+            border-top: 1px solid var(--border-soft);
+            backdrop-filter: blur(20px);
+            margin-top: 4rem;
+        }
+
+        html.dark footer {
+            background: rgba(15, 10, 26, 0.78);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: inline-flex;
+            }
+
+            .navbar .btn-primary.text-sm {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav-rail {
+                display: block;
+            }
+
+            .hero-shell {
+                padding: 2.25rem 1.75rem;
+            }
+
+            .home-contact-links {
+                padding: 1.75rem;
+                border-radius: 1.75rem;
+            }
+
+            .contact-orb {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mobile-nav-rail {
+                top: calc(64px + 0.5rem);
+                padding: 0.5rem 1rem 0.75rem;
+            }
+
+            .mobile-menu-toggle {
+                padding: 0 0.95rem;
+                letter-spacing: 0.14em;
+            }
+
+            .contact-orb {
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+            }
+        }
     </style>
 </head>
-<body class="text-gray-800">
-
-    <!-- Sticky Navigation Bar (Now with Theme Toggle) -->
-    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700 transition duration-300">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            
-            <!-- NEW: Prominent Name and Title -->
-            <div class="flex items-center space-x-4">
-                <h1 class="text-2xl sm:text-3xl font-extrabold accent-primary tracking-tight">Prajakta Shevakari</h1>
-                <span class="hidden sm:block text-base font-semibold text-sky-500 border-l pl-4 border-gray-300 dark:border-gray-700">Masters Candidate</span>
+<body class="antialiased">
+    <nav class="navbar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-11 w-11 rounded-full bg-gradient-to-br from-purple-500/80 to-pink-500/80 flex items-center justify-center text-white font-semibold">PS</div>
+                <div>
+                    <h1 class="text-xl font-semibold tracking-tight">Prajakta Shevakari</h1>
+                    <p class="text-xs uppercase tracking-[0.35em] text-purple-500">AI & Systems Builder</p>
+                </div>
             </div>
-
-            <!-- Navigation Links -->
-            <div class="space-x-8 hidden md:flex">
-                <button onclick="navigate('home')" id="nav-home" class="nav-link text-sky-500 font-bold hover:text-sky-600 transition duration-300">Home</button>
-                <button onclick="navigate('experience')" id="nav-experience" class="nav-link text-gray-600 hover:text-sky-500 transition duration-300">Experience</button>
-                <button onclick="navigate('projects')" id="nav-projects" class="nav-link text-gray-600 hover:text-sky-500 transition duration-300">Research & Projects</button>
-                <button onclick="navigate('skills')" id="nav-skills" class="nav-link text-gray-600 hover:text-sky-500 transition duration-300">Skills</button>
+            <div class="nav-links flex items-center space-x-8">
+                <button type="button" id="nav-home" onclick="navigate('home')" class="nav-link active">Home</button>
+                <button type="button" id="nav-experience" onclick="navigate('experience')" class="nav-link">Experience</button>
+                <button type="button" id="nav-projects" onclick="navigate('projects')" class="nav-link">Research &amp; Projects</button>
+                <button type="button" id="nav-skills" onclick="navigate('skills')" class="nav-link">Skills</button>
             </div>
-            
             <div class="flex items-center space-x-4">
-                <!-- NEW: Theme Toggle Button -->
-                <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
-                    <!-- Sun/Moon SVG icons (for light/dark) - Added 'theme-icon' class -->
-                    <svg id="sun-icon" class="h-6 w-6 theme-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    <svg id="moon-icon" class="h-6 w-6 theme-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <button type="button" id="menu-toggle" class="mobile-menu-toggle" aria-label="Open menu" aria-controls="mobile-menu">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <span>Menu</span>
                 </button>
-
-                <button onclick="navigate('contact')" class="hidden sm:block px-4 py-2 bg-accent-primary text-white font-semibold rounded-full hover:bg-sky-600 transition duration-300 shadow-md">
-                    Contact
+                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg id="sun-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg id="moon-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                 </button>
+                <button type="button" onclick="navigate('contact')" class="hidden sm:inline-flex btn-primary text-sm">Let’s Connect</button>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Container for Dynamic Page Rendering -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="mobile-nav-rail" role="navigation" aria-label="Section shortcuts">
+        <div class="mobile-nav-rail-inner">
+            <button type="button" class="mobile-rail-link active" data-quick-nav="home">Home</button>
+            <button type="button" class="mobile-rail-link" data-quick-nav="experience">Experience</button>
+            <button type="button" class="mobile-rail-link" data-quick-nav="projects">Research &amp; Projects</button>
+            <button type="button" class="mobile-rail-link" data-quick-nav="skills">Skills</button>
+            <button type="button" class="mobile-rail-link" data-quick-nav="contact">Contact</button>
+        </div>
+    </div>
 
-        <!-- 1. Home / Hero Section (page-section) -->
-        <section id="home" class="page-section">
-            <div class="min-h-[70vh] flex flex-col md:flex-row justify-between items-center pt-16 gap-10">
-                
-                <!-- Left Column: Text and CTA -->
-                <div class="md:w-3/5 order-2 md:order-1 fade-in-scroll">
-                    <h4 class="text-xl font-medium text-sky-500 mb-4 tracking-wider uppercase">
-                        JHU Computer Science | AI/ML Focus
-                    </h4>
-                    <!-- Static Headline with Pulsing Gradient -->
-                    <h1 class="5xl sm:text-7xl font-extrabold leading-tight gradient-headline">
-                        Scaling Innovation: Distributed Systems for Applied AI
-                    </h1>
-                    <p class="mt-8 text-xl max-w-3xl text-gray-600 leading-relaxed">
-                        I am a <span class="font-bold">Masters student in Computer Science</span> at <span class="font-bold">Johns Hopkins University</span>, specializing in <span class="font-bold">Artificial Intelligence and Machine Learning (AI/ML)</span>. Leveraging my foundation as a lead developer at FinTech firms like J.P. Morgan and Barclays, I focus on engineering highly scalable, mission-critical systems. My current work integrates deep industry expertise in <span class="font-bold">distributed architecture and cloud services</span> with advanced research in <span class="font-bold">AI/ML and NLP</span>, driving the development of reliable, automated, and intelligent technical solutions.
+    <div id="mobile-menu" class="mobile-menu hidden" aria-hidden="true">
+        <div>
+            <div class="mobile-menu-top">
+                <div class="flex items-center space-x-3">
+                    <div class="h-11 w-11 rounded-full bg-gradient-to-br from-purple-500/80 to-pink-500/80 flex items-center justify-center text-white font-semibold">PS</div>
+                    <div>
+                        <h2 class="text-lg font-semibold tracking-tight">Prajakta Shevakari</h2>
+                        <p class="text-xs uppercase tracking-[0.35em] text-purple-500">AI &amp; Systems Builder</p>
+                    </div>
+                </div>
+                <button type="button" id="mobile-close" class="mobile-close" aria-label="Close menu">×</button>
+            </div>
+            <div class="mobile-menu-links">
+                <button type="button" class="mobile-nav-link" data-mobile-nav="home">Home</button>
+                <button type="button" class="mobile-nav-link" data-mobile-nav="experience">Experience</button>
+                <button type="button" class="mobile-nav-link" data-mobile-nav="projects">Research &amp; Projects</button>
+                <button type="button" class="mobile-nav-link" data-mobile-nav="skills">Skills</button>
+                <button type="button" class="mobile-nav-link" data-mobile-nav="contact">Contact</button>
+            </div>
+        </div>
+        <div class="mobile-menu-footer">
+            <button type="button" onclick="navigate('projects')" class="btn-primary">Explore Research</button>
+            <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="home" class="section-shell">
+            <div class="hero-shell fade-in">
+                <div class="hero-copy">
+                    <span class="hero-eyebrow">Johns Hopkins University · CS (AI/ML)</span>
+                    <h2 class="hero-title">Designing resilient systems that let intelligent products scale.</h2>
+                    <p class="hero-subtitle">
+                        I am a master’s student at Johns Hopkins University blending a fintech engineering background with cutting-edge ML research. From automating mission-critical banking workflows to architecting LLM-driven annotation pipelines, I build dependable platforms for intelligent decisioning.
                     </p>
+                <div class="focus-chips">
+                    <span class="chip">⚙️ Distributed AI Platforms</span>
+                    <span class="chip">☁️ Cloud &amp; Data Pipelines</span>
+                    <span class="chip">🧠 LLM Automation</span>
+                    <span class="chip">🤝 Leadership &amp; Mentorship</span>
+                </div>
+                <div class="cta-group">
+                    <button type="button" onclick="navigate('projects')" class="btn-primary">Explore Research</button>
+                    <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <div class="portrait-frame">
+                    <img src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" alt="Prajakta Shevakari" onerror="this.src='https://placehold.co/400x400/7c3aed/ffffff?text=Prajakta';" />
+                </div>
+            </div>
+            <div class="hero-highlights">
+                <div class="highlight-strip">
+                    <div class="highlight-card">
+                        <div class="highlight-title">70% ↓</div>
+                        <p class="highlight-text">Cut MTTR across JP Morgan systems by re-architecting observability and recovery flows.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-title">90+</div>
+                        <p class="highlight-text">Weekly production releases coordinated as Release Manager with 95% on-time delivery.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-title">SOTA</div>
+                        <p class="highlight-text">Achieved state-of-the-art accuracy for spontaneous smile recognition across four datasets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Hobbies/Personality Section - FINAL VISUAL DIVIDER LAYOUT -->
-                    <div class="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <h5 class="text-lg font-semibold text-gray-700 mb-4">Beyond the Code: Finding Balance</h5>
-                        <div class="flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4 text-center">
-                        
-                            
-                            <!-- Tile 1: Discipline & Focus -->
-                            <div class="hobby-container p-4 sm:flex-1 rounded-lg transition duration-300">
-                                <span class="text-3xl sm:text-4xl block mb-2">🧘</span>
-                                <p class="font-bold text-base text-sky-500">Iyengar Yoga & Focus</p>
-                                <p class="text-sm text-gray-600 mt-1">Practicing Iyengar Yoga and meditation is key to my mental and physical well-being—it’s where my technical focus begins!</p>
-                            </div>
+            <div class="glass-card mt-12 fade-in">
+                <h3 class="text-xl font-semibold text-purple-500">Beyond the code</h3>
+                <p class="text-sm text-purple-400 uppercase tracking-[0.3em] mt-1">Balance &amp; Joy</p>
+                <div class="hobby-grid">
+                    <div class="hobby-card">
+                        <div class="text-4xl mb-2">🧘</div>
+                        <h4 class="font-semibold text-lg text-purple-500">Iyengar Yoga Discipline</h4>
+                        <p class="text-sm text-purple-700/80">Meditation and Iyengar practice keep my focus sharp for high-stakes engineering.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="text-4xl mb-2">🏃</div>
+                        <h4 class="font-semibold text-lg text-purple-500">Movement &amp; Expression</h4>
+                        <p class="text-sm text-purple-700/80">Bharatnatyam, hiking, roller skating, and pickleball fuel creativity and resilience.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="text-4xl mb-2">🤝</div>
+                        <h4 class="font-semibold text-lg text-purple-500">Teaching for Good</h4>
+                        <p class="text-sm text-purple-700/80">I mentor and volunteer, helping learners build confidence in technical foundations.</p>
+                    </div>
+                </div>
+            </div>
 
-                            <!-- Tile 2: Physical Activity & Dance -->
-                            <div class="hobby-container p-4 sm:flex-1 rounded-lg transition duration-300">
-                                <span class="text-3xl sm:text-4xl block mb-2">🏃</span>
-                                <div>
-                                    <p class="font-bold text-base text-sky-500">Movement & Expression</p>
-                                    <p class="text-sm text-gray-600 mt-1">From the discipline of Bharatnatyam to the joy of hiking, roller skating, and new hobbies like Pickleball, I love staying active.</p>
-                                </div>
-                            </div>
+            <div class="home-contact-links fade-in">
+                <h3>Let’s build something lasting together.</h3>
+                <p>Tap a channel below to start a conversation—whether it’s about AI systems, fintech, or new collaborations.</p>
+                <div class="home-contact-actions">
+                    <a class="contact-orb" href="mailto:prajaktashevakari@gmail.com" aria-label="Email Prajakta">
+                        <span class="contact-orb-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 7l8.44 5.63a2 2 0 002.12 0L22 7M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </span>
+                        Email
+                    </a>
+                    <a class="contact-orb" href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" rel="noopener noreferrer" aria-label="Open Prajakta's LinkedIn profile">
+                        <span class="contact-orb-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.452 20.452H16.9v-4.996c0-1.19-.024-2.72-1.657-2.72-1.66 0-1.914 1.297-1.914 2.636v5.08H9.777V9h3.4v1.561h.047c.474-.9 1.637-1.85 3.368-1.85 3.6 0 4.266 2.37 4.266 5.455v6.286zM5.337 7.433a1.965 1.965 0 110-3.93 1.965 1.965 0 010 3.93zM7.119 20.452H3.554V9h3.565v11.452z" />
+                            </svg>
+                        </span>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
 
-                            <!-- Tile 3: Mentorship & Service -->
-                            <div class="hobby-container p-4 sm:flex-1 rounded-lg transition duration-300">
-                                <span class="text-3xl sm:text-4xl block mb-2">🤝</span>
-                                <div>
-                                    <p class="font-bold text-base text-sky-500">Sharing the Skills</p>
-                                    <p class="text-sm text-gray-600 mt-1">I am passionate about volunteering (like my work with 'Teaching for Good') and sharing fundamental technical and mathematical skills.</p>
-                                </div>
+        <section id="experience" class="section-shell hidden">
+            <div class="section-header fade-in">
+                <p class="tag">Trajectory</p>
+                <h2 class="section-title">Professional &amp; Academic Experience</h2>
+            </div>
+            <div class="glass-card fade-in">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Head Course Assistant</p>
+                                <p class="timeline-org">Johns Hopkins University · Software System Design</p>
                             </div>
+                            <span class="timeline-meta">Fall 2025</span>
                         </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Lead mentoring, office hours, and complex assessment design for graduate-level system design.</li>
+                            <li>Build supplementary material that anchors distributed architecture concepts for mixed cohorts.</li>
+                        </ul>
                     </div>
-
-                    <div class="mt-10 flex space-x-4">
-                        <button onclick="navigate('projects')" class="px-8 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-xl hover:bg-sky-600 transition duration-300 transform hover:scale-105">
-                            View Research
-                        </button>
-                        <a href="Prajakta Shevakari SDE Resume.pdf" target="_blank" class="px-8 py-3 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 font-bold rounded-lg shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-305 transform hover:scale-105">
-                            Download CV
-                        </a>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Course Assistant</p>
+                                <p class="timeline-org">Johns Hopkins University · Operating Systems</p>
+                            </div>
+                            <span class="timeline-meta">Spring 2025</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Guided student labs on concurrency, memory management, and kernel internals.</li>
+                            <li>Facilitated peer debugging sessions emphasizing distributed systems thinking.</li>
+                        </ul>
                     </div>
-                </div>
-
-                <!-- Right Column: Image -->
-                <div class="md:w-2/5 order-1 md:order-2 flex justify-center items-center">
-                    <!-- Added floating-image class for animation -->
-                    <div class="w-64 h-64 sm:w-80 sm:h-80 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden shadow-2xl ring-4 ring-sky-100 floating-image">
-                        <img 
-                            src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" 
-                            alt="Prajakta Shevakari Professional Photo" 
-                            class="object-cover w-full h-full"
-                            onerror="this.src='https://placehold.co/400x400/003B6F/FFFFFF?text=Photo+Error';"
-                        >
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">ILLD Fellow · Python Developer</p>
+                                <p class="timeline-org">JHU Office of Digital Transformation</p>
+                            </div>
+                            <span class="timeline-meta">2024 – Present</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Automated internal hiring workflows with Python apps, GUI tooling, and validation systems.</li>
+                            <li>Partnered with university leadership to deliver resilient automation for HR operations.</li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. Experience Section (page-section, initially hidden) -->
-        <section id="experience" class="page-section hidden">
-            <h2 class="text-4xl font-bold mb-10 accent-primary">Professional & Academic Experience</h2>
-            
-            <div class="space-y-12">
-                
-                <!-- NEW ACADEMIC EXPERIENCE: Head Course Assistant (JHU) -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-amber-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="2xl font-semibold accent-primary">Head Course Assistant</h3>
-                        <p class="text-sm font-medium text-gray-600">Fall 2025</p>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Lead Development Engineer</p>
+                                <p class="timeline-org">Barclays · Pune, India</p>
+                            </div>
+                            <span class="timeline-meta">Apr 2023 – May 2024</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Built a global regulatory insights dashboard surfacing real-time transactional intelligence.</li>
+                            <li>Redesigned disaster-recovery pipelines, shrinking releases from 4 hours to under 10 minutes.</li>
+                        </ul>
                     </div>
-                    <p class="text-lg text-amber-600 mb-3">Johns Hopkins University | Software System Design</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Lead mentoring and instruction for the core Software System Design course.</li>
-                        <li>Responsibilities include holding office hours, grading complex assignments, and developing supplementary materials for undergraduate and graduate students.</li>
-                    </ul>
-                </div>
-                
-                <!-- NEW ACADEMIC EXPERIENCE: Course Assistant (JHU) -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-amber-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">Course Assistant</h3>
-                        <p class="text-sm font-medium text-gray-600">Spring 2025</p>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Software Engineer III</p>
+                                <p class="timeline-org">JP Morgan Chase · Mumbai, India</p>
+                            </div>
+                            <span class="timeline-meta">Oct 2021 – Apr 2023</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Migrated terabytes of data into AWS, coupling Spark/Java tooling with enriched reporting flows.</li>
+                            <li>Redesigned legacy modules for resiliency, reducing MTTR by 70%.</li>
+                        </ul>
                     </div>
-                    <p class="text-lg text-amber-600 mb-3">Johns Hopkins University | Operating Systems</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Provided specialized support for students in the demanding Operating Systems course, focusing on core concepts of concurrency, memory management, and kernel design.</li>
-                        <li>Facilitated deeper understanding of complex distributed systems principles in a hands-on environment.</li>
-                    </ul>
-                </div>
-
-                <!-- NEW ACADEMIC EXPERIENCE: ILLD Fellow (JHU) -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-amber-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">ILLD Fellow - Python Developer</h3>
-                        <p class="text-sm font-medium text-gray-600">Academic Year 2024 - Present</p>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Software Engineer &amp; Release Manager</p>
+                                <p class="timeline-org">FIS Global · Pune, India</p>
+                            </div>
+                            <span class="timeline-meta">Jul 2017 – Oct 2021</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Coordinated 90+ weekly production releases with 95% punctuality and enterprise stability.</li>
+                            <li>Delivered automation that saved operations teams 10+ hours weekly; earned "Above &amp; Beyond" award.</li>
+                        </ul>
                     </div>
-                    <p class="text-lg text-amber-600 mb-3">Johns Hopkins University | Office of Digital Transformation</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Developed and deployed internal automation tools, GUI applications, and validation systems using Python to streamline student hiring and operational workflows.</li>
-                        <li>Collaborated with senior university staff to design and maintain internal tooling for HR and administrative processes, significantly improving efficiency.</li>
-                    </ul>
-                </div>
-
-                <!-- Professional Experience Card 1: Barclays -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">Lead Development Engineer</h3>
-                        <p class="text-sm font-medium text-gray-600">April 2023 - May 2024</p>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <p class="timeline-role">Software Development Intern</p>
+                                <p class="timeline-org">BMC Software · Pune, India</p>
+                            </div>
+                            <span class="timeline-meta">Aug 2016 – Apr 2017</span>
+                        </div>
+                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
+                            <li>Built a live analytics platform for BMC Network Automation with ML-driven dashboards.</li>
+                            <li>Integrated Yellowfin BI to unlock real-time reporting and predictive insights.</li>
+                        </ul>
                     </div>
-                    <p class="text-lg text-sky-500 mb-3">Barclays | Pune, India</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Led design and development of a state-of-the-art <span class="font-semibold">web dashboard</span> for real-time transactional data, empowering executives with key insights.</li>
-                        <li>Reimagined and automated the disaster recovery <span class="font-semibold">deployment pipeline</span>, reducing release time from 4+ hours to <span class="font-semibold">under 10 minutes</span>.</li>
-                        <li>Owned the end-to-end product infrastructure, development, and deployment for major shareholding, monitoring, and reporting obligations globally.</li>
-                    </ul>
-                </div>
-
-                <!-- Professional Experience Card 2: JP Morgan Chase -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">Software Engineer III</h3>
-                        <p class="text-sm font-medium text-gray-600">October 2021 - April 2023</p>
-                    </div>
-                    <p class="text-lg text-sky-500 mb-3">JP Morgan Chase | Mumbai, India</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Spearheaded the <span class="font-semibold">cloud migration</span> project, moving terabytes of data from on-prem sources to <span class="font-semibold">AWS</span>.</li>
-                        <li>Developed a robust <span class="font-semibold">Java and Spark tool</span> to connect to AWS, enrich raw data, generate reports, and store output back to the cloud.</li>
-                        <li>Reduced <span class="font-semibold">Mean Time to Resolution (MTTR) by 70%</span> (from 6 days to under 2) by redesigning legacy modules for resilience and ease of debugging.</li>
-                    </ul>
-                </div>
-
-                <!-- Professional Experience Card 3: FIS Global -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">Software Engineer / Release Manager</h3>
-                        <p class="text-sm font-medium text-gray-600">July 2017 - October 2021</p>
-                    </div>
-                    <p class="text-lg text-sky-500 mb-3">FIS Global | Pune, India</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Delivered over <span class="font-semibold">90 weekly production releases</span> with a 95% on-time delivery rate as Release Manager.</li>
-                        <li>Received the <span class="font-semibold">"Above and Beyond" award</span> for delivering a bulk upload feature that automated manual tasks, saving the operations team <span class="font-semibold">10+ hours weekly</span>.</li>
-                        <li>Acted as team lead for a middle office project, ensuring functions like trade processing, enrichment, ETL, and data transformation performed seamlessly.</li>
-                    </ul>
-                </div>
-
-                <!-- NEW PROFESSIONAL EXPERIENCE: BMC Software Internship -->
-                <div class="bg-section p-8 rounded-xl shadow-xl border-l-4 border-sky-500 hover:shadow-2xl transition duration-300">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                        <h3 class="text-2xl font-semibold accent-primary">Software Development Intern</h3>
-                        <p class="text-sm font-medium text-gray-600">August 2016 - April 2017</p>
-                    </div>
-                    <p class="text-lg text-sky-500 mb-3">BMC Software | Pune, India</p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
-                        <li>Built a <span class="font-semibold">live data analytics and reporting platform</span> for BMC Network Automation (BNA).</li>
-                        <li>Used <span class="font-semibold">machine learning</span> to extract real-time insights from large datasets.</li>
-                        <li>Integrated <span class="font-semibold">Yellowfin BI</span> for dynamic reporting, enabling improved data-driven decision-making over static reports.</li>
-                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Research & Projects Section (page-section, initially hidden) -->
-        <section id="projects" class="page-section hidden">
-            <h2 class="text-4xl font-bold mb-10 accent-primary">Selected Academic Research & Technical Projects</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-
-                <!-- Project Card 1: D-FuseSmileNet (ML Report) - NOW REDIRECTS TO DETAIL PAGE -->
-                <article onclick="navigate('project-smile')" class="bg-section p-6 rounded-xl shadow-lg transition duration-300 hover:shadow-xl border-t-4 border-sky-500 cursor-pointer">
-                    <span class="text-sky-500 text-sm font-semibold mb-2 block">COMPUTER VISION / ML (JHU)</span>
-                    <h3 class="text-xl font-bold mb-3 accent-primary">D-FuseSmileNet: Spontaneous Smile Recognition</h3>
-                    <p class="text-gray-600 text-base mb-4 line-clamp-4">
-                        A novel framework for spontaneous smile detection via <span class="font-semibold">Hadamard fusion</span> of transformer-based features and handcrafted <span class="font-semibold">D-Marker features</span>. Achieved <span class="font-semibold">state-of-the-art accuracy</span> on 4 benchmark datasets (e.g., BBC: 100%, SPOS: 98.5%), demonstrating superior performance over multi-task learning methods.
+        <section id="projects" class="section-shell hidden">
+            <div class="section-header fade-in">
+                <p class="tag">Spotlight</p>
+                <h2 class="section-title">Selected Research &amp; Technical Projects</h2>
+            </div>
+            <div class="project-grid fade-in">
+                <article onclick="navigate('project-smile')" class="project-card">
+                    <span class="tag">Computer Vision · ML</span>
+                    <h3 class="text-xl font-semibold mt-3">D-FuseSmileNet: Spontaneous Smile Recognition</h3>
+                    <p class="text-sm text-purple-700/80 mt-3">
+                        Transformer features fused with physiological D-markers via Hadamard interaction to classify spontaneous vs posed smiles with benchmark-leading accuracy across BBC, SPOS, UvA-NEMO, and MMI datasets.
                     </p>
-                    <div class="text-sm font-bold text-sky-500 hover:text-sky-600 hover:underline">
-                        View Details &rarr;
-                    </div>
+                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
-
-                <!-- Project Card 2: Clinical NER (NLP Report) - NOW REDIRECTS TO DETAIL PAGE -->
-                <article onclick="navigate('project-nlp')" class="bg-section p-6 rounded-xl shadow-lg transition duration-300 hover:shadow-xl border-t-4 border-sky-500 cursor-pointer">
-                    <span class="text-sky-500 text-sm font-semibold mb-2 block">NLP / LLMs (JHU)</span>
-                    <h3 class="text-xl font-bold mb-3 accent-primary">LLM-Driven Clinical NER Annotation Pipeline</h3>
-                    <p class="text-gray-600 text-base mb-4 line-clamp-4">
-                        Developed an efficient, automated annotation pipeline for low-resource Bengali clinical text using GPT-4.1. Employed <span class="font-semibold">Chain-of-Thought (CoT) prompting</span>, which <span class="font-semibold">tripled the token-level F1</span> and boosted the downstream BanglishBERT model F1 to 46.0, closing two-thirds of the gap to manual labeling.
+                <article onclick="navigate('project-nlp')" class="project-card">
+                    <span class="tag">NLP · LLMs</span>
+                    <h3 class="text-xl font-semibold mt-3">LLM-Driven Clinical NER Annotation Pipeline</h3>
+                    <p class="text-sm text-purple-700/80 mt-3">
+                        Chain-of-Thought prompting with GPT-4.1 to auto-label Bengali clinical text, tripling F1 agreement and lifting BanglishBERT macro F1 to 46.0 without manual annotation cycles.
                     </p>
-                    <div class="text-sm font-bold text-sky-500 hover:text-sky-600 hover:underline">
-                        View Details &rarr;
-                    </div>
+                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
-
-                <!-- Project Card 3: BMC Software BNA Project - NOW REDIRECTS TO DETAIL PAGE -->
-                <article onclick="navigate('project-bna')" class="bg-section p-6 rounded-xl shadow-lg transition duration-300 hover:shadow-xl border-t-4 border-sky-500 cursor-pointer">
-                    <span class="text-sky-500 text-sm font-semibold mb-2 block">DATA MINING / BI (Undergrad Project)</span>
-                    <h3 class="xl font-bold mb-3 accent-primary">Next Gen Analytics for BMC Network Automation (BNA)</h3>
-                    <p class="text-gray-600 text-base mb-4 line-clamp-4">
-                        Designed and built a modular, concurrent, and scalable platform for data mining BNA datasets. Introduced <span class="font-semibold">live reporting dashboards</span> using Yellowfin BI to replace static reports and enable sophisticated, data-driven decision making.
+                <article onclick="navigate('project-bna')" class="project-card">
+                    <span class="tag">Data Systems · BI</span>
+                    <h3 class="text-xl font-semibold mt-3">Next Gen Analytics for BMC Network Automation</h3>
+                    <p class="text-sm text-purple-700/80 mt-3">
+                        Modular Java/Akka service layering ML models with Yellowfin BI dashboards to transform static reports into real-time predictive insights for enterprise network automation.
                     </p>
-                    <div class="text-sm font-bold text-sky-500 hover:text-sky-600 hover:underline">
-                        View Details &rarr;
-                    </div>
+                    <button type="button" class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
                 </article>
             </div>
         </section>
 
-        <!-- 4. Skills Section (page-section, initially hidden) -->
-        <section id="skills" class="page-section hidden">
-            <h2 class="text-4xl font-bold mb-10 accent-primary">Technical Skills & Profile</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Academic Profile -->
-                <div class="bg-section p-8 rounded-xl shadow-lg">
-                    <h3 class="text-3xl font-semibold text-sky-500">JHU Academic Focus</h3>
-                    <ul class="list-disc space-y-2 text-gray-600 text-lg pl-5">
-                        <li class="pl-2"><span class="font-semibold">EN.601.664</span> - Artificial Intelligence</li>
-                        <li class="pl-2"><span class="font-semibold">EN.601.675</span> - Machine Learning</li>
-                        <li class="pl-2"><span class="font-semibold">EN.601.667</span> - Introduction to Human Language Technology</li>
-                        <li class="pl-2"><span class="font-semibold">EN.601.686</span> - ML: AI System Design and Development</li>
-                        <li class="pl-2"><span class="font-semibold">EN.601.620</span> - Parallel Computing for Data Science</li>
-                        <li class="pl-2"><span class="font-semibold">EN.660.661</span> - Product Management</li>
-                        <li class="pl-2"><span class="font-semibold">EN.601.625</span> - Software System Design</li>
-                        <li class="pl-2"><span class="font-semibold">EN.601.671</span> - NLP: Self Supervised Models</li>
-                        <li class="pl-2"><span class="font-semibold">EN.605.704</span> - Object-Oriented Analysis and Design</li>
-                        <li class="pl-2"><span class="font-semibold">EN.520.657</span> - Design of Advanced Instruments and System</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold text-sky-500 mt-8 mb-4">Research & Teaching</h3>
-                    <ul class="space-y-4 text-gray-600 text-lg">
-                        <li class="border-l-4 border-sky-500 pl-4">
-                            <span class="font-semibold">Research Interests:</span> Scalable ML Architectures, Distributed Systems, Computational Finance, Human-Computer Interaction.
-                        </li>
-                        <li class="border-l-4 border-sky-500 pl-4">
-                            <span class="font-semibold">Teaching:</span> Head Course Assistant, Software System Design (Fall 2025); Course Assistant, Operating Systems (Spring 2025).
-                        </li>
-                    </ul>
+        <section id="skills" class="section-shell hidden">
+            <div class="section-header fade-in">
+                <p class="tag">Stack &amp; Strengths</p>
+                <h2 class="section-title">Technical Profile &amp; Academic Focus</h2>
+            </div>
+            <div class="skill-tiles fade-in">
+                <div class="glass-card">
+                    <h3 class="text-xl font-semibold text-purple-500">JHU Coursework</h3>
+                    <div class="pill-cloud">
+                        <span class="pill">EN.601.664 – Artificial Intelligence</span>
+                        <span class="pill">EN.601.675 – Machine Learning</span>
+                        <span class="pill">EN.601.667 – Intro to Human Language Technology</span>
+                        <span class="pill">EN.601.686 – AI System Design</span>
+                        <span class="pill">EN.601.620 – Parallel Computing for Data Science</span>
+                        <span class="pill">EN.660.661 – Product Management</span>
+                        <span class="pill">EN.601.625 – Software System Design</span>
+                        <span class="pill">EN.601.671 – NLP: Self-Supervised Models</span>
+                        <span class="pill">EN.605.704 – OO Analysis &amp; Design</span>
+                        <span class="pill">EN.520.657 – Advanced Instrument Systems</span>
+                    </div>
                 </div>
-
-                <!-- Technical Skills -->
-                <div class="bg-section p-8 rounded-xl shadow-lg">
-                    <h3 class="text-3xl font-semibold text-sky-500 mb-6">Key Technologies</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Python</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Java (Core)</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">AWS & Cloud Services</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Apache Spark & Kafka</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">LLMs & NLP</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">PyTorch & TensorFlow</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">REST APIs & Microservices</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">AngularJS & JavaScript</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">SQL & Oracle</span>
-                        <span class="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm font-medium rounded-full hover:bg-sky-100 dark:hover:bg-sky-900 hover:text-sky-700">Jenkins & CI/CD</span>
+                <div class="glass-card">
+                    <h3 class="text-xl font-semibold text-purple-500">Research &amp; Teaching</h3>
+                    <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
+                        <li>Research interests: scalable ML architectures, distributed systems, computational finance, HCI.</li>
+                        <li>Teaching: Head CA (Software System Design, Fall 2025); CA (Operating Systems, Spring 2025).</li>
+                    </ul>
+                    <h3 class="text-xl font-semibold text-purple-500 mt-8">Key Technologies</h3>
+                    <div class="pill-cloud">
+                        <span class="pill">Python</span>
+                        <span class="pill">Java (Core)</span>
+                        <span class="pill">AWS &amp; Cloud Services</span>
+                        <span class="pill">Apache Spark &amp; Kafka</span>
+                        <span class="pill">LLMs &amp; NLP</span>
+                        <span class="pill">PyTorch &amp; TensorFlow</span>
+                        <span class="pill">REST APIs &amp; Microservices</span>
+                        <span class="pill">AngularJS &amp; JavaScript</span>
+                        <span class="pill">SQL &amp; Oracle</span>
+                        <span class="pill">Jenkins &amp; CI/CD</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Contact Section (page-section, initially hidden) -->
-        <section id="contact" class="page-section hidden">
-            <h2 class="text-4xl font-bold mb-10 accent-primary">Get In Touch</h2>
-            <div class="bg-section p-8 rounded-xl shadow-lg max-w-2xl mx-auto text-center">
-                <p class="text-xl text-gray-600 mb-8">
-                    With a background in delivering high-impact fintech solutions and a strong foundation in modern ML/AI research at JHU, I'm seeking opportunities to build and scale innovative technical products.
+        <section id="contact" class="section-shell hidden">
+            <div class="section-header text-center fade-in">
+                <p class="tag justify-center">Connect</p>
+                <h2 class="section-title">Let’s build responsible, scalable AI products together</h2>
+            </div>
+            <div class="glass-card contact-card fade-in">
+                <p class="text-base text-purple-700/80 leading-7">
+                    With a blend of enterprise-grade engineering and graduate-level AI research, I’m excited to collaborate on products that demand reliability and insight. Reach out for research, product, or engineering opportunities.
                 </p>
-                <div class="flex flex-col space-y-4">
-                    <a href="mailto:prajaktashevakari@gmail.com" class="text-lg font-medium text-sky-500 hover:text-sky-600 transition duration-300">
-                        <span role="img" aria-label="Email">&#x2709;</span> prajaktashevakari@gmail.com
-                    </a>
-                    <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="text-lg font-medium text-sky-500 hover:text-sky-600 transition duration-300">
-                        <span role="img" aria-label="LinkedIn">&#x1F4F0;</span> LinkedIn Profile
-                    </a>
+                <div class="mt-6 space-y-4">
+                    <a href="mailto:prajaktashevakari@gmail.com" class="btn-primary">Email: prajaktashevakari@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="btn-secondary">LinkedIn Profile</a>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Project Detail: D-FuseSmileNet (JHU ML) -->
-        <section id="project-smile" class="page-section hidden">
-            <button onclick="navigate('projects')" class="text-sky-500 font-semibold mb-6 flex items-center hover:text-sky-600 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
-                Back to Projects
-            </button>
-            <h1 class="text-5xl font-extrabold accent-primary mb-6">D-FuseSmileNet: Enhancing Spontaneous Smile Recognition</h1>
-            
-            <div class="bg-section p-8 rounded-xl shadow-lg space-y-6">
-                <p class="xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
-                    A novel deep learning framework that integrates hand-crafted physiological markers with transformer-based features to distinguish genuine (spontaneous) from fake (posed) smiles, achieving new state-of-the-art results.
+        <section id="project-smile" class="section-shell hidden">
+            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <div class="section-header fade-in">
+                <p class="tag">Computer Vision · ML</p>
+                <h2 class="section-title">D-FuseSmileNet · Enhancing Spontaneous Smile Recognition</h2>
+            </div>
+            <div class="glass-card fade-in space-y-6">
+                <p class="text-base text-purple-700/80 border-l-4 border-purple-400/60 pl-4 italic">
+                    A novel deep learning framework that fuses transformer embeddings with hand-crafted physiological D-marker features using Hadamard interactions—simplifying multi-task complexity while pushing state-of-the-art accuracy on smile authenticity benchmarks.
                 </p>
-
-                <h3 class="text-3xl font-semibold text-sky-500 pt-4">Technical Challenge & Innovation</h3>
-                <ul class="list-disc list-inside text-gray-600 space-y-3 ml-5">
-                    <li><span class="font-semibold">Problem:</span> Spontaneous smiles have subtle spatiotemporal differences in muscle activations (e.g., eye crinkling) often missed by generic deep learning models. Traditional multi-task learning (MTL) approaches are complex due to intricate loss-weighting schemes.</li>
-                    <li><span class="font-semibold">Innovation (Hadamard Fusion):</span> Proposed a direct <span class="font-bold">Hadamard multiplicative fusion</span> to blend powerful transformer-based visual representations (learned features) with expert-defined <span class="font-bold">D-Marker features</span> (hand-crafted physiological cues).</li>
-                    <li><span class="font-semibold">Architecture:</span> Systematically evaluated 15 fusion strategies, confirming that Hadamard fusion achieves optimal performance by enabling meaningful feature interaction while <span class="font-semibold">eliminating the need for auxiliary task supervision</span>, which complicates MTL models.</li>
-                    <li><span class="font-semibold">Methodology:</span> The approach is fully automated and end-to-end trainable, unlike many high-performing baselines that rely on manual landmark initialization and extensive preprocessing.</li>
+                <h3 class="text-xl font-semibold text-purple-500">Technical Challenge &amp; Innovation</h3>
+                <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
+                    <li><strong>Problem:</strong> Genuine smiles show subtle spatiotemporal cues (orbicularis oculi activation, symmetry) often lost in standard deep nets.</li>
+                    <li><strong>Hadamard Fusion:</strong> Direct multiplicative fusion between transformer features and D-marker descriptors enabled expressive interactions without auxiliary loss weighting.</li>
+                    <li><strong>Architecture:</strong> Benchmarked 15 fusion strategies; Hadamard fusion delivered peak accuracy while avoiding manual landmark initialization.</li>
+                    <li><strong>Automation:</strong> Fully trainable end-to-end pipeline surpassing complex multi-task learning baselines.</li>
                 </ul>
-
-                
-                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-center mb-6">
-                    <p class="font-semibold text-gray-700 dark:text-gray-300">Architecture Diagram (D-FuseSmileNet Pipeline)</p>
-                    <!-- IMAGE PLACEHOLDER START -->
-                   <img src="ML_Archi.png" alt="D-FuseSmileNet Architecture Diagram" class="w-full h-auto rounded-lg shadow-lg my-4">
-                    <!-- IMAGE PLACEHOLDER END -->
-                   
+                <div class="bg-white/70 dark:bg-black/40 border border-purple-200/40 rounded-xl p-4 text-center">
+                    <p class="font-semibold text-purple-500">Architecture Diagram</p>
+                    <img src="ML_Archi.png" alt="D-FuseSmileNet Architecture" class="w-full h-auto rounded-lg shadow-md mt-4">
                 </div>
-
-                <h3 class="3xl font-semibold text-sky-500 pt-4">Visual and Quantitative Impact</h3>
                 <div class="grid md:grid-cols-3 gap-4">
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="text-2xl font-bold accent-primary">100% Accuracy</p>
-                        <p class="text-gray-600 dark:text-gray-200">Achieved perfect classification on the challenging <span class="font-semibold">BBC</span> dataset, and 99.7% on MMI, establishing consistent SOTA performance.</p>
+                    <div class="glass-card">
+                        <p class="text-2xl font-bold text-purple-500">100% Accuracy</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Perfect classification on the BBC dataset; 99.7% on MMI.</p>
                     </div>
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="2xl font-bold accent-primary">+5.0% Gain (BBC)</p>
-                        <p class="text-gray-600 dark:text-gray-200">Outperformed previous multi-task learning methods by significant margins: <span class="font-semibold">+5.0% on BBC</span> and +0.8% on UvA-NEMO, validating the superiority of direct feature interaction.</p>
+                    <div class="glass-card">
+                        <p class="text-2xl font-bold text-purple-500">+5.0% Lift</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Beat multi-task learning baselines on BBC by 5.0%.</p>
                     </div>
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="text-2xl font-bold accent-primary">Reduced Complexity</p>
-                        <p class="text-gray-600 dark:text-gray-200">Eliminated the need for auxiliary loss-weighting and hyperparameter tuning required by Multi-Task Learning (MTL) approaches, improving computational efficiency.</p>
+                    <div class="glass-card">
+                        <p class="text-2xl font-bold text-purple-500">Simplified Training</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Eliminated auxiliary loss tuning—faster, more robust convergence.</p>
                     </div>
                 </div>
-
-                <div class="pt-6">
-                    <p class="text-sm font-medium text-gray-600 italic mb-3">Code and supplementary data available upon request.</p>
-                    <a href="JHU_ML_Report.pdf" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
-                        Download Full Research Paper &rarr;
-                    </a>
+                <div class="pt-4">
+                    <a href="JHU_ML_Report.pdf" target="_blank" class="btn-primary">Download Research Paper →</a>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Project Detail: Clinical NER (JHU NLP) -->
-        <section id="project-nlp" class="page-section hidden">
-            <button onclick="navigate('projects')" class="text-sky-500 font-semibold mb-6 flex items-center hover:text-sky-600 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
-                Back to Projects
-            </button>
-            <h1 class="text-5xl font-extrabold accent-primary mb-6">LLM-Driven Clinical NER Annotation Pipeline</h1>
-            
-            <div class="bg-section p-8 rounded-xl shadow-lg space-y-6">
-                <p class="xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
-                    Designed a scalable, cost-effective annotation pipeline using advanced Large Language Models (LLMs) to automatically label medical entities in low-resource Bengali clinical text, drastically reducing reliance on manual expert effort.
+        <section id="project-nlp" class="section-shell hidden">
+            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <div class="section-header fade-in">
+                <p class="tag">NLP · LLMs</p>
+                <h2 class="section-title">LLM-Driven Clinical NER Annotation Pipeline</h2>
+            </div>
+            <div class="glass-card fade-in space-y-6">
+                <p class="text-base text-purple-700/80 border-l-4 border-purple-400/60 pl-4 italic">
+                    Designed a scalable annotation loop harnessing GPT-4.1 with Chain-of-Thought prompts to label low-resource Bengali clinical text, dramatically narrowing the performance gap to fully supervised models while eliminating manual labeling cost.
                 </p>
-
-                <h3 class="3xl font-semibold text-sky-500 pt-4">Core Methodology & Innovation</h3>
-                <ul class="list-disc list-inside text-gray-600 space-y-3 ml-5">
-                    <li><span class="font-semibold">Problem:</span> Training clinical Named Entity Recognition (NER) models for low-resource languages (like Bengali) is severely limited by the scarcity and expense of human-labeled data.</li>
-                    <li><span class="font-semibold">Innovation (CoT Prompting):</span> Developed a pipeline utilizing <span class="font-bold">Chain-of-Thought (CoT) reasoning</span> and carefully balanced few-shot demonstrations with models like GPT-4.1 to generate high-fidelity synthetic labels.</li>
-                    <li><span class="font-semibold">Efficiency:</span> Demonstrated that annotation quality depends more on the structured reasoning provided by <span class="font-bold">CoT prompt design</span> than on raw LLM capacity (GPT-4.1-mini + CoT outperformed GPT-4.1 ICL).</li>
-                    <li><span class="font-semibold">Domain Focus:</span> Conducted detailed corpus analysis of the Bangla-HealthNER dataset to extract domain-specific linguistic features and entity distributions, guiding the prompt design for noisy, code-switched text.</li>
+                <h3 class="text-xl font-semibold text-purple-500">Core Methodology &amp; Impact</h3>
+                <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
+                    <li><strong>Challenge:</strong> Scarcity of human-annotated Bengali medical corpora limits clinical NER quality.</li>
+                    <li><strong>CoT Prompting:</strong> Structured reasoning prompts outperformed raw capacity—GPT-4.1-mini + CoT exceeded GPT-4.1 ICL.</li>
+                    <li><strong>Corpus Insights:</strong> Deep dive on Bangla-HealthNER guided entity-specific prompt strategies for noisy code-switched text.</li>
                 </ul>
-
-                
-                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-center mb-6">
-                    <p class="font-semibold text-gray-700 dark:text-gray-300">System Architecture (Annotation Pipeline)</p>
-                    <!-- IMAGE PLACEHOLDER START -->
-                    <img src="NLP_Archi.png" alt="Clinical NER Annotation Pipeline" class="w-full h-auto rounded-lg shadow-lg my-4">
-                    <!-- IMAGE PLACEHOLDER END -->
-                    
+                <div class="bg-white/70 dark:bg-black/40 border border-purple-200/40 rounded-xl p-4 text-center">
+                    <p class="font-semibold text-purple-500">Annotation Pipeline Diagram</p>
+                    <img src="NLP_Archi.png" alt="Clinical NER Pipeline" class="w-full h-auto rounded-lg shadow-md mt-4">
                 </div>
-
-                <h3 class="text-3xl font-semibold text-sky-500 pt-4">Visual and Quantitative Impact</h3>
                 <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="text-2xl font-bold accent-primary">3x F1 Improvement</p>
-                        <p class="text-gray-600 dark:text-gray-200">CoT reasoning almost <span class="font-semibold">tripled token-level F1</span> agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
+                    <div class="glass-card">
+                        <p class="text-2xl font-bold text-purple-500">3× F1 Lift</p>
+                        <p class="text-sm text-purple-700/80 mt-2">CoT prompting tripled token-level agreement vs. plain prompting.</p>
                     </div>
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="text-2xl font-bold accent-primary">46.0 Macro F1</p>
-                        <p class="text-gray-600 dark:text-gray-200">The resulting synthetic data trained BanglishBERT to achieve 46.0 F1, <span class="font-semibold">closing two-thirds of the gap</span> to fully supervised training (56.13 F1), eliminating manual effort.</p>
-                    </div>
-                </div>
-
-                <div class="pt-6">
-                    <p class="text-sm font-medium text-gray-600 italic mb-3">Code and supplementary data available upon request.</p>
-                    <a href="NLP_Final_Report.pdf" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
-                        Download Full Research Paper &rarr;
-                    </a>
-                </div>
-                </div>
-            </section>
-
-        <!-- 8. Project Detail: Next Gen Analytics for BNA (Undergrad Project/Internship) -->
-        <section id="project-bna" class="page-section hidden">
-            <button onclick="navigate('projects')" class="text-sky-500 font-semibold mb-6 flex items-center hover:text-sky-600 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
-                Back to Projects
-            </button>
-            <h1 class="text-5xl font-extrabold accent-primary mb-6">Next Gen Analytics for BMC Network Automation (BNA)</h1>
-            
-            <div class="bg-section p-8 rounded-xl shadow-lg space-y-6">
-                <p class="text-xl text-gray-600 border-l-4 border-sky-500 pl-4 italic">
-                    Built a modular, concurrent, and scalable data analytics platform for large enterprise networks, integrating advanced machine learning and business intelligence tools to replace static reporting.
-                </p>
-
-                <h3 class="text-3xl font-semibold text-sky-500 pt-4">System Architecture & Technology</h3>
-                <ul class="list-disc list-inside text-gray-600 space-y-3 ml-5">
-                    <li><span class="font-semibold">Objective:</span> Transform raw BNA data (configuration changes, compliance, network outages) into real-time, sophisticated reporting to aid SecOps and decision-making.</li>
-                    <li><span class="font-semibold">Architecture:</span> Designed a <span class="font-bold">modular and concurrent</span> system using <span class="font-bold">Java</span> and JVM-based toolkits such as <span class="font-bold">Akka</span> for scalability. Offered as a <span class="font-bold">RESTful web service</span> to enable predictive analytics and statistical modeling.</li>
-                    <li><span class="font-semibold">Data Pipeline:</span> Utilized <span class="font-semibold">WEKA</span> and <span class="font-semibold">R scripts</span> customized for BNA requirements to implement data mining techniques including clustering, regression, classification, and association.</li>
-                    <li><span class="font-semibold">Reporting Layer:</span> Integrated the <span class="font-bold">Yellowfin BI Platform</span> to introduce dynamic dashboards and live reporting, substituting earlier static reports that lacked applied analytics.</li>
-                </ul>
-                
-                
-                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-center mb-6">
-                    <p class="font-semibold text-gray-700 dark:text-gray-300">Architecture Diagram (Web Service Host Machine)</p>
-                    <!-- IMAGE PLACEHOLDER START -->
-                     <img src="BMC_Archi.png" alt="BNA Web Service Architecture" class="w-full h-auto rounded-lg shadow-lg my-4">
-                    <!-- IMAGE PLACEHOLDER END -->
-                    
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="text-xl font-bold accent-primary">Technology Stack</p>
-                        <p class="text-gray-600 dark:text-gray-200">Java, Akka, PostgreSQL, XML, Apache Tomcat, Axis2, <span class="font-semibold">Yellowfin BI</span>, <span class="font-semibold">Machine Learning</span> (WEKA/R integration).</p>
-                    </div>
-                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg" style="background-color: var(--color-bg-deep-card);">
-                        <p class="text-xl font-bold accent-primary">Key Outcomes</p>
-                        <p class="text-gray-600 dark:text-gray-200">Enabled ad-hoc and sophisticated reporting, provided dynamic dashboards, and delivered intelligent insights for security and operational plans.</p>
+                    <div class="glass-card">
+                        <p class="text-2xl font-bold text-purple-500">46.0 Macro F1</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Closed two-thirds of the gap to full supervision without human labels.</p>
                     </div>
                 </div>
-
-                <div class="pt-6">
-                    <p class="text-sm font-medium text-gray-600 italic mb-3">Code and supplementary data available upon request.</p>
-                    <a href="report2 (1).docx" target="_blank" class="px-6 py-3 bg-accent-primary text-white font-bold rounded-lg shadow-md hover:bg-sky-600 transition duration-300">
-                        Download Full Project Report &rarr;
-                    </a>
+                <div class="pt-4">
+                    <a href="NLP_Final_Report.pdf" target="_blank" class="btn-primary">Download Research Paper →</a>
                 </div>
             </div>
         </section>
 
+        <section id="project-bna" class="section-shell hidden">
+            <button type="button" onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
+            <div class="section-header fade-in">
+                <p class="tag">Data Systems · BI</p>
+                <h2 class="section-title">Next Gen Analytics for BMC Network Automation</h2>
+            </div>
+            <div class="glass-card fade-in space-y-6">
+                <p class="text-base text-purple-700/80 border-l-4 border-purple-400/60 pl-4 italic">
+                    Developed a modular analytics platform for BMC Network Automation that introduced concurrent Java/Akka services, machine learning models, and Yellowfin BI dashboards—replacing static reports with predictive insight for SecOps teams.
+                </p>
+                <h3 class="text-xl font-semibold text-purple-500">System Design Highlights</h3>
+                <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
+                    <li><strong>Objective:</strong> Turn configuration, compliance, and outage data into live intelligence for network operations.</li>
+                    <li><strong>Architecture:</strong> Concurrent, modular Java services exposed as RESTful APIs; scalable via Akka.</li>
+                    <li><strong>Data Pipeline:</strong> Custom WEKA and R workflows enabled clustering, regression, and association mining.</li>
+                    <li><strong>Visualization:</strong> Yellowfin BI dashboards delivered interactive, predictive reporting.</li>
+                </ul>
+                <div class="bg-white/70 dark:bg-black/40 border border-purple-200/40 rounded-xl p-4 text-center">
+                    <p class="font-semibold text-purple-500">System Architecture</p>
+                    <img src="BMC_Archi.png" alt="BNA Architecture" class="w-full h-auto rounded-lg shadow-md mt-4">
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="glass-card">
+                        <p class="text-xl font-bold text-purple-500">Stack</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Java · Akka · PostgreSQL · Apache Tomcat · Axis2 · Yellowfin BI · ML (WEKA &amp; R)</p>
+                    </div>
+                    <div class="glass-card">
+                        <p class="text-xl font-bold text-purple-500">Impact</p>
+                        <p class="text-sm text-purple-700/80 mt-2">Unlocked dynamic dashboards, predictive analytics, and faster network planning.</p>
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <a href="report2 (1).docx" target="_blank" class="btn-primary">Download Project Report →</a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Simple Persistent Footer -->
-    <footer class="bg-gray-100 dark:bg-gray-900 mt-12 py-6 border-t border-gray-200 dark:border-gray-700 transition duration-300">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
-            <p class="text-sm">
-                &copy; 2025 Prajakta Shevakari | Built for GitHub Pages.
-            </p>
+    <footer>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-purple-700/80">
+            © 2025 Prajakta Shevakari · Crafted for curiosity, rigor, and human impact.
         </div>
     </footer>
 
-    <!-- JavaScript for Multi-Page Simulation, Theme Toggle, and Animation Management -->
     <script>
-        // --- THEME TOGGLE LOGIC ---
         const themeToggle = document.getElementById('theme-toggle');
         const sunIcon = document.getElementById('sun-icon');
         const moonIcon = document.getElementById('moon-icon');
-
-        // Function to apply/remove animation class
-        const animateSwitch = (icon, entering) => {
-            icon.classList.remove(entering ? 'switching-out' : 'switching-in');
-            icon.classList.add(entering ? 'switching-in' : 'switching-out');
-            
-            // Clean up the animation class after it finishes
-            setTimeout(() => {
-                icon.classList.remove('switching-in', 'switching-out');
-            }, 400); 
-        };
 
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'dark') {
@@ -652,106 +1482,144 @@
             sunIcon.classList.add('hidden');
             moonIcon.classList.remove('hidden');
         } else {
+            document.documentElement.classList.remove('dark');
             sunIcon.classList.remove('hidden');
             moonIcon.classList.add('hidden');
         }
-        
+
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.classList.toggle('dark');
-            
             if (isDark) {
                 localStorage.setItem('theme', 'dark');
-                animateSwitch(sunIcon, false);
-                animateSwitch(moonIcon, true);
                 sunIcon.classList.add('hidden');
                 moonIcon.classList.remove('hidden');
             } else {
-                localStorage.setItem('light', 'light');
-                animateSwitch(moonIcon, false);
-                animateSwitch(sunIcon, true);
+                localStorage.setItem('theme', 'light');
                 moonIcon.classList.add('hidden');
                 sunIcon.classList.remove('hidden');
             }
         });
 
-        // --- Multi-Page Navigation Logic ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.getElementById('mobile-close');
+        const mobileNavButtons = document.querySelectorAll('[data-mobile-nav]');
+        const quickNavButtons = document.querySelectorAll('[data-quick-nav]');
+        const sections = document.querySelectorAll('.section-shell');
         const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('.page-section');
 
-        const navigate = (pageId) => {
-            // Logic to manage the fade-in-scroll effect
-            if (pageId !== 'home') {
-                // When leaving home, ensure fade-in is removed
-                document.querySelector('#home .md\\:w-3\\/5').classList.remove('visible');
-                document.querySelector('#home .md\\:w-2\\/5').classList.remove('visible');
-            } else {
-                // Re-apply fade-in classes when returning to home page
-                setTimeout(() => {
-                    document.querySelector('#home .md\\:w-3\\/5').classList.add('visible');
-                    document.querySelector('#home .md\\:w-2\\/5').classList.classList.add('visible');
-                }, 10); 
-            }
-
-            // Hide all sections, then show the target section
-            sections.forEach(section => {
-                section.classList.add('hidden');
-            });
-            
-            const target = document.getElementById(pageId);
-            if (target) {
-                target.classList.remove('hidden');
-            }
-
-            // Scroll to the top of the content area for a clean "page" load feel
-            document.querySelector('main').scrollTo(0, 0);
-
-            // Update URL hash
-            history.pushState(null, '', '#' + pageId);
-
-            // Update active nav link style
-            navLinks.forEach(link => {
-                link.classList.remove('text-sky-500', 'font-bold');
-                link.classList.add('text-gray-600');
-            });
-
-            // Find and apply active style to the main navigation links
-            let mainNavId = pageId;
-            if (pageId.startsWith('project-')) {
-                mainNavId = 'projects'; // Highlight 'Projects' when viewing a project detail page
-            }
-            
-            const activeLink = document.getElementById(`nav-${mainNavId}`);
-            if (activeLink) {
-                activeLink.classList.remove('text-gray-600');
-                activeLink.classList.add('text-sky-500', 'font-bold');
+        const openMobileMenu = () => {
+            if (!mobileMenu) return;
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('menu-open');
+            if (menuToggle) {
+                menuToggle.setAttribute('aria-expanded', 'true');
             }
         };
+
+        const closeMobileMenu = () => {
+            if (!mobileMenu) return;
+            mobileMenu.classList.add('hidden');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('menu-open');
+            if (menuToggle) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        };
+
+        if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.addEventListener('click', () => {
+                if (mobileMenu && mobileMenu.classList.contains('hidden')) {
+                    openMobileMenu();
+                } else {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        if (mobileClose) {
+            mobileClose.addEventListener('click', closeMobileMenu);
+        }
+
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', event => {
+                if (event.target === mobileMenu) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        mobileNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-mobile-nav');
+                if (targetId) {
+                    navigate(targetId);
+                }
+            });
+        });
+
+        quickNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-quick-nav');
+                if (targetId) {
+                    navigate(targetId);
+                }
+            });
+        });
+
+        function navigate(pageId) {
+            sections.forEach(section => section.classList.add('hidden'));
+            const target = document.getElementById(pageId) || document.getElementById('home');
+            target.classList.remove('hidden');
+            document.querySelector('main').scrollTo(0, 0);
+            history.pushState(null, '', '#' + pageId);
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeId = pageId.startsWith('project-') ? 'projects' : pageId;
+            const activeLink = document.getElementById(`nav-${activeId}`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            quickNavButtons.forEach(link => link.classList.remove('active'));
+            const quickActive = document.querySelector(`[data-quick-nav="${activeId}"]`);
+            if (quickActive) {
+                quickActive.classList.add('active');
+            }
+            closeMobileMenu();
+        }
 
         window.onpopstate = () => {
             const pageId = window.location.hash.substring(1) || 'home';
             navigate(pageId);
         };
 
-        // --- Initialization ---
         window.onload = () => {
-            let initialPage = window.location.hash.substring(1) || 'home';
-            
-            // Apply initial nav link style and handle navigation
+            const initialPage = window.location.hash.substring(1) || 'home';
             navigate(initialPage);
         };
-        
-        // Initialize fade-in class application for Home page content elements
-        document.addEventListener("DOMContentLoaded", function() {
-            const leftContent = document.querySelector('#home .md\\:w-3\\/5');
-            const rightContent = document.querySelector('#home .md\\:w-2\\/5');
-            
-            // Add initial class to hide content for animation (only if we're on the home page initially)
-            if (window.location.hash === '#home' || window.location.hash === '') {
-                leftContent.classList.add('fade-in-scroll');
-                rightContent.classList.add('fade-in-scroll');
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                closeMobileMenu();
             }
         });
-    </script>
 
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                closeMobileMenu();
+            }
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
