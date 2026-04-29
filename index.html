@@ -282,11 +282,27 @@
             justify-content: center;
             color: var(--text-muted);
             font-weight: 600;
-            transform: rotate(4deg);
+    
+    /* THE FIX: Force hardware acceleration and smooth rendering */
+            transform: rotate(4deg) translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            will-change: transform;
+    
             transition: transform 0.4s ease;
+            overflow: hidden; /* Keeps the image perfectly inside the rounded borders */
         }
+
         .photo-wrapper:hover {
-            transform: rotate(0deg) scale(1.02);
+            transform: rotate(0deg) scale(1.02) translateZ(0);
+        }
+
+        /* Add this targeting the image directly to force high-quality scaling */
+        .photo-wrapper img {
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
         }
 
         /* Pastel Cards */
