@@ -1,1118 +1,970 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prajakta Shevakari | JHU Masters Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Prajakta Shevakari | Backend Software Engineer</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=General+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
-
+        /* ━━━ EXPERT THEME VARIABLES ━━━ */
         :root {
-            --bg-primary: #f6f3ff;
-            --bg-secondary: rgba(255, 255, 255, 0.78);
-            --bg-tertiary: rgba(246, 243, 255, 0.65);
-            --bg-overlay: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(236, 72, 153, 0.12));
-            --text-primary: #1b1036;
-            --text-secondary: #4c3f78;
-            --border-soft: rgba(124, 58, 237, 0.15);
-            --accent-primary: #7c3aed;
-            --accent-secondary: #ec4899;
-            --accent-tertiary: #fbbf24;
-            --shadow-card: 0 25px 55px -25px rgba(124, 58, 237, 0.28);
-            --shadow-hero: 0 40px 70px -32px rgba(36, 11, 77, 0.35);
-            --gradient-title: linear-gradient(120deg, #7c3aed 0%, #ec4899 55%, #f59e0b 100%);
-            --gradient-chip: linear-gradient(120deg, rgba(124, 58, 237, 0.18), rgba(236, 72, 153, 0.18));
+            /* Light Theme */
+            --bg-page: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            
+            /* Header exact colors from screenshot */
+            --header-bg: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%); /* Pastel Pink to Pastel Lavender */
+            --nav-pill-bg: #ffffff;
+            --nav-pill-text: #4b5563;
+            --nav-pill-active-bg: #f3f4f6;
+            --nav-pill-active-text: #111827;
+            --btn-dark-bg: #1c1c1c;
+            --btn-dark-text: #ffffff;
+            
+            /* Solid Pastel Accents */
+            --pastel-lavender: #f3e8ff;
+            --pastel-pink: #fce7f3;
+            --border-color: #e5e7eb;
+
+            --accent-text: #6d28d9;
         }
 
-        .dark {
-            --bg-primary: #080513;
-            --bg-secondary: rgba(20, 15, 35, 0.78);
-            --bg-tertiary: rgba(15, 9, 28, 0.7);
-            --bg-overlay: linear-gradient(130deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.18));
-            --text-primary: #f8f5ff;
-            --text-secondary: #cec1ff;
-            --border-soft: rgba(185, 159, 255, 0.18);
-            --accent-primary: #a78bfa;
-            --accent-secondary: #f472b6;
-            --accent-tertiary: #facc15;
-            --shadow-card: 0 35px 65px -35px rgba(168, 85, 247, 0.5);
-            --shadow-hero: 0 45px 90px -40px rgba(124, 58, 237, 0.55);
-            --gradient-title: linear-gradient(120deg, #a78bfa 0%, #f472b6 55%, #facc15 100%);
-            --gradient-chip: linear-gradient(120deg, rgba(167, 139, 250, 0.24), rgba(244, 114, 182, 0.24));
+        html.dark {
+            /* Dark Theme */
+            --bg-page: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            
+            /* Header */
+            --header-bg: linear-gradient(135deg, #3d1c2d 0%, #2e1a47 100%); /* Dark Pink to Dark Lavender */
+            --nav-pill-bg: #1e293b;
+            --nav-pill-text: #94a3b8;
+            --nav-pill-active-bg: #334155;
+            --nav-pill-active-text: #f8fafc;
+            --btn-dark-bg: #ffffff;
+            --btn-dark-text: #1c1c1c;
+            
+            /* Dark Mode Solid Pastels */
+            --pastel-lavender: #2e1a47;
+            --pastel-pink: #3d1c2d;
+            --border-color: #334155;
+
+            --accent-text: #c4b5fd;
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'General Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            transition: background 0.5s ease, color 0.5s ease;
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        body::before,
-        body::after {
-            content: "";
-            position: fixed;
-            width: 60vw;
-            height: 60vw;
-            border-radius: 9999px;
-            filter: blur(110px);
-            opacity: 0.75;
-            z-index: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-
-        body::before {
-            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.35), transparent 70%);
-            top: -20vh;
-            left: -20vw;
-        }
-
-        body::after {
-            background: radial-gradient(circle at center, rgba(236, 72, 153, 0.28), transparent 70%);
-            bottom: -25vh;
-            right: -18vw;
-        }
-
-        html.dark body::before {
-            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.45), transparent 75%);
-        }
-
-        html.dark body::after {
-            background: radial-gradient(circle at center, rgba(236, 72, 153, 0.4), transparent 75%);
-        }
-
-        main,
-        nav,
-        footer {
-            position: relative;
-            z-index: 1;
-        }
-
-        .navbar {
-            backdrop-filter: blur(24px);
-            background: rgba(255, 255, 255, 0.72);
-            border-bottom: 1px solid var(--border-soft);
-            box-shadow: 0 18px 45px -28px rgba(124, 58, 237, 0.25);
-        }
-
-        html.dark .navbar {
-            background: rgba(14, 9, 28, 0.82);
-        }
-
-        .nav-link {
-            position: relative;
-            font-weight: 500;
-            font-size: 0.98rem;
-            color: var(--text-secondary);
-            padding: 0.25rem 0;
-            transition: color 0.35s ease;
-        }
-
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -0.45rem;
-            width: 100%;
-            height: 2px;
-            border-radius: 999px;
-            background: var(--gradient-title);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.35s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--accent-secondary);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            transform: scaleX(1);
-        }
-
-        .theme-toggle {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-soft);
-            background: rgba(255, 255, 255, 0.58);
-            box-shadow: 0 18px 38px -24px rgba(124, 58, 237, 0.45);
-            transition: transform 0.3s ease, border 0.3s ease, background 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            border-color: rgba(124, 58, 237, 0.4);
-        }
-
-        html.dark .theme-toggle {
-            background: rgba(17, 12, 30, 0.75);
-        }
-
-        .hero-shell {
-            position: relative;
-            display: grid;
-            gap: clamp(2rem, 3vw, 3rem);
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            padding: clamp(2.5rem, 6vw, 3.5rem);
-            border-radius: 2.25rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-hero);
-            overflow: hidden;
-        }
-
-        .hero-shell::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: var(--bg-overlay);
-            pointer-events: none;
-        }
-
-        .hero-copy {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.45rem 1.1rem;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            background: rgba(124, 58, 237, 0.12);
-            color: var(--accent-primary);
-            border: 1px solid rgba(124, 58, 237, 0.18);
-        }
-
-        html.dark .hero-eyebrow {
-            background: rgba(167, 139, 250, 0.18);
-            color: var(--accent-primary);
-        }
-
-        .dark .text-purple-700\/80 {
-            color: var(--text-secondary) !important;
-            opacity: 0.88 !important;
-        }
-
-        .dark .text-purple-500 {
-            color: var(--accent-primary) !important;
-        }
-
-        .dark .text-purple-400 {
-            color: var(--accent-secondary) !important;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 6vw, 4.6rem);
-            line-height: 1.05;
-            margin-top: 1.1rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-title);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.05rem, 1.3vw, 1.2rem);
-            color: var(--text-secondary);
-            max-width: 34rem;
+            font-family: Calibri, 'Carlito', 'Segoe UI', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
             line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .focus-chips {
+        a { text-decoration: none; color: inherit; }
+
+        /* ━━━ HEADER & NAVIGATION (Based on Screenshot) ━━━ */
+        .fixed-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: var(--header-bg);
+            z-index: 1000;
+            transition: background 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2.5rem;
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 1.75rem;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .chip {
-            display: inline-flex;
+        /* Left: Socials */
+        .nav-socials {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1.1rem;
-            border-radius: 999px;
-            background: var(--gradient-chip);
-            border: 1px solid rgba(124, 58, 237, 0.15);
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.92rem;
-            backdrop-filter: blur(12px);
-            transition: transform 0.3s ease, border 0.3s ease;
+            letter-spacing: 0.02em;
+            transition: opacity 0.2s;
         }
+        .social-link:hover { opacity: 0.7; }
+        .social-icon { width: 16px; height: 16px; fill: currentColor; }
 
-        .chip:hover {
-            transform: translateY(-3px);
-            border-color: rgba(236, 72, 153, 0.45);
-        }
-
-        .hero-photo {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .portrait-frame {
-            width: min(320px, 80%);
-            aspect-ratio: 1;
-            border-radius: 42%;
-            padding: 0.6rem;
-            background: linear-gradient(140deg, rgba(124, 58, 237, 0.4), rgba(236, 72, 153, 0.35));
-            box-shadow: 0 45px 75px -35px rgba(124, 58, 237, 0.45);
+        /* Center: Nav Pill */
+        .nav-pill-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            animation: floaty 18s ease-in-out infinite;
-        }
-
-        .portrait-frame img {
-            width: 100%;
-            height: 100%;
-            border-radius: 38%;
-            object-fit: cover;
-            border: 6px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 25px 55px -30px rgba(36, 11, 77, 0.4);
-        }
-
-        @keyframes floaty {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            45% { transform: translateY(-12px) rotate(1deg); }
-        }
-
-        .cta-group {
-            margin-top: 2.5rem;
-            display: flex;
-            flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .btn-primary,
-        .btn-secondary {
-            display: inline-flex;
+        .nav-pill {
+            background-color: var(--nav-pill-bg);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0.3rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--nav-pill-text);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active, .nav-tab:hover {
+            background-color: var(--nav-pill-active-bg);
+            color: var(--nav-pill-active-text);
+        }
+
+        /* Theme Toggle inside Pill */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.95rem 1.9rem;
-            border-radius: 1rem;
+            color: var(--nav-pill-text);
+            transition: color 0.2s, background 0.2s;
+            margin-left: 0.5rem;
+        }
+        .theme-toggle:hover {
+            background-color: var(--nav-pill-active-bg);
+            color: var(--nav-pill-active-text);
+        }
+        .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* Right: Action Buttons */
+        .nav-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn-dark {
+            background-color: var(--btn-dark-bg);
+            color: var(--btn-dark-text);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
             font-weight: 600;
-            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            min-width: 160px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .btn-dark:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        .btn-primary {
-            background: linear-gradient(120deg, rgba(124, 58, 237, 0.95), rgba(236, 72, 153, 0.95));
-            color: #fdfcff;
-            box-shadow: 0 28px 55px -25px rgba(124, 58, 237, 0.45);
+        /* Hero Section (Only visible on Home) */
+        .main-hero {
+            background: var(--header-bg);
+            color: var(--text-main);
+            text-align: center;
+            padding: 140px 2rem 50px;
+            transition: background 0.3s ease, color 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 35px 70px -25px rgba(124, 58, 237, 0.55);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid var(--border-soft);
-            color: var(--text-primary);
-            box-shadow: 0 20px 45px -28px rgba(124, 58, 237, 0.25);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            border-color: rgba(124, 58, 237, 0.35);
-            color: var(--accent-primary);
-        }
-
-        html.dark .btn-secondary {
-            background: rgba(18, 12, 34, 0.85);
-            color: var(--text-secondary);
-        }
-
-        .highlight-strip {
-            display: grid;
-            gap: 1.2rem;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            margin-top: 2.5rem;
-        }
-
-        .highlight-card {
-            padding: 1.45rem 1.8rem;
-            border-radius: 1.4rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(14px);
-        }
-
-        .highlight-title {
-            font-size: 2rem;
+        .main-hero h4 {
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            color: var(--accent-text);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .highlight-text {
-            margin-top: 0.35rem;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
+        .main-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
-        .section-shell {
-            padding: clamp(3rem, 8vw, 5rem) 0;
+        .main-hero h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* ━━━ MAIN CONTENT ━━━ */
+        main {
+            padding-top: 100px; /* Space for fixed header on non-home pages */
+            min-height: 100vh;
+        }
+        
+        #page-home { padding-top: 0; } /* Home handles its own padding via main-hero */
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        .view { display: none; }
+        .view.active { display: block; animation: fadeIn 0.4s ease forwards; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.4rem, 4vw, 3.2rem);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
             margin-bottom: 2.5rem;
-            background: var(--gradient-title);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-align: center;
         }
 
-        .glass-card {
-            background: var(--bg-secondary);
-            border-radius: 1.75rem;
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-card);
-            padding: 2.2rem;
-            backdrop-filter: blur(18px);
-        }
-
-        .timeline {
-            position: relative;
+        /* ━━━ HOME PAGE ━━━ */
+        .about-grid {
             display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .about-text strong {
+            color: var(--accent-text);
+            font-weight: 700;
+        }
+
+        .photo-wrapper {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: var(--pastel-lavender);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+            transform: rotate(4deg);
+            transition: transform 0.4s ease;
+        }
+        .photo-wrapper:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Pastel Cards */
+        .card-lavender {
+            background-color: var(--pastel-lavender);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-pink {
+            background-color: var(--pastel-pink);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
+        .hobby-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hobby-title { font-size: 1.25rem; font-weight: 700; color: var(--accent-text); margin-bottom: 0.5rem; }
+        
+        /* ━━━ EDUCATION & SKILLS ━━━ */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-header h3 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        .edu-date { font-weight: 600; color: var(--accent-text); font-size: 1rem; }
+
+        /* Modern Skills List Styles */
+        .modern-skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-row {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: baseline;
+        }
+        
+        .skill-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .skill-cat {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent-text);
+        }
+        
+        .skill-items {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* ━━━ EXPERIENCE TIMELINE ━━━ */
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+            margin-left: 1rem;
+        }
         .timeline::before {
-            content: "";
+            content: '';
             position: absolute;
-            left: 18px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, rgba(124, 58, 237, 0.6), rgba(236, 72, 153, 0.6));
+            top: 0; left: 15px;
+            height: 100%; width: 2px;
+            background: var(--border-color);
         }
 
         .timeline-item {
             position: relative;
-            padding-left: 3.2rem;
+            padding-left: 3.5rem;
+            margin-bottom: 3.5rem;
         }
 
-        .timeline-marker {
+        .timeline-item::before {
+            content: '';
             position: absolute;
-            left: 9px;
-            top: 0.4rem;
-            width: 18px;
-            height: 18px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #7c3aed, #ec4899);
-            border: 3px solid var(--bg-primary);
-            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+            left: 9px; top: 6px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--accent-text);
+            box-shadow: 0 0 0 4px var(--bg-page);
         }
 
-        .timeline-header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0.75rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .timeline-role {
-            font-size: 1.15rem;
-            font-weight: 600;
-        }
-
-        .timeline-org {
-            font-weight: 600;
-            color: var(--accent-primary);
-        }
-
-        .timeline-meta {
+        .timeline-date {
             font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-company {
+            color: var(--accent-text);
             font-weight: 600;
-            color: var(--accent-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
         }
 
-        .hobby-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.2rem;
-            margin-top: 1.8rem;
-        }
-
-        .hobby-card {
-            padding: 1.4rem 1.6rem;
-            border-radius: 1.3rem;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-card);
-            text-align: center;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .hobby-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 28px 55px -30px rgba(124, 58, 237, 0.35);
-        }
-
+        /* ━━━ PROJECTS ━━━ */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
-        .project-card {
-            position: relative;
-            padding: 2rem;
-            border-radius: 1.6rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-card);
-            cursor: pointer;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-            overflow: hidden;
-        }
-
-        .project-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            background: linear-gradient(140deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.18));
-            transition: opacity 0.35s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 38px 70px -35px rgba(124, 58, 237, 0.45);
-        }
-
-        .project-card:hover::after {
-            opacity: 1;
-        }
-
-        .project-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .skill-tiles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.8rem;
-        }
-
-        .pill-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 1.2rem;
-        }
-
-        .pill {
-            padding: 0.55rem 1.05rem;
-            border-radius: 999px;
+        .pc-meta {
             font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-text);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .read-more::after { content: '→'; transition: transform 0.2s; }
+        .project-card:hover .read-more::after { transform: translateX(5px); }
+
+        /* ━━━ PROJECT DETAIL ━━━ */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-page);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.72);
-            border: 1px solid var(--border-soft);
-            color: var(--text-primary);
-            transition: transform 0.3s ease, border 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 2.5rem;
+            transition: border-color 0.2s;
         }
+        .back-btn:hover { border-color: var(--accent-text); }
 
-        .pill:hover {
-            transform: translateY(-3px);
-            border-color: rgba(236, 72, 153, 0.45);
-        }
-
-        html.dark .pill {
-            background: rgba(16, 11, 31, 0.78);
-            color: var(--text-secondary);
-        }
-
-        .contact-card {
-            max-width: 640px;
-            margin: 0 auto;
+        .arch-placeholder {
+            width: 100%;
+            height: 350px;
+            background: var(--bg-page);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 2rem 0;
             text-align: center;
         }
 
-        .contact-card .btn-primary {
-            width: 100%;
+        .detail-box h3 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin: 2rem 0 1rem;
+        }
+        .detail-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .detail-box li {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .detail-box li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-text);
+            font-weight: bold;
         }
 
+        /* Footer */
         footer {
-            padding: 2.8rem 0;
-            background: rgba(255, 255, 255, 0.68);
-            border-top: 1px solid var(--border-soft);
-            backdrop-filter: blur(20px);
-            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
         }
 
-        html.dark footer {
-            background: rgba(15, 10, 26, 0.78);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .navbar .nav-links {
-                display: none;
-            }
+        @media(max-width: 900px) {
+            .nav-container { flex-direction: column; gap: 1.5rem; align-items: center; padding: 1rem; }
+            .nav-socials, .nav-actions { flex-direction: row; }
+            .nav-pill { flex-wrap: wrap; justify-content: center; }
+            .main-hero { padding: 200px 2rem 40px; }
+            main { padding-top: 180px; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .photo-wrapper { order: -1; max-width: 300px; margin: 0 auto; }
+            .edu-header { flex-direction: column; gap: 0.5rem; }
+            .arch-placeholder { height: 200px; }
+            .skill-row { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 1.5rem; }
         }
     </style>
 </head>
-<body class="antialiased">
-    <nav class="navbar sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="h-11 w-11 rounded-full bg-gradient-to-br from-purple-500/80 to-pink-500/80 flex items-center justify-center text-white font-semibold">PS</div>
-                <div>
-                    <h1 class="text-xl font-semibold tracking-tight">Prajakta Shevakari</h1>
-                    <p class="text-xs uppercase tracking-[0.35em] text-purple-500">Master's in CS</p>
-                </div>
+<body>
+
+    <!-- ━━━ FIXED HEADER ━━━ -->
+    <header class="fixed-header">
+        <div class="nav-container">
+            <!-- Left: Socials -->
+            <div class="nav-socials">
+                <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="social-link">
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LINKEDIN
+                </a>
+                <a href="https://github.com/pshevak" target="_blank" class="social-link">
+                    <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GITHUB
+                </a>
             </div>
-            <div class="nav-links flex items-center space-x-8">
-                <button id="nav-home" onclick="navigate('home')" class="nav-link active">Home</button>
-                <button id="nav-experience" onclick="navigate('experience')" class="nav-link">Experience</button>
-                <button id="nav-projects" onclick="navigate('projects')" class="nav-link">Research &amp; Projects</button>
-                <button id="nav-skills" onclick="navigate('skills')" class="nav-link">Skills</button>
+
+            <!-- Center: Nav Pill -->
+            <div class="nav-pill-container">
+                <nav class="nav-pill">
+                    <button class="nav-tab active" data-p="home" onclick="go('home')">Home</button>
+                    <button class="nav-tab" data-p="experience" onclick="go('experience')">Experience</button>
+                    <button class="nav-tab" data-p="projects" onclick="go('projects')">Projects</button>
+                    <button class="nav-tab" data-p="eduskills" onclick="go('eduskills')">Education & Skills</button>
+                    
+                    <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+                        <!-- SVG inserted by JS -->
+                    </button>
+                </nav>
             </div>
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                    <svg id="sun-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    <svg id="moon-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                </button>
-                <button onclick="navigate('contact')" class="hidden sm:inline-flex btn-primary text-sm">Let’s Connect</button>
+
+            <!-- Right: Actions -->
+            <div class="nav-actions">
+                <a href="Prajakta_Shevakari_SDE_Resume.pdf" target="_blank" class="btn-dark">Download Resume</a>
+                <a href="#contact" onclick="go('contact'); return false;" class="btn-dark">Contact me</a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <section id="home" class="section-shell">
-            <div class="hero-shell fade-in">
-                <div class="hero-copy">
-                    <span class="hero-eyebrow">Johns Hopkins University · CS (AI/ML)</span>
-                    <h2 class="hero-title">Software Engineer: Distributed Systems & Applied ML</h2>
-                    <p class="hero-subtitle">
-                        I am a Masters student in Computer Science at Johns Hopkins University, specializing in Artificial Intelligence and Machine Learning (AI/ML). Leveraging my foundation as a lead developer at FinTech firms like J.P. Morgan and Barclays, I focus on engineering highly scalable, mission-critical systems. My current work integrates deep industry expertise in distributed architecture and cloud services with advanced research in AI/ML and NLP, driving the development of reliable, automated, and intelligent technical solutions.
-                    </p>
-                    <!-- <div class="focus-chips">
-                        <span class="chip">⚙️ Distributed AI Platforms</span>
-                        <span class="chip">☁️ Cloud &amp; Data Pipelines</span>
-                        <span class="chip">🧠 LLM Automation</span>
-                        <span class="chip">🤝 Leadership &amp; Mentorship</span>
-                    </div>
-                    -->
-                    <div class="cta-group">
-                        <button onclick="navigate('projects')" class="btn-primary">Explore Research</button>
-                        <a href="Prajakta Shevakari MLE Resume.pdf" target="_blank" class="btn-secondary">Download Resume</a>
-                    </div>
-                   <!-- <div class="highlight-strip">
-                        <div class="highlight-card">
-                            <div class="highlight-title">70% ↓</div>
-                            <p class="highlight-text">Cut MTTR across JP Morgan systems by re-architecting observability and recovery flows.</p>
-                        </div>
-                        <div class="highlight-card">
-                            <div class="highlight-title">90+</div>
-                            <p class="highlight-text">Weekly production releases coordinated as Release Manager with 95% on-time delivery.</p>
-                        </div>
-                        <div class="highlight-card">
-                            <div class="highlight-title">SOTA</div>
-                            <p class="highlight-text">Achieved state-of-the-art accuracy for spontaneous smile recognition across four datasets.</p>
-                        </div>
-                    </div>
-                    -->
-                </div>
-                <div class="hero-photo">
-                    <div class="portrait-frame">
-                        <img src="https://raw.githubusercontent.com/pshevak/prajaktashevakari/main/photo.jpg" alt="Prajakta Shevakari" onerror="this.src='https://placehold.co/400x400/7c3aed/ffffff?text=Prajakta';" />
-                    </div>
-                </div>
+    <main>
+        <!-- ━━━ HOME PAGE ━━━ -->
+        <section class="view active" id="page-home">
+            
+            <div class="main-hero">
+                <h4>Hello, I'm</h4>
+                <h1>Prajakta Shevakari</h1>
+                <h3>Backend Software Engineer</h3>
             </div>
 
-            <div class="glass-card mt-12 fade-in">
-                <h3 class="text-xl font-semibold text-purple-500">Beyond the code</h3>
-                <p class="text-sm text-purple-400 uppercase tracking-[0.3em] mt-1">Balance &amp; Joy</p>
-                <div class="hobby-grid">
-                    <div class="hobby-card">
-                        <div class="text-4xl mb-2">🧘</div>
-                        <h4 class="font-semibold text-lg text-purple-500">Iyengar Yoga Discipline</h4>
-                        <p class="text-sm text-purple-700/80">Practicing Iyengar Yoga and meditation is key to my mental and physical well-being, it’s where my technical focus begins!</p>
+            <div class="container">
+                <h2 class="section-title">About me</h2>
+                
+                <div class="about-grid">
+                    <div class="about-text">
+                        Hi, I come with a passion for architecting resilient, terabyte-scale backend systems. For over six years across major fintech firms (JPMorgan, Barclays, FIS), my sole focus was <strong>pure backend engineering</strong>—building microservices, executing flawless cloud migrations, and developing high-throughput data pipelines where failure was not an option. 
+                        <br><br>
+                        Now, as a Master's student at Johns Hopkins University, my research bridges those robust production environments with data-driven Natural Language Processing and Computer Vision models. I am on a mission to learn how <strong>Applied Machine Learning</strong> can be integrated securely and efficiently into the backend architectures I've engineered my entire career.
                     </div>
-                    <div class="hobby-card">
-                        <div class="text-4xl mb-2">🏃</div>
-                        <h4 class="font-semibold text-lg text-purple-500">Movement &amp; Expression</h4>
-                        <p class="text-sm text-purple-700/80">From the discipline of Bharatnatyam to the joy of hiking, roller skating, and new hobbies like Pickleball, I love staying active.</p>
+                    <div class="photo-wrapper">
+                        <span>Your Photo Here</span>
+                        <!-- <img src="photo.jpg" alt="Prajakta" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"> -->
                     </div>
-                    <div class="hobby-card">
-                        <div class="text-4xl mb-2">🤝</div>
-                        <h4 class="font-semibold text-lg text-purple-500">Teaching for Good</h4>
-                        <p class="text-sm text-purple-700/80">I mentor and volunteer, helping learners build confidence in technical foundations.</p>
+                </div>
+
+                <!-- Beyond the Code Section -->
+                <h2 class="section-title" style="margin-top: 2rem;">Beyond the Code</h2>
+                <div class="hobbies-grid">
+                    <div class="card-lavender card-hover text-center">
+                        <div class="hobby-icon">🧘‍♀️</div>
+                        <h4 class="hobby-title">Iyengar Yoga</h4>
+                        <p class="text-muted">Practicing Iyengar Yoga and meditation is key to my mental and physical well-being — it's where my technical focus begins.</p>
+                    </div>
+                    <div class="card-pink card-hover text-center">
+                        <div class="hobby-icon">💃</div>
+                        <h4 class="hobby-title">Movement & Expression</h4>
+                        <p class="text-muted">Trained in Indian classical dance. I love hiking, roller skating, Pickleball, and finding new ways to stay active.</p>
+                    </div>
+                    <div class="card-lavender card-hover text-center">
+                        <div class="hobby-icon">🤝</div>
+                        <h4 class="hobby-title">Teaching for Good</h4>
+                        <p class="text-muted">Volunteered teaching Mathematics and elementary CS to underprivileged school students. Mentoring learners in technical foundations.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="section-shell hidden">
-            <div class="section-header fade-in">
-                <p class="tag">Trajectory</p>
-                <h2 class="section-title">Professional &amp; Academic Experience</h2>
+        <!-- ━━━ EDUCATION & SKILLS ━━━ -->
+        <section class="view" id="page-eduskills">
+            <div class="container">
+                <h1 class="section-title" style="text-align: left; margin-bottom: 3rem;">Education & Skills</h1>
+
+                <div class="edu-grid">
+                    <div class="card-lavender">
+                        <div class="edu-header">
+                            <div>
+                                <h3>Johns Hopkins University</h3>
+                                <p style="font-size: 1.1rem; color: var(--text-main); font-weight: 500;">Master of Science in Computer Science</p>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">Focus: Applied AI, NLP, Computer Vision</p>
+                            </div>
+                            <div class="edu-date">Aug 2024 — May 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="card-pink">
+                        <div class="edu-header">
+                            <div>
+                                <h3>Pune Institute of Computer Technology</h3>
+                                <p style="font-size: 1.1rem; color: var(--text-main); font-weight: 500;">Bachelor of Computer Engineering</p>
+                                <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;">Focus: Distributed Systems, Algorithms</p>
+                            </div>
+                            <div class="edu-date">Aug 2013 — May 2017</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modern-skills-list">
+                    <div class="skill-row">
+                        <div class="skill-cat">Backend & Distributed Systems</div>
+                        <div class="skill-items">Java • Python • Spring Boot • Hibernate • Microservices • REST APIs • Apache Kafka • System Design</div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-cat">Cloud & Infrastructure</div>
+                        <div class="skill-items">AWS (EC2, S3, Lambda, IAM, CloudWatch)</div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-cat">Data Engineering</div>
+                        <div class="skill-items">Oracle • PL/SQL • SQL • Apache Spark • ETL pipelines • Splunk • Power BI</div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-cat">Development & DevOps</div>
+                        <div class="skill-items">Git • Jenkins • TeamCity • Maven • Chef • CI/CD pipelines • JUnit • Bash • Agile/Scrum</div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-cat">Machine Learning (Applied/Integration)</div>
+                        <div class="skill-items">PyTorch • LLMs • Transformers • NLP • ML model integration • LLM inference pipelines</div>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card fade-in">
+        </section>
+
+        <!-- ━━━ EXPERIENCE ━━━ -->
+        <section class="view" id="page-experience">
+            <div class="container">
+                <h1 class="section-title" style="text-align: left; margin-bottom: 3rem;">Career Trajectory</h1>
+                
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Head Course Assistant</p>
-                                <p class="timeline-org">Johns Hopkins University · Software System Design</p>
-                            </div>
-                            <span class="timeline-meta">Fall 2025</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Lead mentoring, office hours, and complex assessment design for graduate-level system design.</li>
-                            <li>Build supplementary material that anchors distributed architecture concepts for mixed cohorts.</li>
-                        </ul>
+                        <div class="timeline-date">Fall 2025</div>
+                        <div class="timeline-title">Head Course Assistant</div>
+                        <div class="timeline-company">Johns Hopkins University · Software System Design</div>
+                        <div class="timeline-content">Lead mentoring, office hours, and complex assessment design for graduate-level system design. Focus on building supplementary materials that anchor distributed architecture concepts.</div>
                     </div>
+
                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Software Developer Intern</p>
-                                <p class="timeline-org">JHU Office of Digital Transformation</p>
-                            </div>
-                            <span class="timeline-meta">Jun 2025 – Aug 2025</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Built Python automation, GUI apps, and validation tools that streamlined student hiring and operational workflows.</li>
-                            <li>Partnered with senior HR and operations staff across university systems to design, deploy, and maintain internal tooling, improving administrative efficiency.</li>
-                        </ul>
+                        <div class="timeline-date">Jun 2025 — Aug 2025</div>
+                        <div class="timeline-title">Software Developer Intern</div>
+                        <div class="timeline-company">JHU Office of Digital Transformation</div>
+                        <div class="timeline-content">Built Python pipelines serving 200+ faculty, reducing manual data entry by 25%. Designed and deployed apps to automate HR data cleanup with 100% data integrity.</div>
                     </div>
+
                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Course Assistant</p>
-                                <p class="timeline-org">Johns Hopkins University · Operating Systems</p>
-                            </div>
-                            <span class="timeline-meta">Spring 2025</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Guided student labs on concurrency, memory management, and kernel internals.</li>
-                            <li>Facilitated peer debugging sessions emphasizing distributed systems thinking.</li>
-                        </ul>
+                        <div class="timeline-date">Apr 2023 — May 2024</div>
+                        <div class="timeline-title">Lead Development Engineer</div>
+                        <div class="timeline-company">Barclays</div>
+                        <div class="timeline-content">Architected executive analytics platform visualizing 1M+ daily transactions in near real-time. Led team of 2 engineers — code reviews, mentoring, cross-functional coordination. Automated DR deployments: cut release latency from 4+ hours to under 10 minutes.</div>
                     </div>
+
                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">ILLD Fellow · Python Developer</p>
-                                <p class="timeline-org">JHU Office of Digital Transformation</p>
-                            </div>
-                            <span class="timeline-meta">2024 – Present</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Automated internal hiring workflows with Python apps, GUI tooling, and validation systems.</li>
-                            <li>Partnered with university leadership to deliver resilient automation for HR operations.</li>
-                        </ul>
+                        <div class="timeline-date">Oct 2021 — Apr 2023</div>
+                        <div class="timeline-title">Software Engineer III</div>
+                        <div class="timeline-company">JP Morgan Chase</div>
+                        <div class="timeline-content">Led terabyte-scale cloud migration to AWS with zero data loss. Built high-throughput Java + Spark enrichment engine ingesting GBs daily. Redesigned legacy monoliths into resilient microservices — reduced MTTR by 70%.</div>
                     </div>
+
                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Lead Development Engineer</p>
-                                <p class="timeline-org">Barclays · Pune, India</p>
-                            </div>
-                            <span class="timeline-meta">Apr 2023 – May 2024</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Built a global regulatory insights dashboard surfacing real-time transactional intelligence.</li>
-                            <li>Redesigned disaster-recovery pipelines, shrinking releases from 4 hours to under 10 minutes.</li>
-                        </ul>
+                        <div class="timeline-date">Jul 2017 — Oct 2021</div>
+                        <div class="timeline-title">Software Engineer & Release Manager</div>
+                        <div class="timeline-company">FIS Global</div>
+                        <div class="timeline-content">Managed SDLC for 90+ weekly production releases with 95% on-time delivery. Built bulk data upload tool using Spring Boot — saved 10+ hr/week, reduced errors ~90%. Earned "Above & Beyond" award.</div>
                     </div>
+
                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Software Engineer III</p>
-                                <p class="timeline-org">JP Morgan Chase · Mumbai, India</p>
-                            </div>
-                            <span class="timeline-meta">Oct 2021 – Apr 2023</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Migrated terabytes of data into AWS, coupling Spark/Java tooling with enriched reporting flows.</li>
-                            <li>Redesigned legacy modules for resiliency, reducing MTTR by 70%.</li>
-                        </ul>
+                        <div class="timeline-date">Jan 2017 — Jun 2017</div>
+                        <div class="timeline-title">Software Development Intern</div>
+                        <div class="timeline-company">BMC Software</div>
+                        <div class="timeline-content">Built modular analytics platform with Java/Akka services and ML models for network automation, integrating Yellowfin BI for predictive SecOps intelligence.</div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Software Engineer &amp; Release Manager</p>
-                                <p class="timeline-org">FIS Global · Pune, India</p>
-                            </div>
-                            <span class="timeline-meta">Jul 2017 – Oct 2021</span>
-                        </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Coordinated 90+ weekly production releases with 95% punctuality and enterprise stability.</li>
-                            <li>Delivered automation that saved operations teams 10+ hours weekly; earned "Above &amp; Beyond" award.</li>
-                        </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ━━━ PROJECTS ━━━ -->
+        <section class="view" id="page-projects">
+            <div class="container">
+                <h1 class="section-title" style="text-align: left; margin-bottom: 3rem;">Research & Projects</h1>
+
+                <div class="project-grid">
+                    <div class="card-lavender project-card card-hover" onclick="go('project-terra')">
+                        <div class="pc-meta">Geospatial AI · PyTorch</div>
+                        <h3>TerraNova: Post-Wildfire Recovery</h3>
+                        <p>Three-stage ML platform turning satellite imagery into recovery actions — U-Net segmentation, Random Forest risk, and Genetic Algorithm optimization.</p>
+                        <span class="read-more">View Project Details</span>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <div>
-                                <p class="timeline-role">Software Development Intern</p>
-                                <p class="timeline-org">BMC Software · Pune, India</p>
-                            </div>
-                            <span class="timeline-meta">Aug 2016 – Apr 2017</span>
+
+                    <div class="card-pink project-card card-hover" onclick="go('project-smile')">
+                        <div class="pc-meta">ML · Computer Vision</div>
+                        <h3>D-FuseSmileNet</h3>
+                        <p>Hadamard fusion of transformer embeddings with physiological D-Markers to distinguish spontaneous from posed smiles, achieving SOTA across 4 benchmarks.</p>
+                        <span class="read-more">View Project Details</span>
+                    </div>
+
+                    <div class="card-lavender project-card card-hover" onclick="go('project-nlp')">
+                        <div class="pc-meta">NLP · LLMs</div>
+                        <h3>Clinical NER Annotation</h3>
+                        <p>GPT-4 with Chain-of-Thought prompts to label Bengali clinical text. Tripled F1 score and closed the gap to human supervision without manual labeling.</p>
+                        <span class="read-more">View Project Details</span>
+                    </div>
+
+                    <div class="card-pink project-card card-hover" onclick="go('project-bna')">
+                        <div class="pc-meta">Java · Architecture</div>
+                        <h3>BMC Network Analytics</h3>
+                        <p>Modular Java/Akka platform with ML models and Yellowfin BI dashboards — static reports replaced with predictive intelligence for SecOps.</p>
+                        <span class="read-more">View Project Details</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ━━━ PROJECT DETAILS ━━━ -->
+        <section class="view" id="page-project-terra">
+            <div class="container">
+                <button class="back-btn" onclick="go('projects')">← Back to Projects</button>
+                <div class="card-lavender">
+                    <div class="project-detail-header">
+                        <div class="pc-meta" style="color: var(--text-main); opacity: 0.8;">Under review as a conference paper at ICLR 2025</div>
+                        <h2 style="font-size: 2.25rem; margin: 0.5rem 0;">TerraNova: Post-Wildfire Recovery Platform</h2>
+                        <p class="detail-summary" style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem;">A Data-Driven Framework for Sustainable Use of Barren and Degraded Lands. Less than 2% of the US wildfire budget goes to recovery. TerraNova closes that gap with a pipeline that produces parcel-level severity maps, reburn risk scores, and optimized recovery recommendations.</p>
+                        <a href="AISD_FinalReport_TerraNova.pdf" target="_blank" class="btn-dark" style="display:inline-block; padding: 0.8rem 1.5rem; text-decoration: none;">📄 Read Full PDF Report</a>
+                    </div>
+
+                    <div class="arch-placeholder">
+                        <div>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1rem; opacity: 0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <br>Architecture Diagram Placeholder<br><small>TN_Archi.png</small>
                         </div>
-                        <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-2">
-                            <li>Built a live analytics platform for BMC Network Automation with ML-driven dashboards.</li>
-                            <li>Integrated Yellowfin BI to unlock real-time reporting and predictive insights.</li>
+                    </div>
+
+                    <div class="detail-box">
+                        <h3>Methodology & Architecture</h3>
+                        <ul>
+                            <li><strong>Stage 1 — U-Net:</strong> Trained on 5,773 MTBS patches. Achieved 0.99 ROC-AUC and 540ms P50 latency.</li>
+                            <li><strong>Stage 2 — Random Forest:</strong> Parcel-level features joining severity output with USGS covariates to predict reburn probabilities.</li>
+                            <li><strong>Stage 3 — Genetic Algorithm:</strong> Multi-criteria optimization assigning recovery actions per parcel — balancing risk, soil stability, and cost.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="section-shell hidden">
-            <div class="section-header fade-in">
-                <p class="tag">Spotlight</p>
-                <h2 class="section-title">Selected Research &amp; Technical Projects</h2>
-            </div>
-            <div class="project-grid fade-in">
-                <article onclick="navigate('project-smile')" class="project-card">
-                    <span class="tag">Machine Learning · Computer Vision</span>
-                    <h3 class="text-xl font-semibold mt-3">D-FuseSmileNet: Spontaneous Smile Recognition</h3>
-                    <p class="text-sm text-purple-700/80 mt-3">
-                        Transformer features fused with physiological D-markers via Hadamard interaction to classify spontaneous vs posed smiles with benchmark-leading accuracy across BBC, SPOS, UvA-NEMO, and MMI datasets.
-                    </p>
-                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
-                </article>
-                <article onclick="navigate('project-nlp')" class="project-card">
-                    <span class="tag">Natural Language Processing · LLMs</span>
-                    <h3 class="text-xl font-semibold mt-3">LLM-Driven Clinical NER Annotation Pipeline</h3>
-                    <p class="text-sm text-purple-700/80 mt-3">
-                        Chain-of-Thought prompting with GPT-4.1 to auto-label Bengali clinical text, tripling F1 agreement and lifting BanglishBERT macro F1 to 46.0 without manual annotation cycles.
-                    </p>
-                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
-                </article>
-                <article onclick="navigate('project-bna')" class="project-card">
-                    <span class="tag">Data Mining · BI</span>
-                    <h3 class="text-xl font-semibold mt-3">Next Gen Analytics for BMC Network Automation</h3>
-                    <p class="text-sm text-purple-700/80 mt-3">
-                        Modular Java/Akka service layering ML models with Yellowfin BI dashboards to transform static reports into real-time predictive insights for enterprise network automation.
-                    </p>
-                    <button class="mt-5 inline-flex items-center text-sm font-semibold text-purple-500">View details →</button>
-                </article>
-            </div>
-        </section>
-
-        <section id="skills" class="section-shell hidden">
-            <div class="section-header fade-in">
-                <p class="tag">Stack &amp; Strengths</p>
-                <h2 class="section-title">Technical Profile &amp; Academic Focus</h2>
-            </div>
-            <div class="skill-tiles fade-in">
-                <div class="glass-card">
-                    <h3 class="text-xl font-semibold text-purple-500">JHU Coursework</h3>
-                    <div class="pill-cloud">
-                        <span class="pill">EN.601.664 – Artificial Intelligence</span>
-                        <span class="pill">EN.601.675 – Machine Learning</span>
-                        <span class="pill">EN.601.667 – Intro to Human Language Technology</span>
-                        <span class="pill">EN.601.686 – AI System Design</span>
-                        <span class="pill">EN.601.620 – Parallel Computing for Data Science</span>
-                        <span class="pill">EN.660.661 – Product Management</span>
-                        <span class="pill">EN.601.625 – Software System Design</span>
-                        <span class="pill">EN.601.671 – NLP: Self-Supervised Models</span>
-                        <span class="pill">EN.605.704 – OO Analysis &amp; Design</span>
-                        <span class="pill">EN.520.657 – Advanced Instrument Systems</span>
+        <section class="view" id="page-project-smile">
+            <div class="container">
+                <button class="back-btn" onclick="go('projects')">← Back to Projects</button>
+                <div class="card-pink">
+                    <div class="project-detail-header">
+                        <div class="pc-meta" style="color: var(--text-main); opacity: 0.8;">Publication Report</div>
+                        <h2 style="font-size: 2.25rem; margin: 0.5rem 0;">D-FuseSmileNet</h2>
+                        <p class="detail-summary" style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem;">Enhancing Spontaneous Smile Recognition via Hadamard Fusion of Handcrafted and Deep-Learning Features. We fuse transformer embeddings with hand-crafted D-Marker features to identify genuine smiles.</p>
+                        <a href="JHU_ML_Report.pdf" target="_blank" class="btn-dark" style="display:inline-block; padding: 0.8rem 1.5rem; text-decoration: none;">📄 Read Full PDF Report</a>
                     </div>
-                </div>
-                <div class="glass-card">
-                    <h3 class="text-xl font-semibold text-purple-500">Research &amp; Teaching</h3>
-                    <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
-                        <li>Research interests: scalable ML architectures, distributed systems, computational finance, HCI.</li>
-                        <li>Teaching: Head CA (Software System Design, Fall 2025); CA (Operating Systems, Spring 2025).</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold text-purple-500 mt-8">Key Technologies</h3>
-                    <div class="pill-cloud">
-                        <span class="pill">Python</span>
-                        <span class="pill">Java (Core)</span>
-                        <span class="pill">AWS &amp; Cloud Services</span>
-                        <span class="pill">Apache Spark &amp; Kafka</span>
-                        <span class="pill">LLMs &amp; NLP</span>
-                        <span class="pill">PyTorch &amp; TensorFlow</span>
-                        <span class="pill">Transformers</span>
-                        <span class="pill">Scikit-learn</span>
-                        <span class="pill">Docker</span>
-                        <span class="pill">Kubernetes</span>
-                        <span class="pill">REST APIs &amp; Microservices</span>
-                        <span class="pill">AngularJS &amp; JavaScript</span>
-                        <span class="pill">SQL &amp; Oracle</span>
-                        <span class="pill">Jenkins &amp; CI/CD</span>
-                        <span class="pill">Git</span>
-                        
-                        
+
+                    <div class="arch-placeholder">
+                        <div>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1rem; opacity: 0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <br>Architecture Diagram Placeholder<br><small>ML_Archi.png</small>
+                        </div>
+                    </div>
+
+                    <div class="detail-box">
+                        <h3>Technical Approach</h3>
+                        <ul>
+                            <li><strong>Problem:</strong> Spontaneous vs. posed smiles differ by subtle spatiotemporal muscle activations that deep networks alone struggle with.</li>
+                            <li><strong>Innovation:</strong> Direct multiplicative (Hadamard) fusion between transformer and D-Marker features — no auxiliary loss weighting needed.</li>
+                            <li><strong>Result:</strong> Achieved SOTA on 4 benchmarks. 100% accuracy on BBC, outperforming prior models by +5.0%.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section-shell hidden">
-            <div class="section-header text-center fade-in">
-                <p class="tag justify-center">Connect</p>
-                <h2 class="section-title">Let’s build responsible, scalable AI products together</h2>
+        <section class="view" id="page-project-nlp">
+            <div class="container">
+                <button class="back-btn" onclick="go('projects')">← Back to Projects</button>
+                <div class="card-lavender">
+                    <div class="project-detail-header">
+                        <div class="pc-meta" style="color: var(--text-main); opacity: 0.8;">Academic Project</div>
+                        <h2 style="font-size: 2.25rem; margin: 0.5rem 0;">Clinical NER Annotation Pipeline</h2>
+                        <p class="detail-summary" style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem;">In-Context Learning and Chain-of-Thought Prompting for Low-Resource Clinical Texts. We used GPT-4 with reasoning to replace manual labeling for Bengali clinical texts.</p>
+                        <a href="NLP_Final_Report.pdf" target="_blank" class="btn-dark" style="display:inline-block; padding: 0.8rem 1.5rem; text-decoration: none;">📄 Read Full PDF Report</a>
+                    </div>
+
+                    <div class="arch-placeholder">
+                        <div>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1rem; opacity: 0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <br>Architecture Diagram Placeholder<br><small>NLP_Archi.png</small>
+                        </div>
+                    </div>
+
+                    <div class="detail-box">
+                        <h3>Methodology</h3>
+                        <ul>
+                            <li><strong>Corpus:</strong> Bangla-HealthNER — 144K+ sentences of consumer health queries.</li>
+                            <li><strong>Approach:</strong> By asking the model to verbalize its reasoning (CoT), we almost tripled the token-level F1 score compared to plain prompting.</li>
+                            <li><strong>Downstream:</strong> BanglishBERT trained on synthetic labels reached 46.0 macro F1 — closing two-thirds of the gap to full supervision with 0 manual labels.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card contact-card fade-in">
-                <p class="text-base text-purple-700/80 leading-7">
-                    With a blend of enterprise-grade engineering and graduate-level AI research, I’m excited to collaborate on products that demand reliability and insight. Reach out for research, product, or engineering opportunities.
+        </section>
+
+        <section class="view" id="page-project-bna">
+            <div class="container">
+                <button class="back-btn" onclick="go('projects')">← Back to Projects</button>
+                <div class="card-pink">
+                    <div class="project-detail-header">
+                        <div class="pc-meta" style="color: var(--text-main); opacity: 0.8;">Engineering Architecture Report</div>
+                        <h2 style="font-size: 2.25rem; margin: 0.5rem 0;">BMC Network Automation Analytics</h2>
+                        <p class="detail-summary" style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 1.5rem;">Deriving & Reporting Intelligent Insights for BMC Network Automation. Turn configuration and compliance data into live intelligence for network operations.</p>
+                        <a href="BMC_Report.pdf" target="_blank" class="btn-dark" style="display:inline-block; padding: 0.8rem 1.5rem; text-decoration: none;">📄 Read Full Docx Report</a>
+                    </div>
+
+                    <div class="arch-placeholder">
+                        <div>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1rem; opacity: 0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <br>Architecture Diagram Placeholder<br><small>BMC_Archi.png</small>
+                        </div>
+                    </div>
+
+                    <div class="detail-box">
+                        <h3>System Design</h3>
+                        <ul>
+                            <li><strong>Architecture:</strong> Concurrent, modular Java services exposed as RESTful APIs; scalable via Akka actor model.</li>
+                            <li><strong>Pipeline:</strong> Custom WEKA and R workflows for clustering, regression, and association mining.</li>
+                            <li><strong>Visualization:</strong> Yellowfin BI dashboards with interactive, predictive reporting for SecOps teams.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ━━━ CONTACT ME PAGE ━━━ -->
+        <section class="view" id="page-contact">
+            <div class="container" style="max-width: 850px; text-align: center; padding-top: 8vh;">
+                <h1 class="section-title" style="margin-bottom: 1.5rem; font-size: 3.5rem; letter-spacing: -0.02em;">Let's Connect</h1>
+                <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 3rem; line-height: 1.8;">
+                    Whether you're tackling complex distributed systems, orchestrating large-scale cloud migrations, or bridging the gap between robust backends and applied machine learning — I'm always excited to talk tech, explore collaborations, or just exchange ideas. Let's build something impactful together.
                 </p>
-                <div class="mt-6 space-y-4">
-                    <a href="mailto:prajaktashevakari@gmail.com" class="btn-primary">Email: prajaktashevakari@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="btn-secondary">LinkedIn Profile</a>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+                    <a href="mailto:prajaktashevakari@gmail.com" class="card-lavender card-hover" style="width: 100%; max-width: 450px; display: flex; align-items: center; justify-content: center; gap: 1rem; text-decoration: none; font-weight: 700; color: var(--text-main); padding: 1.5rem; font-size: 1.1rem;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        prajaktashevakari@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/prajakta-shevakari/" target="_blank" class="card-pink card-hover" style="width: 100%; max-width: 450px; display: flex; align-items: center; justify-content: center; gap: 1rem; text-decoration: none; font-weight: 700; color: var(--text-main); padding: 1.5rem; font-size: 1.1rem;">
+                        <svg class="social-icon" style="width: 24px; height: 24px;" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        Connect on LinkedIn
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="project-smile" class="section-shell hidden">
-            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
-            <div class="section-header fade-in">
-                <p class="tag">Machine Learning · Computer Vision</p>
-                <h2 class="section-title">D-FuseSmileNet · Enhancing Spontaneous Smile Recognition</h2>
-            </div>
-            <div class="glass-card fade-in space-y-6">
-                <p class="text-base text-purple-700/80 border-l-4 border-purple-400/60 pl-4 italic">
-                    A novel deep learning framework that fuses transformer embeddings with hand-crafted physiological D-marker features using Hadamard interactions—simplifying multi-task complexity while pushing state-of-the-art accuracy on smile authenticity benchmarks.
-                </p>
-                <h3 class="text-xl font-semibold text-purple-500">Technical Challenge &amp; Innovation</h3>
-                <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
-                    <li><strong>Problem:</strong> Genuine smiles show subtle spatiotemporal cues (orbicularis oculi activation, symmetry) often lost in standard deep nets.</li>
-                    <li><strong>Hadamard Fusion:</strong> Direct multiplicative fusion between transformer features and D-marker descriptors enabled expressive interactions without auxiliary loss weighting.</li>
-                    <li><strong>Architecture:</strong> Benchmarked 15 fusion strategies; Hadamard fusion delivered peak accuracy while avoiding manual landmark initialization.</li>
-                    <li><strong>Automation:</strong> Fully trainable end-to-end pipeline surpassing complex multi-task learning baselines.</li>
-                </ul>
-                <div class="bg-white/70 dark:bg-black/40 border border-purple-200/40 rounded-xl p-4 text-center">
-                    <p class="font-semibold text-purple-500">Architecture Diagram</p>
-                    <img src="ML_Archi.png" alt="D-FuseSmileNet Architecture" class="w-full h-auto rounded-lg shadow-md mt-4">
-                </div>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="glass-card">
-                        <p class="text-2xl font-bold text-purple-500">100% Accuracy</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Achieved perfect classification on the challenging BBC dataset, and 99.7% on MMI, establishing consistent SOTA performance.</p>
-                    </div>
-                    <div class="glass-card">
-                        <p class="text-2xl font-bold text-purple-500">+5.0% Lift</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Outperformed previous multi-task learning methods by significant margins: +5.0% on BBC and +0.8% on UvA-NEMO, validating the superiority of direct feature interaction.</p>
-                    </div>
-                    <div class="glass-card">
-                        <p class="text-2xl font-bold text-purple-500">Simplified Training</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Eliminated the need for auxiliary loss-weighting and hyperparameter tuning required by Multi-Task Learning (MTL) approaches, improving computational efficiency.</p>
-                    </div>
-                </div>
-                <div class="pt-4">
-                    <p class="text-sm text-purple-700/80 mt-2">Code and supplementary data available upon request.</p>
-                    <a href="JHU_ML_Report.pdf" target="_blank" class="btn-primary">Download Research Paper →</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="project-nlp" class="section-shell hidden">
-            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
-            <div class="section-header fade-in">
-                <p class="tag">Natural Language Processing · LLMs</p>
-                <h2 class="section-title">LLM-Driven Clinical NER Annotation Pipeline</h2>
-            </div>
-            <div class="glass-card fade-in space-y-6">
-                <p class="text-base text-purple-700/80 border-l-4 border-purple-400/60 pl-4 italic">
-                    Designed a scalable annotation loop harnessing GPT-4.1 with Chain-of-Thought prompts to label low-resource Bengali clinical text, dramatically narrowing the performance gap to fully supervised models while eliminating manual labeling cost.
-                </p>
-                <h3 class="text-xl font-semibold text-purple-500">Core Methodology &amp; Impact</h3>
-                <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
-                    <li><strong>Challenge:</strong> Scarcity of human-annotated Bengali medical corpora limits clinical NER quality.</li>
-                    <li><strong>CoT Prompting:</strong> Structured reasoning prompts outperformed raw capacity—GPT-4.1-mini + CoT exceeded GPT-4.1 ICL.</li>
-                    <li><strong>Corpus Insights:</strong> Deep dive on Bangla-HealthNER guided entity-specific prompt strategies for noisy code-switched text.</li>
-                </ul>
-                <div class="bg-white/70 dark:bg-black/40 border border-purple-200/40 rounded-xl p-4 text-center">
-                    <p class="font-semibold text-purple-500">Annotation Pipeline Diagram</p>
-                    <img src="NLP_Archi.png" alt="Clinical NER Pipeline" class="w-full h-auto rounded-lg shadow-md mt-4">
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="glass-card">
-                        <p class="text-2xl font-bold text-purple-500">3× F1 Lift</p>
-                        <p class="text-sm text-purple-700/80 mt-2">CoT reasoning almost tripled token-level F1 agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
-                    </div>
-                    <div class="glass-card">
-                        <p class="text-2xl font-bold text-purple-500">46.0 Macro F1</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Closed two-thirds of the gap to full supervision without human labels. CoT reasoning almost tripled token-level F1 agreement with human labels (from 0.120 to 0.335) compared to plain prompting.</p>
-                    </div>
-                </div>
-                <div class="pt-4">
-                    <p class="text-sm text-purple-700/80 mt-2">Code and supplementary data available upon request.</p>
-                    <a href="NLP_Final_Report.pdf" target="_blank" class="btn-primary">Download Research Paper →</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="project-bna" class="section-shell hidden">
-            <button onclick="navigate('projects')" class="inline-flex items-center text-sm font-semibold text-purple-500 mb-6">← Back to Projects</button>
-            <div class="section-header fade-in">
-                <p class="tag">Data Mining · BI</p>
-                <h2 class="section-title">Next Gen Analytics for BMC Network Automation</h2>
-            </div>
-            <div class="glass-card fade-in space-y-6">
-                <p class="text-base text-purple-700/80 border-l-4 border-purple-400/60 pl-4 italic">
-                    Developed a modular analytics platform for BMC Network Automation that introduced concurrent Java/Akka services, machine learning models, and Yellowfin BI dashboards—replacing static reports with predictive insight for SecOps teams.
-                </p>
-                <h3 class="text-xl font-semibold text-purple-500">System Design Highlights</h3>
-                <ul class="list-disc text-sm text-purple-700/80 ml-5 space-y-3">
-                    <li><strong>Objective:</strong> Turn configuration, compliance, and outage data into live intelligence for network operations.</li>
-                    <li><strong>Architecture:</strong> Concurrent, modular Java services exposed as RESTful APIs; scalable via Akka.</li>
-                    <li><strong>Data Pipeline:</strong> Custom WEKA and R workflows enabled clustering, regression, and association mining.</li>
-                    <li><strong>Visualization:</strong> Yellowfin BI dashboards delivered interactive, predictive reporting.</li>
-                </ul>
-                <div class="bg-white/70 dark:bg-black/40 border border-purple-200/40 rounded-xl p-4 text-center">
-                    <p class="font-semibold text-purple-500">System Architecture</p>
-                    <img src="BMC_Archi.png" alt="BNA Architecture" class="w-full h-auto rounded-lg shadow-md mt-4">
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="glass-card">
-                        <p class="text-xl font-bold text-purple-500">Stack</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Java · Akka · PostgreSQL · Apache Tomcat · Axis2 · Yellowfin BI · ML (WEKA &amp; R)</p>
-                    </div>
-                    <div class="glass-card">
-                        <p class="text-xl font-bold text-purple-500">Impact</p>
-                        <p class="text-sm text-purple-700/80 mt-2">Unlocked dynamic dashboards, predictive analytics, and faster network planning.</p>
-                    </div>
-                </div>
-                <div class="pt-4">
-                    <a href="report2 (1).docx" target="_blank" class="btn-primary">Download Project Report →</a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-purple-700/80">
-            © 2025 Prajakta Shevakari · Crafted for curiosity, rigor, and human impact.
-        </div>
+        <p>© 2026 · Prajakta Shevakari · Built for curiosity, rigor, and human impact.</p>
     </footer>
 
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
+        // ━━━ THEME TOGGLE ━━━
+        const themeBtn = document.getElementById('themeBtn');
+        const sunSVG = `<svg viewBox="0 0 24 24"><path d="M12 18C8.686 18 6 15.314 6 12s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6zm0-10c-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4-1.791-4-4-4zM11 1h2v3h-2zm0 19h2v3h-2zM3.515 4.929l1.414-1.414 2.121 2.121-1.414 1.414zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414zM19.071 3.515l1.414 1.414-2.121 2.121-1.414-1.414zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414zM23 11v2h-3v-2zM4 11v2H1v-2z"/></svg>`;
+        const moonSVG = `<svg viewBox="0 0 24 24"><path d="M11.38 2.019c-1.465 1.369-2.38 3.318-2.38 5.481 0 4.142 3.358 7.5 7.5 7.5 1.726 0 3.315-.583 4.59-1.564-.477 4.914-4.622 8.564-9.59 8.564-5.247 0-9.5-4.253-9.5-9.5 0-4.671 3.379-8.552 7.84-10.227.481-.18 1-.286 1.54-.254zm-.213 2.008C6.469 4.291 2.721 8.272 2.757 13.064c.037 5.042 4.154 9.091 9.197 9.054 4.869-.036 8.872-3.8 9.1-8.608-1.407.664-2.94 1.035-4.554 1.035-4.393 0-7.955-3.561-7.955-7.954 0-.911.161-1.785.453-2.597.699.405 1.465.714 2.279.915-.038-.29-.088-.583-.11-.882z"/></svg>`;
 
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
+        function setTheme(isDark) {
+            document.documentElement.classList.toggle('dark', isDark);
+            if (themeBtn) themeBtn.innerHTML = isDark ? sunSVG : moonSVG;
+            try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+        }
+        
+        let initialDark = false;
+        try { initialDark = localStorage.getItem('theme') === 'dark'; } catch(e){}
+        setTheme(initialDark);
+
+        if (themeBtn) {
+            themeBtn.onclick = () => setTheme(!document.documentElement.classList.contains('dark'));
         }
 
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            if (isDark) {
-                localStorage.setItem('theme', 'dark');
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            } else {
-                localStorage.setItem('theme', 'light');
-                moonIcon.classList.add('hidden');
-                sunIcon.classList.remove('hidden');
+        // ━━━ NAVIGATION ━━━
+        const pages = document.querySelectorAll('.view');
+        const tabs = document.querySelectorAll('.nav-tab');
+
+        function go(id) {
+            pages.forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page-' + id);
+            if (target) {
+                target.classList.add('active');
             }
-        });
-
-        const sections = document.querySelectorAll('.section-shell');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        function navigate(pageId) {
-            sections.forEach(section => section.classList.add('hidden'));
-            const target = document.getElementById(pageId) || document.getElementById('home');
-            target.classList.remove('hidden');
-            document.querySelector('main').scrollTo(0, 0);
-            history.pushState(null, '', '#' + pageId);
-            navLinks.forEach(link => link.classList.remove('active'));
-            const activeId = pageId.startsWith('project-') ? 'projects' : pageId;
-            const activeLink = document.getElementById(`nav-${activeId}`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-        }
-
-        window.onpopstate = () => {
-            const pageId = window.location.hash.substring(1) || 'home';
-            navigate(pageId);
-        };
-
-        window.onload = () => {
-            const initialPage = window.location.hash.substring(1) || 'home';
-            navigate(initialPage);
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+            
+            const base = id.startsWith('project-') ? 'projects' : id;
+            tabs.forEach(tab => {
+                if(tab.dataset.p === base) tab.classList.add('active');
+                else tab.classList.remove('active');
             });
-        }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            history.pushState(null, '', '#' + id);
+        }
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        window.onpopstate = () => go((location.hash || '#home').substring(1));
+        window.onload = () => go((location.hash || '#home').substring(1));
     </script>
 </body>
 </html>
