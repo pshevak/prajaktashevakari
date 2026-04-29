@@ -349,11 +349,19 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 0.5rem;
+            gap: 2rem; /* Adds a nice breathing room between the text and the date */
+        }
+
+        .edu-date {
+            font-weight: 600; 
+            color: var(--accent-text); 
+            font-size: 1rem;
+            white-space: nowrap; /* THE FIX: This forces the date to stay on a single line */
+            text-align: right;
         }
 
         .edu-header h3 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
-        .edu-date { font-weight: 600; color: var(--accent-text); font-size: 1rem; }
-
+        
         /* Modern Skills List Styles */
         .modern-skills-list {
             display: flex;
@@ -725,54 +733,68 @@
 
         <!-- ━━━ EXPERIENCE ━━━ -->
         <section class="view" id="page-experience">
-            <div class="container">
-                <h1 class="section-title" style="text-align: left; margin-bottom: 3rem;">Career Trajectory</h1>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Fall 2025</div>
-                        <div class="timeline-title">Head Course Assistant</div>
-                        <div class="timeline-company">Johns Hopkins University · Software System Design</div>
-                        <div class="timeline-content">Lead mentoring, office hours, and complex assessment design for graduate-level system design. Focus on building supplementary materials that anchor distributed architecture concepts.</div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Jun 2025 — Aug 2025</div>
-                        <div class="timeline-title">Software Developer Intern</div>
-                        <div class="timeline-company">JHU Office of Digital Transformation</div>
-                        <div class="timeline-content">Built Python pipelines serving 200+ faculty, reducing manual data entry by 25%. Designed and deployed apps to automate HR data cleanup with 100% data integrity.</div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Apr 2023 — May 2024</div>
-                        <div class="timeline-title">Lead Development Engineer</div>
-                        <div class="timeline-company">Barclays</div>
-                        <div class="timeline-content">Architected executive analytics platform visualizing 1M+ daily transactions in near real-time. Led team of 2 engineers — code reviews, mentoring, cross-functional coordination. Automated DR deployments: cut release latency from 4+ hours to under 10 minutes.</div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Oct 2021 — Apr 2023</div>
-                        <div class="timeline-title">Software Engineer III</div>
-                        <div class="timeline-company">JP Morgan Chase</div>
-                        <div class="timeline-content">Led terabyte-scale cloud migration to AWS with zero data loss. Built high-throughput Java + Spark enrichment engine ingesting GBs daily. Redesigned legacy monoliths into resilient microservices — reduced MTTR by 70%.</div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Jul 2017 — Oct 2021</div>
-                        <div class="timeline-title">Software Engineer & Release Manager</div>
-                        <div class="timeline-company">FIS Global</div>
-                        <div class="timeline-content">Managed SDLC for 90+ weekly production releases with 95% on-time delivery. Built bulk data upload tool using Spring Boot — saved 10+ hr/week, reduced errors ~90%. Earned "Above & Beyond" award.</div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Jan 2017 — Jun 2017</div>
-                        <div class="timeline-title">Software Development Intern</div>
-                        <div class="timeline-company">BMC Software</div>
-                        <div class="timeline-content">Built modular analytics platform with Java/Akka services and ML models for network automation, integrating Yellowfin BI for predictive SecOps intelligence.</div>
-                    </div>
-                </div>
+    <div class="container">
+        <h1 class="section-title" style="text-align: left; margin-bottom: 3rem;">Career Trajectory</h1>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Oct 2024 — Present</div>
+                <div class="timeline-title">Integrative Learning and Life Design Fellow</div>
+                <div class="timeline-company">Johns Hopkins University</div>
+                <div class="timeline-content">Developed Python automation tools and PySimpleGUI applications to streamline data validation and reporting pipelines. Managed TimesheetX technical issues, collaborating with university departments to improve user experience and reduce support turnaround time.</div>
             </div>
-        </section>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Aug 2025 — Dec 2025</div>
+                <div class="timeline-title">Head Course Assistant</div>
+                <div class="timeline-company">Johns Hopkins University · Software System Design</div>
+                <div class="timeline-content">Led the CA team, guiding students on modular system design, real-world architectural decision-making, and iterative development. Oversaw grading rubrics for technical design documents and project demos.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jun 2025 — Aug 2025</div>
+                <div class="timeline-title">Software Engineer Intern</div>
+                <div class="timeline-company">Johns Hopkins University</div>
+                <div class="timeline-content">Developed internal Python automation tools and custom Power BI solutions to enhance data reporting and audit accuracy. Reduced manual processing time by integrating internal systems with hiring and compliance processes.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jan 2025 — May 2025</div>
+                <div class="timeline-title">Course Assistant</div>
+                <div class="timeline-company">Johns Hopkins University · Operating Systems</div>
+                <div class="timeline-content">Taught OS fundamentals including scheduling, virtual memory, and file systems. Supported students with debugging and architectural reviews on kernel-level projects involving PintOS and system call implementations.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Apr 2023 — May 2024</div>
+                <div class="timeline-title">Lead Software Development Engineer</div>
+                <div class="timeline-company">Barclays</div>
+                <div class="timeline-content">Led iterative development of a state-of-the-art web dashboard transforming real-time transactional data into executive insights. Reimagined the Disaster Recovery deployment process, drastically reducing release time from hours to minutes.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Oct 2021 — Apr 2023</div>
+                <div class="timeline-title">Senior Software Development Engineer</div>
+                <div class="timeline-company">JPMorgan Chase & Co.</div>
+                <div class="timeline-content">Led a terabyte-scale on-prem to AWS cloud migration using robust Java and Spark data pipelines. Supported the APAC reporting backend, completing 15 production releases and redesigning outdated modules to reduce MTTR from 6 days to 1-2 days.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jul 2017 — Oct 2021</div>
+                <div class="timeline-title">Software Engineer</div>
+                <div class="timeline-company">FIS Global</div>
+                <div class="timeline-content">Served as middle-office team lead and Release Manager, delivering 90+ weekly releases with 95% on-time delivery. Earned the "Above and Beyond" award for building a bulk upload UI tool that automated manual tasks and saved 10+ hours per week.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Jul 2016 — Jun 2017</div>
+                <div class="timeline-title">Software Engineer Intern</div>
+                <div class="timeline-company">BMC Software</div>
+                <div class="timeline-content">Analyzed BNA datasets to build an advanced data analytics and reporting platform utilizing machine learning algorithms. Integrated Yellowfin BI to transition from static reports to predictive, live ad-hoc reporting.</div>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- ━━━ PROJECTS ━━━ -->
         <section class="view" id="page-projects">
